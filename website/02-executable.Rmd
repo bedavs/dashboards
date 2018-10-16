@@ -1,0 +1,5 @@
+# Executable for each automated analysis
+
+Each automated analysis has its own R package (e.g. [sykdomspuls](https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/)).
+
+Each R package should contain 99%
