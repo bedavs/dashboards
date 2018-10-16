@@ -2,28 +2,21 @@
 
 This is the code repository for programs developed for the infectious disease group.
 
-# Packages
+For all the documentation, please visit https://folkehelseinstituttet.github.io/dashboards/
 
-## dashboards_sykdomspuls
-[![Build Status](https://travis-ci.org/raubreywhite/dashboards_sykdomspuls.svg?branch=master)](https://travis-ci.org/raubreywhite/dashboards_sykdomspuls)
-[![codecov](https://codecov.io/gh/raubreywhite/dashboards_sykdomspuls/branch/master/graph/badge.svg)](https://codecov.io/gh/raubreywhite/dashboards_sykdomspuls)
+## Important repositories
 
-## dashboards_normomo
-[![Build Status](https://travis-ci.org/raubreywhite/dashboards_normomo.svg?branch=master)](https://travis-ci.org/raubreywhite/dashboards_normomo)
-[![codecov](https://codecov.io/gh/raubreywhite/dashboards_normomo/branch/master/graph/badge.svg)](https://codecov.io/gh/raubreywhite/dashboards_normomo)
+https://folkehelseinstituttet.github.io/fhi/
 
-## dashboards_reporttb
-[![Build Status](https://travis-ci.org/raubreywhite/dashboards_reporttb.svg?branch=master)](https://travis-ci.org/raubreywhite/dashboards_reporttb)
-[![codecov](https://codecov.io/gh/raubreywhite/dashboards_reporttb/branch/master/graph/badge.svg)](https://codecov.io/gh/raubreywhite/dashboards_reporttb)
+https://folkehelseinstituttet.github.io/dashboards/ (this one)
 
-## momo
-[![Build Status](https://travis-ci.org/raubreywhite/MOMOpack-for-R.svg?branch=master)](https://travis-ci.org/raubreywhite/MOMOpack-for-R)
-[![codecov](https://codecov.io/gh/raubreywhite/MOMOpack-for-R/branch/master/graph/badge.svg)](https://codecov.io/gh/raubreywhite/MOMOpack-for-R)
+https://github.com/raubreywhite/dashboards_control/ (private)
 
-## RAWmisc
-[![Build Status](https://travis-ci.org/raubreywhite/RAWmisc.svg?branch=master)](https://travis-ci.org/raubreywhite/RAWmisc)
-[![codecov](https://codecov.io/gh/raubreywhite/RAWmisc/branch/master/graph/badge.svg)](https://codecov.io/gh/raubreywhite/RAWmisc)
+https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/
 
-## fhi
-[![Build Status](https://travis-ci.org/raubreywhite/fhi.svg?branch=master)](https://travis-ci.org/raubreywhite/fhi)
-[![codecov](https://codecov.io/gh/raubreywhite/fhi/branch/master/graph/badge.svg)](https://codecov.io/gh/raubreywhite/fhi)
+https://folkehelseinstituttet.github.io/dashboards_normomo/
+
+https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/
+
+https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/
+

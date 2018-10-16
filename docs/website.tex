@@ -85,20 +85,6 @@
   
 \usepackage{booktabs}
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[section]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{corollary}{Corollary}[section]
-\newtheorem{proposition}{Proposition}[section]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[section]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[section]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 
 {
@@ -106,6 +92,24 @@
 \tableofcontents
 }
 \section{Introduction}\label{intro}
+
+\subsection{Important repositories}\label{important-repositories}
+
+\url{https://folkehelseinstituttet.github.io/fhi/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards/} (this one)
+
+\url{https://github.com/raubreywhite/dashboards_control/} (private)
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_normomo/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
+
+\subsection{Summary}\label{summary}
 
 The dashboards project is a project at FHI concerned with running
 automated analyses on data.
@@ -117,32 +121,30 @@ In principle, the dashboards project is split up into three parts:
 \tightlist
 \item
   The overarching infrastructure (i.e.~Docker containers, continuous
-  integration, etc.)
-\item
-  The executable for each automated analysis
+  integration, chron jobs, etc.)
 \item
   The R package for each automated analysis
+\item
+  The executable for each automated analysis
 \end{enumerate}
 
-\section{Literature}\label{literature}
+\subsection{What is an automated
+analysis}\label{what-is-an-automated-analysis}
 
-Here is a review of existing methods.
+\section{Executable for each automated
+analysis}\label{executable-for-each-automated-analysis}
 
-\section{Methods}\label{methods}
+Each automated analysis has its own R package (e.g.
+\href{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/}{sykdomspuls}).
 
-We describe our methods in this chapter.
+Each R package should contain 99\%
 
-\section{Applications}\label{applications}
+\section{R packages}\label{r-packages}
 
-Some \emph{significant} applications are demonstrated in this chapter.
+Each automated analysis has its own R package (e.g.
+\href{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/}{sykdomspuls}).
 
-\subsection{Example one}\label{example-one}
-
-\subsection{Example two}\label{example-two}
-
-\section{Final Words}\label{final-words}
-
-We have finished a nice book.
+Each R package should contain 99\%
 
 
 \end{document}
