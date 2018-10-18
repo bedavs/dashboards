@@ -243,23 +243,23 @@ repository we have:
 
 \begin{verbatim}
 - dev/
-|-- src/
-   |-- sykdomspuls/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
-   |-- normomo/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
-   |-- sykdomspuls_log/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
-   |-- sykdomspuls_pdf/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
+  |-- src/
+    |-- sykdomspuls/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
+    |-- normomo/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
+    |-- sykdomspuls_log/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
+    |-- sykdomspuls_pdf/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
 \end{verbatim}
 
 \subsection{RunProcess.R}\label{runprocess.r}
@@ -285,13 +285,12 @@ An automated analysis needs to:
   Save the results.
 \end{enumerate}
 
-The R executable (commonly called \texttt{RunProcess.R}) is responsible
-for these tasks.
+\texttt{RunProcess.R} is responsible for these tasks.
 
 We can think of it as an extremely short and extremely high-level script
 that implements the analysis scripts.
 
-Depending on the automated analysis, \texttt{RunProcess.R} can be run
+Depending on the automated analysis \texttt{RunProcess.R} can be run
 every two minutes (constantly checking for new data), or once a week
 (when we know that data will only be available on a certain day/time).
 
@@ -304,7 +303,26 @@ every two minutes (constantly checking for new data), or once a week
   Only one instance of \texttt{RunProcess.R} can be run at a time.
 \item
   Data only exists on physical folders on the system.
+\item
+  The following folder structure exists on the system (here the name of
+  the automated analysis is \texttt{ANALYSIS}):
 \end{enumerate}
+
+\begin{verbatim}
+/data_raw/
+  |-- ANALYSIS/
+/data_clean/
+  |-- ANALYSIS/
+/data_app/
+  |-- ANALYSIS/
+/results/
+  |-- ANALYSIS/
+/src/
+  |-- ANALYSIS/
+     |-- 0_run.sh
+     |-- RunProcess.R
+     |-- RunTest.R
+\end{verbatim}
 
 Point \#1 is important because if \texttt{RunProcess.R} is run every 2
 minutes (constantly checking for new data) but the analyses take 3 hours
@@ -343,15 +361,24 @@ The aim of \texttt{0\_run.sh} is to ensure that:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  The bounded context of \texttt{RunProcess.R} happens
+  Points 1 and 2 of the bounded context of \texttt{RunProcess.R} happen
 \item
   Run \texttt{RunProcess.R}
 \end{enumerate}
 
-Point \#1 is done through the use of \texttt{flock}.
+With regards to the bounded context, we ensure that only one instance of
+\texttt{RunProcess.R} is run at a time through the use of
+\texttt{flock}.
 
-(If neccessary) point \#2 uses \texttt{sshpass}, \texttt{sftp}, and
-\texttt{ncftpput} to download/upload files from SFTP servers.
+(If neccessary) with regards to the bounded context, we use
+\texttt{sshpass}, \texttt{sftp}, and \texttt{ncftpput} to
+download/upload files from SFTP servers.
+
+We then run \texttt{RunProcess.R} with a standard call:
+
+\begin{verbatim}
+/usr/local/bin/Rscript /src/ANALYSIS/RunProcess.R
+\end{verbatim}
 
 \subsection{RunTest.R}\label{runtest.r}
 
@@ -429,6 +456,12 @@ version of the package to Folkehelseinstituttet's R repository:
 
 \section{Umbrella Infrastructure}\label{umbrella-infrastructure}
 
+\begin{itemize}
+\tightlist
+\item
+  Three computers
+\end{itemize}
+
 \subsection{Executive summary}\label{executive-summary-1}
 
 The dashboards project is a project at FHI concerned with running
@@ -503,6 +536,103 @@ use the same infrastructure, so we:
   Can easily work on multiple projects, as we all speak the same
   language
 \end{enumerate}
+
+\section{Contributing}\label{contributing}
+
+\subsection{Development guidelines}\label{development-guidelines}
+
+We try to follow the
+\href{https://guides.github.com/introduction/flow/}{GitHub flow} for
+development.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Fork {[}this repo{]}{[}repo{]} and clone it to your computer. To learn
+  more about this process, see
+  \href{https://guides.github.com/activities/forking/}{this guide}.
+\item
+  If you have forked and cloned the project before and it has been a
+  while since you worked on it, merge changes from the original repo to
+  your clone by using:
+
+\begin{verbatim}
+git fetch upstream
+git merge upstream/master
+\end{verbatim}
+\item
+  Open the RStudio project file (\texttt{.Rproj}).
+\item
+  Make your changes:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Write your code.
+  \item
+    Test your code (bonus points for adding unit tests).
+  \item
+    Document your code (see function documentation above).
+  \item
+    Do an \texttt{R\ CMD\ check} using \texttt{devtools::check()} and
+    aim for 0 errors and warnings.
+  \item
+    Commit your changes locally
+  \item
+    Merge changes from the original repo (again)
+  \item
+    Do an \texttt{R\ CMD\ check} using \texttt{devtools::check()} and
+    aim for 0 errors and warnings.
+  \end{itemize}
+\item
+  Commit and push your changes.
+\item
+  Submit a
+  \href{https://guides.github.com/activities/forking/\#making-a-pull-request}{pull
+  request}.
+\end{enumerate}
+
+\subsection{Code style}\label{code-style}
+
+\begin{itemize}
+\item
+  Function names start with capital letters
+\item
+  Variable names start with small letters
+\item
+  Environments should be in ALL CAPS
+\item
+  Reference \href{http://adv-r.had.co.nz/Style.html}{Hadley's style
+  code}
+\item
+  \textless{}- is preferred over = for assignment
+\item
+  Indentation is with two spaces, not two or a tab. There should be no
+  tabs in code files.
+\item
+  if () \{\} else \{\} constructions should always use full curly braces
+  even when usage seems unnecessary from a clarity perspective.
+\item
+  TODO statements should be opened as GitHub issues with links to
+  specific code files and code lines, rather than written inline.
+\item
+  Follow Hadley's suggestion for aligning long functions with many
+  arguments:
+
+\begin{verbatim}
+ long_function_name <- function(a = "a long argument", 
+                            b = "another argument",
+                            c = "another long argument") {
+   # As usual code is indented by two spaces.
+ }
+\end{verbatim}
+\item
+  Never use print() to send text to the console. Instead use message(),
+  warning(), and error() as appropriate.
+\item
+  Use environment variables, not options(), to store global arguments
+  that are used by many or all functions.
+\end{itemize}
 
 \bibliography{book.bib}
 

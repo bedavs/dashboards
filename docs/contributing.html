@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="r-packages.html">
-<link rel="next" href="contributing.html">
+<link rel="prev" href="umbrella-infrastructure.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -122,47 +122,51 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="umbrella-infrastructure" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Umbrella Infrastructure</h1>
+<div id="contributing" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Contributing</h1>
+<div id="development-guidelines" class="section level2">
+<h2><span class="header-section-number">5.1</span> Development guidelines</h2>
+<p>We try to follow the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> for development.</p>
+<ol style="list-style-type: decimal">
+<li>Fork [this repo][repo] and clone it to your computer. To learn more about this process, see <a href="https://guides.github.com/activities/forking/">this guide</a>.</li>
+<li><p>If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:</p>
+<pre><code>git fetch upstream
+git merge upstream/master</code></pre></li>
+<li>Open the RStudio project file (<code>.Rproj</code>).</li>
+<li>Make your changes:
 <ul>
-<li>Three computers</li>
+<li>Write your code.</li>
+<li>Test your code (bonus points for adding unit tests).</li>
+<li>Document your code (see function documentation above).</li>
+<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
+<li>Commit your changes locally</li>
+<li>Merge changes from the original repo (again)</li>
+<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
+</ul></li>
+<li>Commit and push your changes.</li>
+<li><p>Submit a <a href="https://guides.github.com/activities/forking/#making-a-pull-request">pull request</a>.</p></li>
+</ol>
+</div>
+<div id="code-style" class="section level2">
+<h2><span class="header-section-number">5.2</span> Code style</h2>
+<ul>
+<li>Function names start with capital letters</li>
+<li>Variable names start with small letters</li>
+<li>Environments should be in ALL CAPS</li>
+<li>Reference <a href="http://adv-r.had.co.nz/Style.html">Hadley’s style code</a></li>
+<li>&lt;- is preferred over = for assignment</li>
+<li>Indentation is with two spaces, not two or a tab. There should be no tabs in code files.</li>
+<li>if () {} else {} constructions should always use full curly braces even when usage seems unnecessary from a clarity perspective.</li>
+<li>TODO statements should be opened as GitHub issues with links to specific code files and code lines, rather than written inline.</li>
+<li><p>Follow Hadley’s suggestion for aligning long functions with many arguments:</p>
+<pre><code> long_function_name &lt;- function(a = &quot;a long argument&quot;, 
+                            b = &quot;another argument&quot;,
+                            c = &quot;another long argument&quot;) {
+   # As usual code is indented by two spaces.
+ }</code></pre></li>
+<li>Never use print() to send text to the console. Instead use message(), warning(), and error() as appropriate.</li>
+<li><p>Use environment variables, not options(), to store global arguments that are used by many or all functions.</p></li>
 </ul>
-<div id="executive-summary-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> Executive summary</h2>
-<p>The dashboards project is a project at FHI concerned with running automated analyses on data.</p>
-<p>In principle, the dashboards project is split up into three parts:</p>
-<ol style="list-style-type: decimal">
-<li>The overarching infrastructure (i.e. Docker containers, continuous integration, chron jobs, etc.)</li>
-<li>The R package for each automated analysis</li>
-<li>The executable for each automated analysis</li>
-</ol>
-</div>
-<div id="what-is-an-automated-analysis-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> What is an automated analysis?</h2>
-<p>An automated analysis is any analysis that:</p>
-<ol style="list-style-type: decimal">
-<li>Will be repeated multiple times in the future</li>
-<li>Always has an input dataset with consistent file structure</li>
-<li>Always has the same expected output (e.g. tables, graphs, reports)</li>
-</ol>
-</div>
-<div id="why-not-have-one-project-for-each-automated-analysis-1" class="section level2">
-<h2><span class="header-section-number">4.3</span> Why not have one project for each automated analysis?</h2>
-<p>Automated analyses have a lot of code and infrastructure in common.</p>
-<p>Automated analyses:</p>
-<ol style="list-style-type: decimal">
-<li>Need their code to be tested via unit testing to ensure the results are correct</li>
-<li>Need their code to be tested via integration testing to ensure everything runs</li>
-<li>Need to be run at certain times</li>
-<li>Need to be able to send emails notifying people that the analyses have finished running</li>
-<li>Need to make their results accessible to the relevant people</li>
-</ol>
-<p>By combining them all in one umbrella project we can force everyone to use the same infrastructure, so we:</p>
-<ol style="list-style-type: decimal">
-<li>Only need to solve a problem once</li>
-<li>Only need to maintain one system</li>
-<li>Can easily work on multiple projects, as we all speak the same language</li>
-</ol>
 
 </div>
 </div>
@@ -171,8 +175,8 @@
           </div>
         </div>
       </div>
-<a href="r-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="contributing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="umbrella-infrastructure.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
