@@ -1,4 +1,4 @@
-\documentclass[]{article}
+\documentclass[12pt,]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -13,6 +13,7 @@
     \usepackage{fontspec}
   \fi
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmonofont[Mapping=tex-ansi,Scale=0.7]{Ubuntu}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -23,12 +24,18 @@
 }{}
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{unicode=true,
-            pdfborder={0 0 0},
+            pdftitle={Dashboards project},
+            pdfauthor={Richard White},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=Blue,
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
-\bibliographystyle{plainnat}
+\bibliographystyle{apalike}
 \usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -75,22 +82,28 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{}
-    \pretitle{\vspace{\droptitle}}
-  \posttitle{}
-    \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
+  \title{Dashboards project}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Richard White}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2018-10-18}
+
 \usepackage{booktabs}
 
 \begin{document}
+\maketitle
 
 {
+\hypersetup{linkcolor=black}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\listoftables
+\listoffigures
 \section{Introduction}\label{introduction}
 
 \subsection{Executive summary}\label{executive-summary}
@@ -285,6 +298,8 @@ use the same infrastructure, so we:
   Can easily work on multiple projects, as we all speak the same
   language
 \end{enumerate}
+
+\bibliography{book.bib}
 
 
 \end{document}
