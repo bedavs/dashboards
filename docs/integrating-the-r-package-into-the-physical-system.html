@@ -126,23 +126,23 @@
 <p>Everything related to integrating the R package into the physical system lives in the <a href="https://github.com/folkehelseinstituttet/dashboards/">dashboards</a> repository.</p>
 <p>Inside the <a href="https://github.com/folkehelseinstituttet/dashboards/">dashboards</a> repository we have:</p>
 <pre><code>- dev/
-|-- src/
-   |-- sykdomspuls/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
-   |-- normomo/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
-   |-- sykdomspuls_log/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R
-   |-- sykdomspuls_pdf/
-      |-- 0_run.sh
-      |-- RunProcess.R
-      |-- RunTest.R</code></pre>
+  |-- src/
+    |-- sykdomspuls/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
+    |-- normomo/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
+    |-- sykdomspuls_log/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R
+    |-- sykdomspuls_pdf/
+       |-- 0_run.sh
+       |-- RunProcess.R
+       |-- RunTest.R</code></pre>
 </div>
 <div id="runprocess.r" class="section level2">
 <h2><span class="header-section-number">2.2</span> RunProcess.R</h2>
@@ -157,16 +157,30 @@
 <li>Run the analyses.</li>
 <li>Save the results.</li>
 </ol>
-<p>The R executable (commonly called <code>RunProcess.R</code>) is responsible for these tasks.</p>
+<p><code>RunProcess.R</code> is responsible for these tasks.</p>
 <p>We can think of it as an extremely short and extremely high-level script that implements the analysis scripts.</p>
-<p>Depending on the automated analysis, <code>RunProcess.R</code> can be run every two minutes (constantly checking for new data), or once a week (when we know that data will only be available on a certain day/time).</p>
+<p>Depending on the automated analysis <code>RunProcess.R</code> can be run every two minutes (constantly checking for new data), or once a week (when we know that data will only be available on a certain day/time).</p>
 </div>
 <div id="bounded-context" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Bounded context</h3>
 <ol style="list-style-type: decimal">
 <li>Only one instance of <code>RunProcess.R</code> can be run at a time.</li>
 <li>Data only exists on physical folders on the system.</li>
+<li>The following folder structure exists on the system (here the name of the automated analysis is <code>ANALYSIS</code>):</li>
 </ol>
+<pre><code>/data_raw/
+  |-- ANALYSIS/
+/data_clean/
+  |-- ANALYSIS/
+/data_app/
+  |-- ANALYSIS/
+/results/
+  |-- ANALYSIS/
+/src/
+  |-- ANALYSIS/
+     |-- 0_run.sh
+     |-- RunProcess.R
+     |-- RunTest.R</code></pre>
 <p>Point #1 is important because if <code>RunProcess.R</code> is run every 2 minutes (constantly checking for new data) but the analyses take 3 hours to run, then we need to ensure that only one instance of <code>RunProcess.R</code> can be run at a time.</p>
 <p>Point #2 is important because sometimes:</p>
 <ol style="list-style-type: decimal">
@@ -182,11 +196,13 @@
 <h3><span class="header-section-number">2.3.1</span> Aim</h3>
 <p>The aim of <code>0_run.sh</code> is to ensure that:</p>
 <ol style="list-style-type: decimal">
-<li>The bounded context of <code>RunProcess.R</code> happens</li>
+<li>Points 1 and 2 of the bounded context of <code>RunProcess.R</code> happen</li>
 <li>Run <code>RunProcess.R</code></li>
 </ol>
-<p>Point #1 is done through the use of <code>flock</code>.</p>
-<p>(If neccessary) point #2 uses <code>sshpass</code>, <code>sftp</code>, and <code>ncftpput</code> to download/upload files from SFTP servers.</p>
+<p>With regards to the bounded context, we ensure that only one instance of <code>RunProcess.R</code> is run at a time through the use of <code>flock</code>.</p>
+<p>(If neccessary) with regards to the bounded context, we use <code>sshpass</code>, <code>sftp</code>, and <code>ncftpput</code> to download/upload files from SFTP servers.</p>
+<p>We then run <code>RunProcess.R</code> with a standard call:</p>
+<pre><code>/usr/local/bin/Rscript /src/ANALYSIS/RunProcess.R</code></pre>
 </div>
 </div>
 <div id="runtest.r" class="section level2">
