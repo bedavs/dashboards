@@ -29,7 +29,7 @@ In principle, the dashboards project is split up into three parts:
 
 1. The overarching infrastructure (i.e. Docker containers, continuous integration, chron jobs, etc.)
 2. The R package for each automated analysis
-3. The R executable for each automated analysis
+3. Integrating the R package into the physical system (e.g. specifying where the data is)
 
 ## What is an automated analysis?
 

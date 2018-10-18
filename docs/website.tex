@@ -122,7 +122,8 @@ In principle, the dashboards project is split up into three parts:
 \item
   The R package for each automated analysis
 \item
-  The R executable for each automated analysis
+  Integrating the R package into the physical system (e.g.~specifying
+  where the data is)
 \end{enumerate}
 
 \subsection{What is an automated
@@ -207,31 +208,17 @@ This is an R package that contains helper functions.
 
 \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
 
-\section{R executable for each automated
-analysis}\label{r-executable-for-each-automated-analysis}
+\section{Integrating the R package into the physical
+system}\label{integrating-the-r-package-into-the-physical-system}
 
-An automated analysis needs to:
+\subsection{Summary}\label{summary}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Know the location of the data/results folders
-\item
-  Load in the data
-\item
-  Load in the analysis functions
-\item
-  Run the analyses
-\item
-  Save the results
-\end{enumerate}
+An R package is not enough to run an analysis -- something needs to
+physically call the functions inside the R package. That is, the R
+package needs to be integrated into the physical system.
 
-The R executable (commonly called \texttt{RunProcess.R}) is responsible
-for these tasks. We can think of it as an extremely short and extremely
-high-level script that implements the analysis scripts.
-
-All of these R executables live in the
+Everything related to integrating the R package into the physical system
+lives in the
 \href{https://github.com/folkehelseinstituttet/dashboards/}{dashboards}
 repository.
 
@@ -259,6 +246,99 @@ repository we have:
       |-- RunProcess.R
       |-- RunTest.R
 \end{verbatim}
+
+\subsection{RunProcess.R}\label{runprocess.r}
+
+\subsubsection{Purpose}\label{purpose}
+
+An automated analysis needs to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Know the location of the data/results folders.
+\item
+  Check for new data in these folders. If no new data - then quit.
+\item
+  Load in the data.
+\item
+  Load in the analysis functions.
+\item
+  Run the analyses.
+\item
+  Save the results.
+\end{enumerate}
+
+The R executable (commonly called \texttt{RunProcess.R}) is responsible
+for these tasks.
+
+We can think of it as an extremely short and extremely high-level script
+that implements the analysis scripts.
+
+Depending on the automated analysis, \texttt{RunProcess.R} can be run
+every two minutes (constantly checking for new data), or once a week
+(when we know that data will only be available on a certain day/time).
+
+\subsubsection{Bounded context}\label{bounded-context}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Only one instance of \texttt{RunProcess.R} can be run at a time.
+\item
+  Data only exists on physical folders on the system.
+\end{enumerate}
+
+Point \#1 is important because if \texttt{RunProcess.R} is run every 2
+minutes (constantly checking for new data) but the analyses take 3 hours
+to run, then we need to ensure that only one instance of
+\texttt{RunProcess.R} can be run at a time.
+
+Point \#2 is important because sometimes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Data files need to be downloaded from external SFTP servers
+  (\href{https://folkehelseinstituttet.github.io/dashboards_normomo/}{normomo},
+  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}{sykdomspuls\_log}).
+\item
+  Results files need to be uploaded to external SFTP servers
+  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}.
+\end{enumerate}
+
+If we include code to download/upload the files from SFTP servers inside
+\texttt{RunProcess.R} then it makes it very difficult to test
+\texttt{RunProcess.R} (because we will then need to simulate SFTP
+servers inside our testing infrastructure). If we know that
+\texttt{RunProcess.R} only accesses files that are available on physical
+folders in the system, then our testing infrastructure is a lot easier
+to create and maintain.
+
+\subsection{0\_run.sh}\label{run.sh}
+
+\subsubsection{Purpose}\label{purpose-1}
+
+The aim of \texttt{0\_run.sh} is to ensure that:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The bounded context of \texttt{RunProcess.R} happens
+\item
+  Run \texttt{RunProcess.R}
+\end{enumerate}
+
+Point \#1 is done through the use of \texttt{flock}.
+
+(If neccessary) point \#2 uses \texttt{sshpass}, \texttt{sftp}, and
+\texttt{ncftpput} to download/upload files from SFTP servers.
+
+\subsection{RunTest.R}\label{runtest.r}
 
 \section{R packages}\label{r-packages}
 

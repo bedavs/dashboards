@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="r-packages.html">
-
+<link rel="prev" href="index.html">
+<link rel="next" href="r-packages.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -112,44 +112,79 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Introduction</h1>
-<div id="executive-summary-1" class="section level2">
-<h2><span class="header-section-number">4.1</span> Executive summary</h2>
-<p>The dashboards project is a project at FHI concerned with running automated analyses on data.</p>
-<p>In principle, the dashboards project is split up into three parts:</p>
-<ol style="list-style-type: decimal">
-<li>The overarching infrastructure (i.e. Docker containers, continuous integration, chron jobs, etc.)</li>
-<li>The R package for each automated analysis</li>
-<li>The executable for each automated analysis</li>
-</ol>
+<div id="integrating-the-r-package-into-the-physical-system" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Integrating the R package into the physical system</h1>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">2.1</span> Summary</h2>
+<p>An R package is not enough to run an analysis – something needs to physically call the functions inside the R package. That is, the R package needs to be integrated into the physical system.</p>
+<p>Everything related to integrating the R package into the physical system lives in the <a href="https://github.com/folkehelseinstituttet/dashboards/">dashboards</a> repository.</p>
+<p>Inside the <a href="https://github.com/folkehelseinstituttet/dashboards/">dashboards</a> repository we have:</p>
+<pre><code>- dev/
+|-- src/
+   |-- sykdomspuls/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+   |-- normomo/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+   |-- sykdomspuls_log/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+   |-- sykdomspuls_pdf/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R</code></pre>
 </div>
-<div id="what-is-an-automated-analysis-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> What is an automated analysis?</h2>
-<p>An automated analysis is any analysis that:</p>
+<div id="runprocess.r" class="section level2">
+<h2><span class="header-section-number">2.2</span> RunProcess.R</h2>
+<div id="purpose" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Purpose</h3>
+<p>An automated analysis needs to:</p>
 <ol style="list-style-type: decimal">
-<li>Will be repeated multiple times in the future</li>
-<li>Always has an input dataset with consistent file structure</li>
-<li>Always has the same expected output (e.g. tables, graphs, reports)</li>
+<li>Know the location of the data/results folders.</li>
+<li>Check for new data in these folders. If no new data - then quit.</li>
+<li>Load in the data.</li>
+<li>Load in the analysis functions.</li>
+<li>Run the analyses.</li>
+<li>Save the results.</li>
 </ol>
+<p>The R executable (commonly called <code>RunProcess.R</code>) is responsible for these tasks.</p>
+<p>We can think of it as an extremely short and extremely high-level script that implements the analysis scripts.</p>
+<p>Depending on the automated analysis, <code>RunProcess.R</code> can be run every two minutes (constantly checking for new data), or once a week (when we know that data will only be available on a certain day/time).</p>
 </div>
-<div id="why-not-have-one-project-for-each-automated-analysis-1" class="section level2">
-<h2><span class="header-section-number">4.3</span> Why not have one project for each automated analysis?</h2>
-<p>Automated analyses have a lot of code and infrastructure in common.</p>
-<p>Automated analyses:</p>
+<div id="bounded-context" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Bounded context</h3>
 <ol style="list-style-type: decimal">
-<li>Need their code to be tested via unit testing to ensure the results are correct</li>
-<li>Need their code to be tested via integration testing to ensure everything runs</li>
-<li>Need to be run at certain times</li>
-<li>Need to be able to send emails notifying people that the analyses have finished running</li>
-<li>Need to make their results accessible to the relevant people</li>
+<li>Only one instance of <code>RunProcess.R</code> can be run at a time.</li>
+<li>Data only exists on physical folders on the system.</li>
 </ol>
-<p>By combining them all in one umbrella project we can force everyone to use the same infrastructure, so we:</p>
+<p>Point #1 is important because if <code>RunProcess.R</code> is run every 2 minutes (constantly checking for new data) but the analyses take 3 hours to run, then we need to ensure that only one instance of <code>RunProcess.R</code> can be run at a time.</p>
+<p>Point #2 is important because sometimes:</p>
 <ol style="list-style-type: decimal">
-<li>Only need to solve a problem once</li>
-<li>Only need to maintain one system</li>
-<li>Can easily work on multiple projects, as we all speak the same language</li>
+<li>Data files need to be downloaded from external SFTP servers (<a href="https://folkehelseinstituttet.github.io/dashboards_normomo/">normomo</a>, <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/">sykdomspuls_log</a>).</li>
+<li>Results files need to be uploaded to external SFTP servers <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>.</li>
 </ol>
+<p>If we include code to download/upload the files from SFTP servers inside <code>RunProcess.R</code> then it makes it very difficult to test <code>RunProcess.R</code> (because we will then need to simulate SFTP servers inside our testing infrastructure). If we know that <code>RunProcess.R</code> only accesses files that are available on physical folders in the system, then our testing infrastructure is a lot easier to create and maintain.</p>
+</div>
+</div>
+<div id="run.sh" class="section level2">
+<h2><span class="header-section-number">2.3</span> 0_run.sh</h2>
+<div id="purpose-1" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Purpose</h3>
+<p>The aim of <code>0_run.sh</code> is to ensure that:</p>
+<ol style="list-style-type: decimal">
+<li>The bounded context of <code>RunProcess.R</code> happens</li>
+<li>Run <code>RunProcess.R</code></li>
+</ol>
+<p>Point #1 is done through the use of <code>flock</code>.</p>
+<p>(If neccessary) point #2 uses <code>sshpass</code>, <code>sftp</code>, and <code>ncftpput</code> to download/upload files from SFTP servers.</p>
+</div>
+</div>
+<div id="runtest.r" class="section level2">
+<h2><span class="header-section-number">2.4</span> RunTest.R</h2>
 
 </div>
 </div>
@@ -158,8 +193,8 @@
           </div>
         </div>
       </div>
-<a href="r-packages.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
