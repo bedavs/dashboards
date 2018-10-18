@@ -91,9 +91,7 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\section{Introduction}\label{intro}
-
-\subsection{Important repositories}\label{important-repositories}
+\section{Important repositories}\label{important-repositories}
 
 \url{https://folkehelseinstituttet.github.io/fhi/}
 
@@ -109,7 +107,9 @@
 
 \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
 
-\subsection{Summary}\label{summary}
+\section{Introduction}\label{intro}
+
+\subsection{Executive summary}\label{executive-summary}
 
 The dashboards project is a project at FHI concerned with running
 automated analyses on data.
@@ -129,7 +129,60 @@ In principle, the dashboards project is split up into three parts:
 \end{enumerate}
 
 \subsection{What is an automated
-analysis}\label{what-is-an-automated-analysis}
+analysis?}\label{what-is-an-automated-analysis}
+
+An automated analysis is any analysis that:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Will be repeated multiple times in the future
+\item
+  Always has an input dataset with consistent file structure
+\item
+  Always has the same expected output (e.g.~tables, graphs, reports)
+\end{enumerate}
+
+\subsection{Why not have one project for each automated
+analysis?}\label{why-not-have-one-project-for-each-automated-analysis}
+
+Automated analyses have a lot of code and infrastructure in common.
+
+Automated analyses:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Need their code to be tested via unit testing to ensure the results
+  are correct
+\item
+  Need their code to be tested via integration testing to ensure
+  everything runs
+\item
+  Need to be run at certain times
+\item
+  Need to be able to send emails notifying people that the analyses have
+  finished running
+\item
+  Need to make their results accessible to the relevant people
+\end{enumerate}
+
+By combining them all in one umbrella project we can force everyone to
+use the same infrastructure, so we:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Only need to solve a problem once
+\item
+  Only need to maintain one system
+\item
+  Can easily work on multiple projects, as we all speak the same
+  language
+\end{enumerate}
 
 \section{Executable for each automated
 analysis}\label{executable-for-each-automated-analysis}
