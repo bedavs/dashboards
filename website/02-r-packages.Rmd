@@ -1,5 +1,30 @@
 # R packages
 
-Each automated analysis has its own R package (e.g. [sykdomspuls](https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/)).
+## Summary
 
-Each R package should contain 99%
+Each automated analysis has its own R package:
+
+- [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/)
+- [normomo](https://folkehelseinstituttet.github.io/dashboards_normomo/)
+- [sykdomspulspdf](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/)
+- [sykdomspulslog](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/)
+
+Each R package contains all of the code necessary for that automated analysis. Typical examples are:
+
+- Data cleaning
+- Signal analysis
+- Graph generation
+- Report generation
+
+## Requirements
+
+The R packages should be developed using unit testing as implemented in the [testthat](http://r-pkgs.had.co.nz/tests.html) package.
+
+Furthermore, the R package should operate (and be able to be tested) independently from the real datasets on the system. This is because the real datasets cannot be shared publically or uploaded to github. To circumvent this issue, each package will need to develop functions that can generate fake data. [GenFakeDataRaw](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/GenFakeDataRaw.html) is one example from [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/).
+
+We also require that unit tests are created to test the formatting/structure of results. [ValidateAnalysisResults](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/ValidateAnalysisResults.html) is one example from [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/), where the names of the data.table are checked against reference values to ensure that the structure of the results are not accidentally changed.
+
+## Deployment via travis-ci and drat
+
+Unit testing is then automatically run using [travis-ci](http://r-pkgs.had.co.nz/check.html#travis). If the R package passes all tests, then we use [drat](https://github.com/eddelbuettel/drat) to deploy a built version of the package to Folkehelseinstituttet's R repository: https://folkehelseinstituttet.github.io/drat/.
+

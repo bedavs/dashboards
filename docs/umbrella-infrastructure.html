@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="integrating-the-r-package-into-the-physical-system.html">
-<link rel="next" href="umbrella-infrastructure.html">
+<link rel="prev" href="r-packages.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -118,34 +118,44 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-packages" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> R packages</h1>
-<div id="summary-1" class="section level2">
-<h2><span class="header-section-number">3.1</span> Summary</h2>
-<p>Each automated analysis has its own R package:</p>
-<ul>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_normomo/">normomo</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/">sykdomspulspdf</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/">sykdomspulslog</a></li>
-</ul>
-<p>Each R package contains all of the code necessary for that automated analysis. Typical examples are:</p>
-<ul>
-<li>Data cleaning</li>
-<li>Signal analysis</li>
-<li>Graph generation</li>
-<li>Report generation</li>
-</ul>
+<div id="umbrella-infrastructure" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Umbrella Infrastructure</h1>
+<div id="executive-summary-1" class="section level2">
+<h2><span class="header-section-number">4.1</span> Executive summary</h2>
+<p>The dashboards project is a project at FHI concerned with running automated analyses on data.</p>
+<p>In principle, the dashboards project is split up into three parts:</p>
+<ol style="list-style-type: decimal">
+<li>The overarching infrastructure (i.e. Docker containers, continuous integration, chron jobs, etc.)</li>
+<li>The R package for each automated analysis</li>
+<li>The executable for each automated analysis</li>
+</ol>
 </div>
-<div id="requirements" class="section level2">
-<h2><span class="header-section-number">3.2</span> Requirements</h2>
-<p>The R packages should be developed using unit testing as implemented in the <a href="http://r-pkgs.had.co.nz/tests.html">testthat</a> package.</p>
-<p>Furthermore, the R package should operate (and be able to be tested) independently from the real datasets on the system. This is because the real datasets cannot be shared publically or uploaded to github. To circumvent this issue, each package will need to develop functions that can generate fake data. <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/GenFakeDataRaw.html">GenFakeDataRaw</a> is one example from <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>.</p>
-<p>We also require that unit tests are created to test the formatting/structure of results. <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/ValidateAnalysisResults.html">ValidateAnalysisResults</a> is one example from <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>, where the names of the data.table are checked against reference values to ensure that the structure of the results are not accidentally changed.</p>
+<div id="what-is-an-automated-analysis-1" class="section level2">
+<h2><span class="header-section-number">4.2</span> What is an automated analysis?</h2>
+<p>An automated analysis is any analysis that:</p>
+<ol style="list-style-type: decimal">
+<li>Will be repeated multiple times in the future</li>
+<li>Always has an input dataset with consistent file structure</li>
+<li>Always has the same expected output (e.g. tables, graphs, reports)</li>
+</ol>
 </div>
-<div id="deployment-via-travis-ci-and-drat" class="section level2">
-<h2><span class="header-section-number">3.3</span> Deployment via travis-ci and drat</h2>
-<p>Unit testing is then automatically run using <a href="http://r-pkgs.had.co.nz/check.html#travis">travis-ci</a>. If the R package passes all tests, then we use <a href="https://github.com/eddelbuettel/drat">drat</a> to deploy a built version of the package to Folkehelseinstituttet’s R repository: <a href="https://folkehelseinstituttet.github.io/drat/" class="uri">https://folkehelseinstituttet.github.io/drat/</a>.</p>
+<div id="why-not-have-one-project-for-each-automated-analysis-1" class="section level2">
+<h2><span class="header-section-number">4.3</span> Why not have one project for each automated analysis?</h2>
+<p>Automated analyses have a lot of code and infrastructure in common.</p>
+<p>Automated analyses:</p>
+<ol style="list-style-type: decimal">
+<li>Need their code to be tested via unit testing to ensure the results are correct</li>
+<li>Need their code to be tested via integration testing to ensure everything runs</li>
+<li>Need to be run at certain times</li>
+<li>Need to be able to send emails notifying people that the analyses have finished running</li>
+<li>Need to make their results accessible to the relevant people</li>
+</ol>
+<p>By combining them all in one umbrella project we can force everyone to use the same infrastructure, so we:</p>
+<ol style="list-style-type: decimal">
+<li>Only need to solve a problem once</li>
+<li>Only need to maintain one system</li>
+<li>Can easily work on multiple projects, as we all speak the same language</li>
+</ol>
 
 </div>
 </div>
@@ -154,8 +164,8 @@
           </div>
         </div>
       </div>
-<a href="integrating-the-r-package-into-the-physical-system.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="umbrella-infrastructure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r-packages.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

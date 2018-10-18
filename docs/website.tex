@@ -94,6 +94,20 @@
 
 \usepackage{booktabs}
 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -117,7 +131,7 @@ In principle, the dashboards project is split up into three parts:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  The overarching infrastructure (i.e.~Docker containers, continuous
+  The umbrella infrastructure (i.e.~Docker containers, continuous
   integration, chron jobs, etc.)
 \item
   The R package for each automated analysis
@@ -198,7 +212,8 @@ This contains the R executable for each automated analysis.
 
 This is an R package that contains helper functions.
 
-\subsubsection{Automated analyses}\label{automated-analyses}
+\subsubsection{Automated analyses R
+packages}\label{automated-analyses-r-packages}
 
 \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
 
@@ -249,7 +264,7 @@ repository we have:
 
 \subsection{RunProcess.R}\label{runprocess.r}
 
-\subsubsection{Purpose}\label{purpose}
+\subsubsection{Aim}\label{aim}
 
 An automated analysis needs to:
 
@@ -304,10 +319,10 @@ Point \#2 is important because sometimes:
 \item
   Data files need to be downloaded from external SFTP servers
   (\href{https://folkehelseinstituttet.github.io/dashboards_normomo/}{normomo},
-  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}{sykdomspuls\_log}).
+  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}{sykdomspulslog}).
 \item
   Results files need to be uploaded to external SFTP servers
-  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}.
+  (\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}).
 \end{enumerate}
 
 If we include code to download/upload the files from SFTP servers inside
@@ -320,7 +335,7 @@ to create and maintain.
 
 \subsection{0\_run.sh}\label{run.sh}
 
-\subsubsection{Purpose}\label{purpose-1}
+\subsubsection{Aim}\label{aim-1}
 
 The aim of \texttt{0\_run.sh} is to ensure that:
 
@@ -340,14 +355,79 @@ Point \#1 is done through the use of \texttt{flock}.
 
 \subsection{RunTest.R}\label{runtest.r}
 
+\subsubsection{Aim}\label{aim-2}
+
+The aim of \texttt{RunTest.R} is to perform integration testing on the
+automated analysis. This integration testing is performed as part of the
+Jenkins build pipeline.
+
 \section{R packages}\label{r-packages}
 
-Each automated analysis has its own R package (e.g.
-\href{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/}{sykdomspuls}).
+\subsection{Summary}\label{summary-1}
 
-Each R package should contain 99\%
+Each automated analysis has its own R package:
 
-\section{Introduction}\label{intro}
+\begin{itemize}
+\tightlist
+\item
+  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}
+\item
+  \href{https://folkehelseinstituttet.github.io/dashboards_normomo/}{normomo}
+\item
+  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}{sykdomspulspdf}
+\item
+  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}{sykdomspulslog}
+\end{itemize}
+
+Each R package contains all of the code necessary for that automated
+analysis. Typical examples are:
+
+\begin{itemize}
+\tightlist
+\item
+  Data cleaning
+\item
+  Signal analysis
+\item
+  Graph generation
+\item
+  Report generation
+\end{itemize}
+
+\subsection{Requirements}\label{requirements}
+
+The R packages should be developed using unit testing as implemented in
+the \href{http://r-pkgs.had.co.nz/tests.html}{testthat} package.
+
+Furthermore, the R package should operate (and be able to be tested)
+independently from the real datasets on the system. This is because the
+real datasets cannot be shared publically or uploaded to github. To
+circumvent this issue, each package will need to develop functions that
+can generate fake data.
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/GenFakeDataRaw.html}{GenFakeDataRaw}
+is one example from
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}.
+
+We also require that unit tests are created to test the
+formatting/structure of results.
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/ValidateAnalysisResults.html}{ValidateAnalysisResults}
+is one example from
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls},
+where the names of the data.table are checked against reference values
+to ensure that the structure of the results are not accidentally
+changed.
+
+\subsection{Deployment via travis-ci and
+drat}\label{deployment-via-travis-ci-and-drat}
+
+Unit testing is then automatically run using
+\href{http://r-pkgs.had.co.nz/check.html\#travis}{travis-ci}. If the R
+package passes all tests, then we use
+\href{https://github.com/eddelbuettel/drat}{drat} to deploy a built
+version of the package to Folkehelseinstituttet's R repository:
+\url{https://folkehelseinstituttet.github.io/drat/}.
+
+\section{Umbrella Infrastructure}\label{umbrella-infrastructure}
 
 \subsection{Executive summary}\label{executive-summary-1}
 

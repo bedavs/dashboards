@@ -31,7 +31,7 @@ Inside the [dashboards](https://github.com/folkehelseinstituttet/dashboards/) re
 
 ## RunProcess.R
 
-### Purpose
+### Aim
 
 An automated analysis needs to:
 
@@ -57,14 +57,14 @@ Point #1 is important because if `RunProcess.R` is run every 2 minutes (constant
 
 Point #2 is important because sometimes:
 
-1. Data files need to be downloaded from external SFTP servers ([normomo](https://folkehelseinstituttet.github.io/dashboards_normomo/), [sykdomspuls_log](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/)).
-2. Results files need to be uploaded to external SFTP servers [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/).
+1. Data files need to be downloaded from external SFTP servers ([normomo](https://folkehelseinstituttet.github.io/dashboards_normomo/), [sykdomspulslog](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/)).
+2. Results files need to be uploaded to external SFTP servers ([sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/)).
 
 If we include code to download/upload the files from SFTP servers inside `RunProcess.R` then it makes it very difficult to test `RunProcess.R` (because we will then need to simulate SFTP servers inside our testing infrastructure). If we know that `RunProcess.R` only accesses files that are available on physical folders in the system, then our testing infrastructure is a lot easier to create and maintain.
 
 ## 0_run.sh
 
-### Purpose
+### Aim
 
 The aim of `0_run.sh` is to ensure that:
 
@@ -77,7 +77,9 @@ Point #1 is done through the use of `flock`.
 
 ## RunTest.R
 
+### Aim
 
+The aim of `RunTest.R` is to perform integration testing on the automated analysis. This integration testing is performed as part of the Jenkins build pipeline.
 
 
 
