@@ -91,23 +91,7 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\section{Important repositories}\label{important-repositories}
-
-\url{https://folkehelseinstituttet.github.io/fhi/}
-
-\url{https://folkehelseinstituttet.github.io/dashboards/} (this one)
-
-\url{https://github.com/raubreywhite/dashboards_control/} (private)
-
-\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
-
-\url{https://folkehelseinstituttet.github.io/dashboards_normomo/}
-
-\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}
-
-\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
-
-\section{Introduction}\label{intro}
+\section{Introduction}\label{introduction}
 
 \subsection{Executive summary}\label{executive-summary}
 
@@ -125,7 +109,7 @@ In principle, the dashboards project is split up into three parts:
 \item
   The R package for each automated analysis
 \item
-  The executable for each automated analysis
+  The R executable for each automated analysis
 \end{enumerate}
 
 \subsection{What is an automated
@@ -184,6 +168,32 @@ use the same infrastructure, so we:
   language
 \end{enumerate}
 
+\subsection{Important repositories}\label{important-repositories}
+
+\subsubsection{Infrastructure}\label{infrastructure}
+
+\url{https://github.com/raubreywhite/dashboards_control/} (private)
+
+This contains the Docker files, cronfiles, all bash scripts, etc.
+
+\url{https://folkehelseinstituttet.github.io/dashboards/} (this one)
+
+This contains the R executable for each automated analysis.
+
+\url{https://folkehelseinstituttet.github.io/fhi/}
+
+This is an R package that contains helper functions.
+
+\subsubsection{Automated analyses}\label{automated-analyses}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_normomo/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
+
 \section{Executable for each automated
 analysis}\label{executable-for-each-automated-analysis}
 
@@ -198,6 +208,83 @@ Each automated analysis has its own R package (e.g.
 \href{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/}{sykdomspuls}).
 
 Each R package should contain 99\%
+
+\section{Introduction}\label{intro}
+
+\subsection{Executive summary}\label{executive-summary-1}
+
+The dashboards project is a project at FHI concerned with running
+automated analyses on data.
+
+In principle, the dashboards project is split up into three parts:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The overarching infrastructure (i.e.~Docker containers, continuous
+  integration, chron jobs, etc.)
+\item
+  The R package for each automated analysis
+\item
+  The executable for each automated analysis
+\end{enumerate}
+
+\subsection{What is an automated
+analysis?}\label{what-is-an-automated-analysis-1}
+
+An automated analysis is any analysis that:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Will be repeated multiple times in the future
+\item
+  Always has an input dataset with consistent file structure
+\item
+  Always has the same expected output (e.g.~tables, graphs, reports)
+\end{enumerate}
+
+\subsection{Why not have one project for each automated
+analysis?}\label{why-not-have-one-project-for-each-automated-analysis-1}
+
+Automated analyses have a lot of code and infrastructure in common.
+
+Automated analyses:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Need their code to be tested via unit testing to ensure the results
+  are correct
+\item
+  Need their code to be tested via integration testing to ensure
+  everything runs
+\item
+  Need to be run at certain times
+\item
+  Need to be able to send emails notifying people that the analyses have
+  finished running
+\item
+  Need to make their results accessible to the relevant people
+\end{enumerate}
+
+By combining them all in one umbrella project we can force everyone to
+use the same infrastructure, so we:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Only need to solve a problem once
+\item
+  Only need to maintain one system
+\item
+  Can easily work on multiple projects, as we all speak the same
+  language
+\end{enumerate}
 
 
 \end{document}
