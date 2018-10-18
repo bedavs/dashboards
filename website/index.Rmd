@@ -51,7 +51,7 @@ Automated analyses:
 4. Need to be able to send emails notifying people that the analyses have finished running
 5. Need to make their results accessible to the relevant people
 
-By combining them all in one umbrella project we can force everyone to use the same infrastructure, so we:
+By combining them all in one umbrella project we can force everyone to use the same infrastructure and coding principles, so we:
 
 1. Only need to solve a problem once
 2. Only need to maintain one system

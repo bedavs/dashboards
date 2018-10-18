@@ -1,5 +1,36 @@
-# Executable for each automated analysis
+# R executable for each automated analysis
 
-Each automated analysis has its own R package (e.g. [sykdomspuls](https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/)).
+An automated analysis needs to:
 
-Each R package should contain 99%
+1. Know the location of the data/results folders
+2. Load in the data
+3. Load in the analysis functions
+4. Run the analyses
+5. Save the results
+
+The R executable (commonly called `RunProcess.R`) is responsible for these tasks. We can think of it as an extremely short and extremely high-level script that implements the analysis scripts.
+
+All of these R executables live in the [dashboards](https://github.com/folkehelseinstituttet/dashboards/) repository.
+
+Inside the [dashboards](https://github.com/folkehelseinstituttet/dashboards/) repository we have:
+
+```
+- dev/
+|-- src/
+   |-- sykdomspuls/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+   |-- normomo/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+   |-- sykdomspuls_log/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+   |-- sykdomspuls_pdf/
+      |-- 0_run.sh
+      |-- RunProcess.R
+      |-- RunTest.R
+```
