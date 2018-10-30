@@ -25,7 +25,7 @@
 <meta name="author" content="Richard White">
 
 
-<meta name="date" content="2018-10-18">
+<meta name="date" content="2018-10-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -129,6 +129,8 @@
 <p>We try to follow the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> for development.</p>
 <ol style="list-style-type: decimal">
 <li>Fork [this repo][repo] and clone it to your computer. To learn more about this process, see <a href="https://guides.github.com/activities/forking/">this guide</a>.</li>
+<li><p>Add the Folkehelseinstituttet repository as your upstream:</p>
+<pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre></li>
 <li><p>If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:</p>
 <pre><code>git fetch upstream
 git merge upstream/master</code></pre></li>
@@ -144,8 +146,14 @@ git merge upstream/master</code></pre></li>
 <li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
 </ul></li>
 <li>Commit and push your changes.</li>
-<li><p>Submit a <a href="https://guides.github.com/activities/forking/#making-a-pull-request">pull request</a>.</p></li>
+<li>Submit a <a href="https://guides.github.com/activities/forking/#making-a-pull-request">pull request</a>.</li>
+<li><p>If you are reviewing the pull request, wait until the <a href="www.travis-ci.org">travis-ci</a> unit tests have finished</p></li>
 </ol>
+<p><img src="images/pull_request_before_checks.png" width="1372" /></p>
+<ol start="9" style="list-style-type: decimal">
+<li>Please make sure that the unit tests <code>PASS</code> before merging in!!</li>
+</ol>
+<p><img src="images/pull_request_checks_failed.png" width="1372" /></p>
 </div>
 <div id="code-style" class="section level2">
 <h2><span class="header-section-number">5.2</span> Code style</h2>

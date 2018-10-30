@@ -90,7 +90,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-18}
+    \date{2018-10-26}
 
 \usepackage{booktabs}
 
@@ -552,6 +552,12 @@ development.
   more about this process, see
   \href{https://guides.github.com/activities/forking/}{this guide}.
 \item
+  Add the Folkehelseinstituttet repository as your upstream:
+
+\begin{verbatim}
+git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
+\end{verbatim}
+\item
   If you have forked and cloned the project before and it has been a
   while since you worked on it, merge changes from the original repo to
   your clone by using:
@@ -590,7 +596,22 @@ git merge upstream/master
   Submit a
   \href{https://guides.github.com/activities/forking/\#making-a-pull-request}{pull
   request}.
+\item
+  If you are reviewing the pull request, wait until the
+  \href{www.travis-ci.org}{travis-ci} unit tests have finished
 \end{enumerate}
+
+\includegraphics[width=38.11in]{images/pull_request_before_checks}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Please make sure that the unit tests \texttt{PASS} before merging in!!
+\end{enumerate}
+
+\includegraphics[width=38.11in]{images/pull_request_checks_failed}
 
 \subsection{Code style}\label{code-style}
 
