@@ -33,16 +33,16 @@ function travis-branch-commit() {
         return 1
     fi
     # make Travis CI skip this build
-    if ! git commit -m "Travis CI update [$TRAVIS_BUILD_NUMBER]"; then
+    if ! git commit -m "Travis CI update $TRAVIS_BUILD_NUMBER [ci skip]"; then
         err "failed to commit updates"
         return 1
     fi
     # add to your .travis.yml: `branches\n  except:\n  - "/\\+travis\\d+$/"\n`
-    local git_tag=travis+$TRAVIS_BUILD_NUMBER
-    if ! git tag "$git_tag" -m "Generated tag from Travis CI build $TRAVIS_BUILD_NUMBER"; then
-        err "failed to create git tag: $git_tag"
-        return 1
-    fi
+    #local git_tag=travis+$TRAVIS_BUILD_NUMBER
+    #if ! git tag "$git_tag" -m "Generated tag from Travis CI build $TRAVIS_BUILD_NUMBER"; then
+    #    err "failed to create git tag: $git_tag"
+    #    return 1
+    #fi
     local remote=origin
     if [[ $GITHUB_PAT ]]; then
         remote=https://$GITHUB_PAT@github.com/$TRAVIS_REPO_SLUG
