@@ -1,5 +1,8 @@
 language: r
 pandoc_version: 1.19.2.1
+branches:
+  except:
+    - travis
 before_script:
 - chmod +x ./website/_build.sh
 - chmod +x ./website/_deploy.sh
