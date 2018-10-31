@@ -6,7 +6,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Dashboards</a></li>
       after: |
-        <li><a href="https://www.fhi.no/" target="blank">fhi.no</a></li>
+        <li><a href="https://www.fhi.no/" target="blank">www.fhi.no</a></li>
     download: ["pdf", "epub"]
 
 bookdown::html_chapters:
