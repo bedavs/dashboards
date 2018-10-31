@@ -2,7 +2,6 @@
 title: "Dashboards project"
 author: "Richard White"
 date: "`r Sys.Date()`"
-cover-image: "images/cover.png"
 knit: "bookdown::render_book"
 bibliography: [book.bib]
 biblio-style: apalike
