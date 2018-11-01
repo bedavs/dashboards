@@ -228,25 +228,8 @@ packages}\label{automated-analyses-r-packages}
 
 \section{Umbrella Infrastructure}\label{umbrella-infrastructure}
 
-\subsection{Physical hardware and
-subscriptions}\label{physical-hardware-and-subscriptions}
-
-\begin{itemize}
-\tightlist
-\item
-  At least three computers
-\end{itemize}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Production linux computer \texttt{smhb}
-\item
-  Testing linux computer \texttt{linux}
-\item
-  Development linux computers (1 per person)
-\end{enumerate}
+\subsection{Physical Hardware and
+Subscriptions}\label{physical-hardware-and-subscriptions}
 
 \begin{itemize}
 \tightlist
@@ -257,7 +240,7 @@ subscriptions}\label{physical-hardware-and-subscriptions}
   One Github team
   (\url{https://github.com/orgs/folkehelseinstituttet/teams/dashboards})
 \item
-  One \href{https://github.com/eddelbuettel/drat}{DRAT} repository
+  One \href{https://github.com/eddelbuettel/drat}{drat} repository
   (\url{https://folkehelseinstituttet.github.io/drat/})
 \item
   One travis-ci.org account
@@ -267,6 +250,19 @@ subscriptions}\label{physical-hardware-and-subscriptions}
   (\url{http://travis-ci.com/folkehelseinstituttet})
 \item
   One Docker hub account (\url{http://hub.docker.com/u/raw996/})
+\item
+  At least three computers:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Production linux computer \texttt{smhb}
+  \item
+    Testing linux computer \texttt{linux}
+  \item
+    Development linux computers (1 per person)
+  \end{enumerate}
 \end{itemize}
 
 \subsubsection{Requirements - smhb}\label{requirements---smhb}
@@ -304,7 +300,7 @@ subscriptions}\label{physical-hardware-and-subscriptions}
   (\url{https://www.docker.com/products/docker-engine})
 \end{itemize}
 
-\subsection{Analysis Docker image}\label{analysis-docker-image}
+\subsection{Analysis Docker Image}\label{analysis-docker-image}
 
 \subsubsection{Images}\label{images}
 
@@ -331,7 +327,7 @@ tests are passed, then the Docker image is retagged and pushed to
 \href{https://hub.docker.com/r/raw996/dashboards_r/}{raw996/dashboards\_r:production}.
 This image is private as it contains passwords and email addresses.
 
-\subsubsection{File structure}\label{file-structure}
+\subsubsection{File Structure}\label{file-structure}
 
 Inside \texttt{raw996/dashboards\_r} we have the following file
 structure:
@@ -400,8 +396,8 @@ Autofs is only activated when the environmental variable
 
 In principle, autofs should only be activated on \texttt{smhb}.
 
-\subsection{Reverse proxy Docker
-image}\label{reverse-proxy-docker-image}
+\subsection{Reverse Proxy Docker
+Image}\label{reverse-proxy-docker-image}
 
 We use nginx as a reverse proxy to make rstudio server available to the
 developers.
@@ -412,7 +408,7 @@ and is pushed to
 \href{https://hub.docker.com/r/raw996/dashboards_nginx/}{raw996/dashboards\_nginx:production}
 after integration testing is passed.
 
-\subsection{Docker compose}\label{docker-compose}
+\subsection{Docker Compose}\label{docker-compose}
 
 \href{https://docs.docker.com/compose/}{Docker compose} is used to
 integrate these Docker images into the local filesystem. We have

@@ -78,19 +78,19 @@
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html"><i class="fa fa-check"></i><b>2</b> Umbrella Infrastructure</a><ul>
-<li class="chapter" data-level="2.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#physical-hardware-and-subscriptions"><i class="fa fa-check"></i><b>2.1</b> Physical hardware and subscriptions</a><ul>
+<li class="chapter" data-level="2.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#physical-hardware-and-subscriptions"><i class="fa fa-check"></i><b>2.1</b> Physical Hardware and Subscriptions</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#requirements---smhb"><i class="fa fa-check"></i><b>2.1.1</b> Requirements - smhb</a></li>
 <li class="chapter" data-level="2.1.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#requirements---linux"><i class="fa fa-check"></i><b>2.1.2</b> Requirements - linux</a></li>
 <li class="chapter" data-level="2.1.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#requirements---dev"><i class="fa fa-check"></i><b>2.1.3</b> Requirements - dev</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#analysis-docker-image"><i class="fa fa-check"></i><b>2.2</b> Analysis Docker image</a><ul>
+<li class="chapter" data-level="2.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#analysis-docker-image"><i class="fa fa-check"></i><b>2.2</b> Analysis Docker Image</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#images"><i class="fa fa-check"></i><b>2.2.1</b> Images</a></li>
-<li class="chapter" data-level="2.2.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure"><i class="fa fa-check"></i><b>2.2.2</b> File structure</a></li>
+<li class="chapter" data-level="2.2.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure"><i class="fa fa-check"></i><b>2.2.2</b> File Structure</a></li>
 <li class="chapter" data-level="2.2.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#cron"><i class="fa fa-check"></i><b>2.2.3</b> cron</a></li>
 <li class="chapter" data-level="2.2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#autofs"><i class="fa fa-check"></i><b>2.2.4</b> autofs</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#reverse-proxy-docker-image"><i class="fa fa-check"></i><b>2.3</b> Reverse proxy Docker image</a></li>
-<li class="chapter" data-level="2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#docker-compose"><i class="fa fa-check"></i><b>2.4</b> Docker compose</a></li>
+<li class="chapter" data-level="2.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#reverse-proxy-docker-image"><i class="fa fa-check"></i><b>2.3</b> Reverse Proxy Docker Image</a></li>
+<li class="chapter" data-level="2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#docker-compose"><i class="fa fa-check"></i><b>2.4</b> Docker Compose</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R packages</a><ul>
 <li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#generic"><i class="fa fa-check"></i><b>3.1</b> Generic</a><ul>
@@ -140,22 +140,20 @@
 <div id="umbrella-infrastructure" class="section level1">
 <h1><span class="header-section-number">2</span> Umbrella Infrastructure</h1>
 <div id="physical-hardware-and-subscriptions" class="section level2">
-<h2><span class="header-section-number">2.1</span> Physical hardware and subscriptions</h2>
+<h2><span class="header-section-number">2.1</span> Physical Hardware and Subscriptions</h2>
 <ul>
-<li>At least three computers</li>
-</ul>
+<li>One Github organization (<a href="http://github.com/folkehelseinstituttet/" class="uri">http://github.com/folkehelseinstituttet/</a>)</li>
+<li>One Github team (<a href="https://github.com/orgs/folkehelseinstituttet/teams/dashboards" class="uri">https://github.com/orgs/folkehelseinstituttet/teams/dashboards</a>)</li>
+<li>One <a href="https://github.com/eddelbuettel/drat">drat</a> repository (<a href="https://folkehelseinstituttet.github.io/drat/" class="uri">https://folkehelseinstituttet.github.io/drat/</a>)</li>
+<li>One travis-ci.org account (<a href="http://travis-ci.org/folkehelseinstituttet" class="uri">http://travis-ci.org/folkehelseinstituttet</a>)</li>
+<li>One travis-ci.com account (<a href="http://travis-ci.com/folkehelseinstituttet" class="uri">http://travis-ci.com/folkehelseinstituttet</a>)</li>
+<li>One Docker hub account (<a href="http://hub.docker.com/u/raw996/" class="uri">http://hub.docker.com/u/raw996/</a>)</li>
+<li>At least three computers:
 <ol style="list-style-type: decimal">
 <li>Production linux computer <code>smhb</code></li>
 <li>Testing linux computer <code>linux</code></li>
 <li>Development linux computers (1 per person)</li>
-</ol>
-<ul>
-<li>One Github organization (<a href="http://github.com/folkehelseinstituttet/" class="uri">http://github.com/folkehelseinstituttet/</a>)</li>
-<li>One Github team (<a href="https://github.com/orgs/folkehelseinstituttet/teams/dashboards" class="uri">https://github.com/orgs/folkehelseinstituttet/teams/dashboards</a>)</li>
-<li>One <a href="https://github.com/eddelbuettel/drat">DRAT</a> repository (<a href="https://folkehelseinstituttet.github.io/drat/" class="uri">https://folkehelseinstituttet.github.io/drat/</a>)</li>
-<li>One travis-ci.org account (<a href="http://travis-ci.org/folkehelseinstituttet" class="uri">http://travis-ci.org/folkehelseinstituttet</a>)</li>
-<li>One travis-ci.com account (<a href="http://travis-ci.com/folkehelseinstituttet" class="uri">http://travis-ci.com/folkehelseinstituttet</a>)</li>
-<li>One Docker hub account (<a href="http://hub.docker.com/u/raw996/" class="uri">http://hub.docker.com/u/raw996/</a>)</li>
+</ol></li>
 </ul>
 <div id="requirements---smhb" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Requirements - smhb</h3>
@@ -181,7 +179,7 @@
 </div>
 </div>
 <div id="analysis-docker-image" class="section level2">
-<h2><span class="header-section-number">2.2</span> Analysis Docker image</h2>
+<h2><span class="header-section-number">2.2</span> Analysis Docker Image</h2>
 <div id="images" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Images</h3>
 <p>Our analysis Docker images are based off the <a href="https://rocker-project.org">rocker</a> images. More specifically, the <a href="https://hub.docker.com/r/rocker/verse/">rocker/verse:3.5.0</a> image.</p>
@@ -189,7 +187,7 @@
 <p>This Docker image is then expanded upon by a separate Dockerfile <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r</a>. This Docker image is automatically rebuilt by <code>Jenkins</code> on <code>linux</code> whenever the repository is updated. The resultant Docker image is locally tagged as <code>raw996/dashboards_r:test</code> and then a number of integration tests are performed on it. If the integration tests are passed, then the Docker image is retagged and pushed to <a href="https://hub.docker.com/r/raw996/dashboards_r/">raw996/dashboards_r:production</a>. This image is private as it contains passwords and email addresses.</p>
 </div>
 <div id="file-structure" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> File structure</h3>
+<h3><span class="header-section-number">2.2.2</span> File Structure</h3>
 <p>Inside <code>raw996/dashboards_r</code> we have the following file structure:</p>
 <pre><code>/data_raw/
   |-- normomo/
@@ -240,12 +238,12 @@
 </div>
 </div>
 <div id="reverse-proxy-docker-image" class="section level2">
-<h2><span class="header-section-number">2.3</span> Reverse proxy Docker image</h2>
+<h2><span class="header-section-number">2.3</span> Reverse Proxy Docker Image</h2>
 <p>We use nginx as a reverse proxy to make rstudio server available to the developers.</p>
 <p>The relevant Dockerfile is [here](<a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile">raw996/dashboards_r</a> and is pushed to <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a> after integration testing is passed.</p>
 </div>
 <div id="docker-compose" class="section level2">
-<h2><span class="header-section-number">2.4</span> Docker compose</h2>
+<h2><span class="header-section-number">2.4</span> Docker Compose</h2>
 <p><a href="https://docs.docker.com/compose/">Docker compose</a> is used to integrate these Docker images into the local filesystem. We have multiple docker-compose files for different reasons:</p>
 <ul>
 <li>For <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml">production</a> on <code>smhb</code></li>
