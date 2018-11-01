@@ -1,17 +1,17 @@
 # Umbrella Infrastructure
 
-## Physical hardware and subscriptions
+## Physical Hardware and Subscriptions
 
-- At least three computers
-  1. Production linux computer `smhb`
-  2. Testing linux computer `linux`
-  3. Development linux computers (1 per person)
 - One Github organization (http://github.com/folkehelseinstituttet/)
 - One Github team (https://github.com/orgs/folkehelseinstituttet/teams/dashboards)
-- One [DRAT](https://github.com/eddelbuettel/drat) repository (https://folkehelseinstituttet.github.io/drat/)
+- One [drat](https://github.com/eddelbuettel/drat) repository (https://folkehelseinstituttet.github.io/drat/)
 - One travis-ci.org account (http://travis-ci.org/folkehelseinstituttet)
 - One travis-ci.com account (http://travis-ci.com/folkehelseinstituttet)
 - One Docker hub account (http://hub.docker.com/u/raw996/)
+- At least three computers:
+    1. Production linux computer `smhb`
+    2. Testing linux computer `linux`
+    3. Development linux computers (1 per person)
 
 ### Requirements - smhb
 
@@ -29,7 +29,7 @@
 - Git
 - Docker Engine - Community (https://www.docker.com/products/docker-engine)
 
-## Analysis Docker image
+## Analysis Docker Image
 
 ### Images
 
@@ -39,7 +39,7 @@ This Docker image is then expanded upon by a separate Dockerfile [raw996/dhadley
 
 This Docker image is then expanded upon by a separate Dockerfile [raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile). This Docker image is automatically rebuilt by `Jenkins` on `linux` whenever the repository is updated. The resultant Docker image is locally tagged as `raw996/dashboards_r:test` and then a number of integration tests are performed on it. If the integration tests are passed, then the Docker image is retagged and pushed to [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/). This image is private as it contains passwords and email addresses.
 
-### File structure
+### File Structure
 
 Inside `raw996/dashboards_r` we have the following file structure:
 
@@ -97,13 +97,13 @@ Autofs is only activated when the environmental variable `ADD_AUTOFS=yes` is def
 
 In principle, autofs should only be activated on `smhb`.
 
-## Reverse proxy Docker image
+## Reverse Proxy Docker Image
 
 We use nginx as a reverse proxy to make rstudio server available to the developers.
 
 The relevant Dockerfile is [here]([raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile) and is pushed to [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/) after integration testing is passed.
 
-## Docker compose
+## Docker Compose
 
 [Docker compose](https://docs.docker.com/compose/) is used to integrate these Docker images into the local filesystem. We have multiple docker-compose files for different reasons:
 
