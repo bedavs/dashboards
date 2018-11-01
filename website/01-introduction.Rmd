@@ -1,33 +1,13 @@
---- 
-title: "Dashboards project"
-author: "Richard White"
-date: "`r Sys.Date()`"
-knit: "bookdown::render_book"
-bibliography: [book.bib]
-biblio-style: apalike
-link-citations: yes
-colorlinks: yes
-lot: yes
-lof: yes
-fontsize: 12pt
-site: bookdown::bookdown_site
-description: "A guide to authoring books with R Markdown, including how to generate figures and tables, and insert cross-references, citations, HTML widgets, and Shiny apps in R Markdown. The book can be exported to HTML, PDF, and e-books (e.g. EPUB). The book style is customizable. You can easily write and preview the book in RStudio IDE or other editors, and host the book wherever you want (e.g. bookdown.org)."
-url: 'https\://folkehelseinstituttet.github.io/dashboards/'
-github-repo: folkehelseinstituttet/dashboards
-cover-image: images/fhi.svg
----
-
 # Introduction
 
 ## Executive summary
 
 The dashboards project is a project at FHI concerned with running automated analyses on data.
 
-In principle, the dashboards project is split up into three parts:
+In principle, the dashboards project is split up into two parts:
 
 1. The umbrella infrastructure (i.e. Docker containers, continuous integration, chron jobs, etc.)
 2. The R package for each automated analysis
-3. Integrating the R package into the physical system (e.g. specifying where the data is)
 
 ## What is an automated analysis?
 
@@ -61,11 +41,13 @@ By combining them all in one umbrella project we can force everyone to use the s
 
 https://github.com/raubreywhite/dashboards_control/ (private)
 
-This contains the Docker files, cronfiles, all bash scripts, etc.
+This contains the Dockerfiles, cronfiles, all bash scripts, etc.
 
-https://folkehelseinstituttet.github.io/dashboards/ (this one)
+http://github.com/raubreywhite/docker/
 
-This contains the R executable for each automated analysis.
+This contains the base analysis Dockerfile
+
+https://rocker-project.org
 
 https://folkehelseinstituttet.github.io/fhi/
 
@@ -78,5 +60,7 @@ https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/
 https://folkehelseinstituttet.github.io/dashboards_normomo/
 
 https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/
+
+https://folkehelseinstituttet.github.io/dashboards_noispiah/
 
 https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/

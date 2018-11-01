@@ -1,0 +1,114 @@
+# Umbrella Infrastructure
+
+## Physical hardware and subscriptions
+
+- At least three computers
+  1. Production linux computer `smhb`
+  2. Testing linux computer `linux`
+  3. Development linux computers (1 per person)
+- One Github organization (http://github.com/folkehelseinstituttet/)
+- One Github team (https://github.com/orgs/folkehelseinstituttet/teams/dashboards)
+- One [DRAT](https://github.com/eddelbuettel/drat) repository (https://folkehelseinstituttet.github.io/drat/)
+- One travis-ci.org account (http://travis-ci.org/folkehelseinstituttet)
+- One travis-ci.com account (http://travis-ci.com/folkehelseinstituttet)
+- One Docker hub account (http://hub.docker.com/u/raw996/)
+
+### Requirements - smhb
+
+- Git
+- Docker Engine - Community (https://www.docker.com/products/docker-engine)
+
+### Requirements - linux
+
+- Git
+- Docker Engine - Community (https://www.docker.com/products/docker-engine)
+- Jenkins installed via a Docker container (http://jenkins.io)
+
+### Requirements - dev
+
+- Git
+- Docker Engine - Community (https://www.docker.com/products/docker-engine)
+
+## Analysis Docker image
+
+### Images
+
+Our analysis Docker images are based off the [rocker](https://rocker-project.org) images. More specifically, the [rocker/verse:3.5.0](https://hub.docker.com/r/rocker/verse/) image.
+
+This Docker image is then expanded upon by a separate Dockerfile [raw996/dhadley](https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile). This Docker image is automatically rebuilt by `Jenkins` on `linux` whenever the repository is updated. The resultant Docker image is pushed to [raw996/dhadley:3.5.0](https://hub.docker.com/r/raw996/dhadley/). This image is a general-purpose analysis image, with no sensitive information in it.
+
+This Docker image is then expanded upon by a separate Dockerfile [raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile). This Docker image is automatically rebuilt by `Jenkins` on `linux` whenever the repository is updated. The resultant Docker image is locally tagged as `raw996/dashboards_r:test` and then a number of integration tests are performed on it. If the integration tests are passed, then the Docker image is retagged and pushed to [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/). This image is private as it contains passwords and email addresses.
+
+### File structure
+
+Inside `raw996/dashboards_r` we have the following file structure:
+
+```
+/data_raw/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/data_clean/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/data_app/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/results/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/usr/local/lib/R/site-library/  <soft linked to /r>
+  |-- <OTHER R PACKAGES INSTALLED HERE>/
+  |-- fhi/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+  |-- <OTHER R PACKAGES INSTALLED HERE>/
+```
+
+Note that we have a soft link between `/r` and `/usr/local/lib/R/site-library/`.
+
+### cron
+
+We use [cron](https://en.wikipedia.org/wiki/Cron) to schedule the analyses. The schedule is specified in [crontab](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab).
+
+The cronjobs are only activated when the environmental variable `ADD=cron` is defined. Cronjobs are then activated through [add_cron.sh](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/add_cron.sh).
+
+In principle, cronjobs should only be activated on `smhb`.
+
+### autofs
+
+We use [autofs](https://help.ubuntu.com/community/Autofs) to connect to the F network. The network locations, username, and password are specified in [auto.mounts](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/auto.mounts).
+
+Autofs is only activated when the environmental variable `ADD_AUTOFS=yes` is defined. Autofs is then activated through [add_autofs.sh](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/add_autofs.sh).
+
+In principle, autofs should only be activated on `smhb`.
+
+## Reverse proxy Docker image
+
+We use nginx as a reverse proxy to make rstudio server available to the developers.
+
+The relevant Dockerfile is [here]([raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile) and is pushed to [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/) after integration testing is passed.
+
+## Docker compose
+
+[Docker compose](https://docs.docker.com/compose/) is used to integrate these Docker images into the local filesystem. We have multiple docker-compose files for different reasons:
+
+- For [production](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml) on `smhb`
+- For [testing](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-test.yml) on `linux`
+- For [development](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-dev.yml) on a dev computer
+
+

@@ -1,11 +1,14 @@
 # R packages
 
-## Summary
+## Generic
+
+### Overview
 
 Each automated analysis has its own R package:
 
 - [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/)
 - [normomo](https://folkehelseinstituttet.github.io/dashboards_normomo/)
+- [noispiah](https://folkehelseinstituttet.github.io/dashboards_noispiah/)
 - [sykdomspulspdf](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/)
 - [sykdomspulslog](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/)
 
@@ -16,7 +19,7 @@ Each R package contains all of the code necessary for that automated analysis. T
 - Graph generation
 - Report generation
 
-## Requirements
+### Requirements
 
 The R packages should be developed using unit testing as implemented in the [testthat](http://r-pkgs.had.co.nz/tests.html) package.
 
@@ -24,7 +27,9 @@ Furthermore, the R package should operate (and be able to be tested) independent
 
 We also require that unit tests are created to test the formatting/structure of results. [ValidateAnalysisResults](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/ValidateAnalysisResults.html) is one example from [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/), where the names of the data.table are checked against reference values to ensure that the structure of the results are not accidentally changed.
 
-## Deployment via travis-ci and drat
+### Deployment via travis-ci and drat
 
 Unit testing is then automatically run using [travis-ci](http://r-pkgs.had.co.nz/check.html#travis). If the R package passes all tests, then we use [drat](https://github.com/eddelbuettel/drat) to deploy a built version of the package to Folkehelseinstituttet's R repository: https://folkehelseinstituttet.github.io/drat/.
+
+### Integration with the local file system
 
