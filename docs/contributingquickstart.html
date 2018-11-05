@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="umbrella-infrastructure.html">
+<link rel="prev" href="integrating-the-r-package-into-the-physical-system.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -139,65 +139,129 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<div id="executive-summary" class="section level2">
-<h2><span class="header-section-number">1.1</span> Executive summary</h2>
-<p>The dashboards project is a project at FHI concerned with running automated analyses on data.</p>
-<p>In principle, the dashboards project is split up into two parts:</p>
+<div id="contributingquickstart" class="section level1">
+<h1><span class="header-section-number">5</span> Contributing/Quickstart</h1>
+<div id="quickstart" class="section level2">
+<h2><span class="header-section-number">5.1</span> Quickstart</h2>
 <ol style="list-style-type: decimal">
-<li>The umbrella infrastructure (i.e. Docker containers, continuous integration, chron jobs, etc.)</li>
-<li>The R package for each automated analysis</li>
+<li>Create a project folder for your code (let us say <code>~/git/dashboards</code>). This folder will be accessible from inside your Docker container as <code>/dashboards/</code></li>
+<li>Create a project folder for your data (let us say <code>~/data/</code>).</li>
+<li>Fork the following repos, and clone them to your computer inside <code>~/git/dashboards</code>:
+<ul>
+<li><a href="https://github.com/raubreywhite/dashboards_control/" class="uri">https://github.com/raubreywhite/dashboards_control/</a> (private)</li>
+</ul></li>
+<li>For each repo, add the raubreywhite repository as your upstream:</li>
+</ol>
+<pre><code>git remote add upstream https://github.com/raubreywhite/dashboards_control.git</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Fork the following repos, and clone them to your computer inside <code>~/git/dashboards</code>:
+<ul>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards/" class="uri">https://folkehelseinstituttet.github.io/dashboards/</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_normomo/" class="uri">https://folkehelseinstituttet.github.io/dashboards_normomo/</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_noispiah/" class="uri">https://folkehelseinstituttet.github.io/dashboards_noispiah/</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/</a></li>
+</ul></li>
+<li>For each repo, add the folkehelseinstitutet repository as your upstream:</li>
+</ol>
+<pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>In your <code>~/.profile</code> add the following two lines:</li>
+</ol>
+<pre><code>export DASHBOARDS_DATA=~/git/dashboards/
+export DASHBOARDS_FOLDER=~/git/dashboards/
+export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Build your Dockerfiles:</li>
+</ol>
+<pre><code>docker_build.sh</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>A number of folders will have been automatically created (see below). Please put in your development datafiles into the appropriate <code>data_raw/</code> folder:</li>
+</ol>
+<pre><code>- $DASHBOARDS_DATA/
+  |-- data_app/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- data_clean/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- data_raw/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- results/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Run your docker-compose:</li>
+</ol>
+<pre><code>dev_up.sh</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>Open a browser and go to <a href="http://localhost:8788/" class="uri">http://localhost:8788/</a></li>
+<li>Login using <code>username=rstudio</code> and <code>password=rstudio1</code></li>
+<li>Using the project menu, open the project corresponding to the automated analysis you are interested in</li>
 </ol>
 </div>
-<div id="what-is-an-automated-analysis" class="section level2">
-<h2><span class="header-section-number">1.2</span> What is an automated analysis?</h2>
-<p>An automated analysis is any analysis that:</p>
+<div id="development-guidelines" class="section level2">
+<h2><span class="header-section-number">5.2</span> Development guidelines</h2>
+<p>We try to follow the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> for development.</p>
 <ol style="list-style-type: decimal">
-<li>Will be repeated multiple times in the future</li>
-<li>Always has an input dataset with consistent file structure</li>
-<li>Always has the same expected output (e.g. tables, graphs, reports)</li>
+<li>Fork [this repo][repo] and clone it to your computer. To learn more about this process, see <a href="https://guides.github.com/activities/forking/">this guide</a>.</li>
+<li><p>Add the Folkehelseinstituttet repository as your upstream:</p>
+<pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre></li>
+<li><p>If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:</p>
+<pre><code>git fetch upstream
+git merge upstream/master</code></pre></li>
+<li>Open the RStudio project file (<code>.Rproj</code>).</li>
+<li>Make your changes:
+<ul>
+<li>Write your code.</li>
+<li>Test your code (bonus points for adding unit tests).</li>
+<li>Document your code (see function documentation above).</li>
+<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
+<li>Commit your changes locally</li>
+<li>Merge changes from the original repo (again)</li>
+<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
+</ul></li>
+<li>Commit and push your changes.</li>
+<li>Submit a <a href="https://guides.github.com/activities/forking/#making-a-pull-request">pull request</a>.</li>
+<li><p>If you are reviewing the pull request, wait until the <a href="www.travis-ci.org">travis-ci</a> unit tests have finished</p></li>
 </ol>
-</div>
-<div id="why-not-have-one-project-for-each-automated-analysis" class="section level2">
-<h2><span class="header-section-number">1.3</span> Why not have one project for each automated analysis?</h2>
-<p>Automated analyses have a lot of code and infrastructure in common.</p>
-<p>Automated analyses:</p>
-<ol style="list-style-type: decimal">
-<li>Need their code to be tested via unit testing to ensure the results are correct</li>
-<li>Need their code to be tested via integration testing to ensure everything runs</li>
-<li>Need to be run at certain times</li>
-<li>Need to be able to send emails notifying people that the analyses have finished running</li>
-<li>Need to make their results accessible to the relevant people</li>
+<p><img src="images/pull_request_before_checks.png" /><!-- --></p>
+<ol start="9" style="list-style-type: decimal">
+<li>Please make sure that the unit tests <code>PASS</code> before merging in!!</li>
 </ol>
-<p>By combining them all in one umbrella project we can force everyone to use the same infrastructure and coding principles, so we:</p>
-<ol style="list-style-type: decimal">
-<li>Only need to solve a problem once</li>
-<li>Only need to maintain one system</li>
-<li>Can easily work on multiple projects, as we all speak the same language</li>
-</ol>
+<p><img src="images/pull_request_checks_failed.png" /><!-- --></p>
 </div>
-<div id="important-repositories" class="section level2">
-<h2><span class="header-section-number">1.4</span> Important repositories</h2>
-<div id="infrastructure" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Infrastructure</h3>
-<p><a href="https://github.com/raubreywhite/dashboards_control/" class="uri">https://github.com/raubreywhite/dashboards_control/</a> (private)</p>
-<p>This contains the Dockerfiles, cronfiles, all bash scripts, etc.</p>
-<p><a href="http://github.com/raubreywhite/docker/" class="uri">http://github.com/raubreywhite/docker/</a></p>
-<p>This contains the base analysis Dockerfile</p>
-<p><a href="https://rocker-project.org" class="uri">https://rocker-project.org</a></p>
-<p><a href="https://folkehelseinstituttet.github.io/fhi/" class="uri">https://folkehelseinstituttet.github.io/fhi/</a></p>
-<p>This is an R package that contains helper functions.</p>
-</div>
-<div id="automated-analyses-r-packages" class="section level3">
-<h3><span class="header-section-number">1.4.2</span> Automated analyses R packages</h3>
-<p><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/</a></p>
-<p><a href="https://folkehelseinstituttet.github.io/dashboards_normomo/" class="uri">https://folkehelseinstituttet.github.io/dashboards_normomo/</a></p>
-<p><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/</a></p>
-<p><a href="https://folkehelseinstituttet.github.io/dashboards_noispiah/" class="uri">https://folkehelseinstituttet.github.io/dashboards_noispiah/</a></p>
-<p><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/</a></p>
+<div id="code-style" class="section level2">
+<h2><span class="header-section-number">5.3</span> Code style</h2>
+<ul>
+<li>Function names start with capital letters</li>
+<li>Variable names start with small letters</li>
+<li>Environments should be in ALL CAPS</li>
+<li>Reference <a href="http://adv-r.had.co.nz/Style.html">Hadley’s style code</a></li>
+<li>&lt;- is preferred over = for assignment</li>
+<li>Indentation is with two spaces, not two or a tab. There should be no tabs in code files.</li>
+<li>if () {} else {} constructions should always use full curly braces even when usage seems unnecessary from a clarity perspective.</li>
+<li>TODO statements should be opened as GitHub issues with links to specific code files and code lines, rather than written inline.</li>
+<li><p>Follow Hadley’s suggestion for aligning long functions with many arguments:</p>
+<pre><code> long_function_name &lt;- function(a = &quot;a long argument&quot;, 
+                            b = &quot;another argument&quot;,
+                            c = &quot;another long argument&quot;) {
+   # As usual code is indented by two spaces.
+ }</code></pre></li>
+<li>Never use print() to send text to the console. Instead use message(), warning(), and error() as appropriate.</li>
+<li><p>Use environment variables, not options(), to store global arguments that are used by many or all functions.</p></li>
+</ul>
 
-</div>
 </div>
 </div>
             </section>
@@ -205,8 +269,8 @@
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="umbrella-infrastructure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="integrating-the-r-package-into-the-physical-system.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

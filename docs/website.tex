@@ -89,7 +89,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-01}
+    \date{2018-11-05}
 
 \usepackage{booktabs}
 
@@ -299,6 +299,13 @@ Subscriptions}\label{physical-hardware-and-subscriptions}
   Docker Engine - Community
   (\url{https://www.docker.com/products/docker-engine})
 \end{itemize}
+
+\subsection{Configuration, Scripts,
+etc.}\label{configuration-scripts-etc.}
+
+Most of the bash scripts, Docker files, passwords, etc. are all hosted
+at the private Github repository
+\href{https://github.com/raubreywhite/dashboards_control}{raubreywhite/dashboards\_control}.
 
 \subsection{Analysis Docker Image}\label{analysis-docker-image}
 
@@ -668,7 +675,154 @@ The aim of \texttt{RunTest.R} is to perform integration testing on the
 automated analysis. This integration testing is performed as part of the
 Jenkins build pipeline.
 
-\section{Contributing}\label{contributing}
+\section{Contributing/Quickstart}\label{contributingquickstart}
+
+\subsection{Quickstart}\label{quickstart}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a project folder for your code (let us say
+  \texttt{\textasciitilde{}/git/dashboards}). This folder will be
+  accessible from inside your Docker container as \texttt{/dashboards/}
+\item
+  Create a project folder for your data (let us say
+  \texttt{\textasciitilde{}/data/}).
+\item
+  Fork the following repos, and clone them to your computer inside
+  \texttt{\textasciitilde{}/git/dashboards}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \url{https://github.com/raubreywhite/dashboards_control/} (private)
+  \end{itemize}
+\item
+  For each repo, add the raubreywhite repository as your upstream:
+\end{enumerate}
+
+\begin{verbatim}
+git remote add upstream https://github.com/raubreywhite/dashboards_control.git
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Fork the following repos, and clone them to your computer inside
+  \texttt{\textasciitilde{}/git/dashboards}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \url{https://folkehelseinstituttet.github.io/dashboards/}
+  \item
+    \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
+  \item
+    \url{https://folkehelseinstituttet.github.io/dashboards_normomo/}
+  \item
+    \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}
+  \item
+    \url{https://folkehelseinstituttet.github.io/dashboards_noispiah/}
+  \item
+    \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
+  \end{itemize}
+\item
+  For each repo, add the folkehelseinstitutet repository as your
+  upstream:
+\end{enumerate}
+
+\begin{verbatim}
+git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  In your \texttt{\textasciitilde{}/.profile} add the following two
+  lines:
+\end{enumerate}
+
+\begin{verbatim}
+export DASHBOARDS_DATA=~/git/dashboards/
+export DASHBOARDS_FOLDER=~/git/dashboards/
+export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Build your Dockerfiles:
+\end{enumerate}
+
+\begin{verbatim}
+docker_build.sh
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  A number of folders will have been automatically created (see below).
+  Please put in your development datafiles into the appropriate
+  \texttt{data\_raw/} folder:
+\end{enumerate}
+
+\begin{verbatim}
+- $DASHBOARDS_DATA/
+  |-- data_app/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- data_clean/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- data_raw/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- results/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Run your docker-compose:
+\end{enumerate}
+
+\begin{verbatim}
+dev_up.sh
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  Open a browser and go to \url{http://localhost:8788/}
+\item
+  Login using \texttt{username=rstudio} and \texttt{password=rstudio1}
+\item
+  Using the project menu, open the project corresponding to the
+  automated analysis you are interested in
+\end{enumerate}
 
 \subsection{Development guidelines}\label{development-guidelines}
 
