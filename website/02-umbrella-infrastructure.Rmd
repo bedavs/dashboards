@@ -10,7 +10,7 @@
 - One Docker hub account (http://hub.docker.com/u/raw996/)
 - At least three computers:
     1. Production linux computer `smhb`
-    2. Testing linux computer `linux`
+    2. Integration testing linux computer `linux`
     3. Development linux computers (1 per person)
 
 ### Requirements - smhb
@@ -154,23 +154,23 @@ Note: This script is generally only run by `Jenkins` on `linux` as the integrati
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_autofs.sh
 
-See [autofs]{#autofs}.
+See [autofs](#autofs).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_cron.sh
 
-See [cron]{#cron}.
+See [cron](#cron).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/auto.mounts
 
-See [autofs]{#autofs}.
+See [autofs](#autofs).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/crontab
 
-See [cron]{#cron}.
+See [cron](#cron).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/Dockerfile
 
-See [here]{#analysisdocker}.
+See [here](#analysisdocker).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert_test.xlsx
 
@@ -190,7 +190,7 @@ The authorization file for the dashboardsfhi@gmail.com. This probably needs to b
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/mail.json
 
-Related to [httr-oauth]{#httroauth}.
+Related to [httr-oauth](#httroauth).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/repo-key
 
@@ -206,15 +206,15 @@ Docker-compose file used for testing the [API](https://github.com/folkehelseinst
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-dev.yml
 
-Docker-compose file used for development.
+Docker-compose file used for development. See [here](#dockercompose).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-prod.yml
 
-Docker-compose file used for the production computer.
+Docker-compose file used for the production computer. See [here](#dockercompose).
 
 ### $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-test.yml
 
-Docker-compose file used for integration testing of `Jenkins` on `linux`.
+Docker-compose file used for integration testing of `Jenkins` on `linux`. See [here](#dockercompose).
 
 ## Analysis Docker Image {#analysisdocker}
 
@@ -288,9 +288,9 @@ In principle, autofs should only be activated on `smhb`.
 
 We use nginx as a reverse proxy to make rstudio server available to the developers.
 
-The relevant Dockerfile is [here]([raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile) and is pushed to [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/) after integration testing is passed.
+The relevant Dockerfile is [here](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile) and is pushed to [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/) after integration testing is passed.
 
-## Docker Compose
+## Docker Compose {#dockercompose}
 
 [Docker compose](https://docs.docker.com/compose/) is used to integrate these Docker images into the local filesystem. We have multiple docker-compose files for different reasons:
 
@@ -298,4 +298,65 @@ The relevant Dockerfile is [here]([raw996/dashboards_r](https://github.com/raubr
 - For [testing](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-test.yml) on `linux`
 - For [development](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-dev.yml) on a dev computer
 
+## Production Computer - smhb
 
+### crontab
+
+```
+# m h  dom mon dow   command
+5 1 * * * /home/raw996/git/dashboards_control/bin/prod_update.sh
+@reboot /home/raw996/git/dashboards_control/bin/prod_update.sh
+```
+
+### File Structure
+
+```
+/home/raw996/git/dashboards_control/
+```
+
+### Explanation
+
+`smhb` is designed to be extremely simple. It has two jobs:
+
+1. Updating [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/), [raw996/dashboards_shiny:production](https://hub.docker.com/r/raw996/dashboards_shiny/), and [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/)
+2. Making sure that [docker-compose-prod.yml](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml) is running
+
+We purposefully minimize all integration with the base machine, because this enables us to be deploy-environment independent and to move our deployment anywhere with minimal hassle.
+
+## Integration Testing Computer - linux
+
+### File Structure
+
+```
+/home/raw996/
+  |-- docker-compose-jenkins/
+    |-- docker-compose.yml
+  |-- data/
+    |-- data_app/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_clean/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_raw/
+      |-- normomo/
+        |-- FHIDOD2_20170425.txt
+      |-- sykdomspuls/
+        |-- partially_formatted_2017_08_01.txt
+    |-- data_results/
+      |-- normomo/
+      |-- sykdomspuls/
+  |-- jenkins/
+```
+
+### Explanation
+
+`linux` has three jobs:
+
+1. Building [raw996/dhadley](https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile
+2. Integration testing for the automated analyses
+3. Pushing [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/), [raw996/dashboards_shiny:production](https://hub.docker.com/r/raw996/dashboards_shiny/), and [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/) to Docker hub after successful integration testing
+
+## Unit Testing - travis-ci
+
+[Travis-ci](http://travis-ci.org/folkehelseinstituttet) is used for unit testing.

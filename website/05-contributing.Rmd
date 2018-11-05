@@ -13,12 +13,12 @@ git remote add upstream https://github.com/raubreywhite/dashboards_control.git
 ```
 
 5. Fork the following repos, and then clone the forks to your computer inside `~/git/dashboards`:
-    - https://folkehelseinstituttet.github.io/dashboards/
-    - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/
-    - https://folkehelseinstituttet.github.io/dashboards_normomo/
-    - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/
-    - https://folkehelseinstituttet.github.io/dashboards_noispiah/
-    - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/
+    - https://github.com/folkehelseinstituttet/dashboards/
+    - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/
+    - https://github.com/folkehelseinstituttet/dashboards_normomo/
+    - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/
+    - https://github.com/folkehelseinstituttet/dashboards_noispiah/
+    - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/
 6. For each repo, add the folkehelseinstitutet repository as your upstream:
 
 ```
@@ -73,7 +73,7 @@ dev_up.sh
 
 11. Open a browser and go to http://localhost:8788/
 12. Login using `username=rstudio` and `password=rstudio1`
-13. Using the project menu, open the project corresponding to the automated analysis you are interested in
+13. Using the project menu, open the project corresponding to the automated analysis you are interested in. This should be located at `/dashboards/`.
 
 ## Development guidelines
 

@@ -24,3 +24,5 @@ The dashboards project is a project at FHI concerned with running automated anal
 1. Will be repeated multiple times in the future
 2. Always has an input dataset with consistent file structure
 3. Always has the same expected output (e.g. tables, graphs, reports)
+
+If you are just joining this project, please see the [quickstart](#quickstart) section.
