@@ -122,7 +122,17 @@
 <li class="chapter" data-level="2.3.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#autofs"><i class="fa fa-check"></i><b>2.3.4</b> autofs</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#reverse-proxy-docker-image"><i class="fa fa-check"></i><b>2.4</b> Reverse Proxy Docker Image</a></li>
-<li class="chapter" data-level="2.5" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#docker-compose"><i class="fa fa-check"></i><b>2.5</b> Docker Compose</a></li>
+<li class="chapter" data-level="2.5" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dockercompose"><i class="fa fa-check"></i><b>2.5</b> Docker Compose</a></li>
+<li class="chapter" data-level="2.6" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#production-computer---smhb"><i class="fa fa-check"></i><b>2.6</b> Production Computer - smhb</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#crontab"><i class="fa fa-check"></i><b>2.6.1</b> crontab</a></li>
+<li class="chapter" data-level="2.6.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure-1"><i class="fa fa-check"></i><b>2.6.2</b> File Structure</a></li>
+<li class="chapter" data-level="2.6.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#explanation"><i class="fa fa-check"></i><b>2.6.3</b> Explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#integration-testing-computer---linux"><i class="fa fa-check"></i><b>2.7</b> Integration Testing Computer - linux</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure-2"><i class="fa fa-check"></i><b>2.7.1</b> File Structure</a></li>
+<li class="chapter" data-level="2.7.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#explanation-1"><i class="fa fa-check"></i><b>2.7.2</b> Explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#unit-testing---travis-ci"><i class="fa fa-check"></i><b>2.8</b> Unit Testing - travis-ci</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R packages</a><ul>
 <li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#generic"><i class="fa fa-check"></i><b>3.1</b> Generic</a><ul>
@@ -184,7 +194,7 @@
 <li>At least three computers:
 <ol style="list-style-type: decimal">
 <li>Production linux computer <code>smhb</code></li>
-<li>Testing linux computer <code>linux</code></li>
+<li>Integration testing linux computer <code>linux</code></li>
 <li>Development linux computers (1 per person)</li>
 </ol></li>
 </ul>
@@ -328,23 +338,23 @@
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_radd_autofs.sh" class="section level3">
 <h3><span class="header-section-number">2.2.15</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_autofs.sh</h3>
-<p>See <span id="autofs">autofs</span>.</p>
+<p>See <a href="umbrella-infrastructure.html#autofs">autofs</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_radd_cron.sh" class="section level3">
 <h3><span class="header-section-number">2.2.16</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_cron.sh</h3>
-<p>See <span id="cron">cron</span>.</p>
+<p>See <a href="umbrella-infrastructure.html#cron">cron</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_rauto.mounts" class="section level3">
 <h3><span class="header-section-number">2.2.17</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/auto.mounts</h3>
-<p>See <span id="autofs">autofs</span>.</p>
+<p>See <a href="umbrella-infrastructure.html#autofs">autofs</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_rcrontab" class="section level3">
 <h3><span class="header-section-number">2.2.18</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/crontab</h3>
-<p>See <span id="cron">cron</span>.</p>
+<p>See <a href="umbrella-infrastructure.html#cron">cron</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_rdockerfile" class="section level3">
 <h3><span class="header-section-number">2.2.19</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/Dockerfile</h3>
-<p>See <span id="analysisdocker">here</span>.</p>
+<p>See <a href="umbrella-infrastructure.html#analysisdocker">here</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert_test.xlsx" class="section level3">
 <h3><span class="header-section-number">2.2.20</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert_test.xlsx</h3>
@@ -364,7 +374,7 @@
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_rmail.json" class="section level3">
 <h3><span class="header-section-number">2.2.24</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/mail.json</h3>
-<p>Related to <span id="httroauth">httr-oauth</span>.</p>
+<p>Related to <a href="umbrella-infrastructure.html#httroauth">httr-oauth</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredashboards_rrepo-key" class="section level3">
 <h3><span class="header-section-number">2.2.25</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/repo-key</h3>
@@ -380,15 +390,15 @@
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-dev.yml" class="section level3">
 <h3><span class="header-section-number">2.2.28</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-dev.yml</h3>
-<p>Docker-compose file used for development.</p>
+<p>Docker-compose file used for development. See <a href="umbrella-infrastructure.html#dockercompose">here</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-prod.yml" class="section level3">
 <h3><span class="header-section-number">2.2.29</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-prod.yml</h3>
-<p>Docker-compose file used for the production computer.</p>
+<p>Docker-compose file used for the production computer. See <a href="umbrella-infrastructure.html#dockercompose">here</a>.</p>
 </div>
 <div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-test.yml" class="section level3">
 <h3><span class="header-section-number">2.2.30</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-test.yml</h3>
-<p>Docker-compose file used for integration testing of <code>Jenkins</code> on <code>linux</code>.</p>
+<p>Docker-compose file used for integration testing of <code>Jenkins</code> on <code>linux</code>. See <a href="umbrella-infrastructure.html#dockercompose">here</a>.</p>
 </div>
 </div>
 <div id="analysisdocker" class="section level2">
@@ -453,9 +463,9 @@
 <div id="reverse-proxy-docker-image" class="section level2">
 <h2><span class="header-section-number">2.4</span> Reverse Proxy Docker Image</h2>
 <p>We use nginx as a reverse proxy to make rstudio server available to the developers.</p>
-<p>The relevant Dockerfile is [here](<a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile">raw996/dashboards_r</a> and is pushed to <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a> after integration testing is passed.</p>
+<p>The relevant Dockerfile is <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile">here</a> and is pushed to <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a> after integration testing is passed.</p>
 </div>
-<div id="docker-compose" class="section level2">
+<div id="dockercompose" class="section level2">
 <h2><span class="header-section-number">2.5</span> Docker Compose</h2>
 <p><a href="https://docs.docker.com/compose/">Docker compose</a> is used to integrate these Docker images into the local filesystem. We have multiple docker-compose files for different reasons:</p>
 <ul>
@@ -463,6 +473,66 @@
 <li>For <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-test.yml">testing</a> on <code>linux</code></li>
 <li>For <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-dev.yml">development</a> on a dev computer</li>
 </ul>
+</div>
+<div id="production-computer---smhb" class="section level2">
+<h2><span class="header-section-number">2.6</span> Production Computer - smhb</h2>
+<div id="crontab" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> crontab</h3>
+<pre><code># m h  dom mon dow   command
+5 1 * * * /home/raw996/git/dashboards_control/bin/prod_update.sh
+@reboot /home/raw996/git/dashboards_control/bin/prod_update.sh</code></pre>
+</div>
+<div id="file-structure-1" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> File Structure</h3>
+<pre><code>/home/raw996/git/dashboards_control/</code></pre>
+</div>
+<div id="explanation" class="section level3">
+<h3><span class="header-section-number">2.6.3</span> Explanation</h3>
+<p><code>smhb</code> is designed to be extremely simple. It has two jobs:</p>
+<ol style="list-style-type: decimal">
+<li>Updating <a href="https://hub.docker.com/r/raw996/dashboards_r/">raw996/dashboards_r:production</a>, <a href="https://hub.docker.com/r/raw996/dashboards_shiny/">raw996/dashboards_shiny:production</a>, and <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a></li>
+<li>Making sure that <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml">docker-compose-prod.yml</a> is running</li>
+</ol>
+<p>We purposefully minimize all integration with the base machine, because this enables us to be deploy-environment independent and to move our deployment anywhere with minimal hassle.</p>
+</div>
+</div>
+<div id="integration-testing-computer---linux" class="section level2">
+<h2><span class="header-section-number">2.7</span> Integration Testing Computer - linux</h2>
+<div id="file-structure-2" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> File Structure</h3>
+<pre><code>/home/raw996/
+  |-- docker-compose-jenkins/
+    |-- docker-compose.yml
+  |-- data/
+    |-- data_app/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_clean/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_raw/
+      |-- normomo/
+        |-- FHIDOD2_20170425.txt
+      |-- sykdomspuls/
+        |-- partially_formatted_2017_08_01.txt
+    |-- data_results/
+      |-- normomo/
+      |-- sykdomspuls/
+  |-- jenkins/</code></pre>
+</div>
+<div id="explanation-1" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Explanation</h3>
+<p><code>linux</code> has three jobs:</p>
+<ol style="list-style-type: decimal">
+<li>Building [raw996/dhadley](<a href="https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile" class="uri">https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile</a></li>
+<li>Integration testing for the automated analyses</li>
+<li>Pushing <a href="https://hub.docker.com/r/raw996/dashboards_r/">raw996/dashboards_r:production</a>, <a href="https://hub.docker.com/r/raw996/dashboards_shiny/">raw996/dashboards_shiny:production</a>, and <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a> to Docker hub after successful integration testing</li>
+</ol>
+</div>
+</div>
+<div id="unit-testing---travis-ci" class="section level2">
+<h2><span class="header-section-number">2.8</span> Unit Testing - travis-ci</h2>
+<p><a href="http://travis-ci.org/folkehelseinstituttet">Travis-ci</a> is used for unit testing.</p>
 
 </div>
 </div>

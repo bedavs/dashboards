@@ -122,7 +122,17 @@
 <li class="chapter" data-level="2.3.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#autofs"><i class="fa fa-check"></i><b>2.3.4</b> autofs</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#reverse-proxy-docker-image"><i class="fa fa-check"></i><b>2.4</b> Reverse Proxy Docker Image</a></li>
-<li class="chapter" data-level="2.5" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#docker-compose"><i class="fa fa-check"></i><b>2.5</b> Docker Compose</a></li>
+<li class="chapter" data-level="2.5" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dockercompose"><i class="fa fa-check"></i><b>2.5</b> Docker Compose</a></li>
+<li class="chapter" data-level="2.6" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#production-computer---smhb"><i class="fa fa-check"></i><b>2.6</b> Production Computer - smhb</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#crontab"><i class="fa fa-check"></i><b>2.6.1</b> crontab</a></li>
+<li class="chapter" data-level="2.6.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure-1"><i class="fa fa-check"></i><b>2.6.2</b> File Structure</a></li>
+<li class="chapter" data-level="2.6.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#explanation"><i class="fa fa-check"></i><b>2.6.3</b> Explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#integration-testing-computer---linux"><i class="fa fa-check"></i><b>2.7</b> Integration Testing Computer - linux</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure-2"><i class="fa fa-check"></i><b>2.7.1</b> File Structure</a></li>
+<li class="chapter" data-level="2.7.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#explanation-1"><i class="fa fa-check"></i><b>2.7.2</b> Explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#unit-testing---travis-ci"><i class="fa fa-check"></i><b>2.8</b> Unit Testing - travis-ci</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R packages</a><ul>
 <li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#generic"><i class="fa fa-check"></i><b>3.1</b> Generic</a><ul>
@@ -187,12 +197,12 @@
 <ol start="5" style="list-style-type: decimal">
 <li>Fork the following repos, and then clone the forks to your computer inside <code>~/git/dashboards</code>:
 <ul>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards/" class="uri">https://folkehelseinstituttet.github.io/dashboards/</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_normomo/" class="uri">https://folkehelseinstituttet.github.io/dashboards_normomo/</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_noispiah/" class="uri">https://folkehelseinstituttet.github.io/dashboards_noispiah/</a></li>
-<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/</a></li>
+<li><a href="https://github.com/folkehelseinstituttet/dashboards/" class="uri">https://github.com/folkehelseinstituttet/dashboards/</a></li>
+<li><a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/" class="uri">https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/</a></li>
+<li><a href="https://github.com/folkehelseinstituttet/dashboards_normomo/" class="uri">https://github.com/folkehelseinstituttet/dashboards_normomo/</a></li>
+<li><a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/" class="uri">https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/</a></li>
+<li><a href="https://github.com/folkehelseinstituttet/dashboards_noispiah/" class="uri">https://github.com/folkehelseinstituttet/dashboards_noispiah/</a></li>
+<li><a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/" class="uri">https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/</a></li>
 </ul></li>
 <li>For each repo, add the folkehelseinstitutet repository as your upstream:</li>
 </ol>
@@ -238,7 +248,7 @@ export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li>Open a browser and go to <a href="http://localhost:8788/" class="uri">http://localhost:8788/</a></li>
 <li>Login using <code>username=rstudio</code> and <code>password=rstudio1</code></li>
-<li>Using the project menu, open the project corresponding to the automated analysis you are interested in</li>
+<li>Using the project menu, open the project corresponding to the automated analysis you are interested in. This should be located at <code>/dashboards/</code>.</li>
 </ol>
 </div>
 <div id="development-guidelines" class="section level2">

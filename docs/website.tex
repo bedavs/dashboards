@@ -120,6 +120,9 @@ automated analyses on data. An automated analysis is any analysis that:
   Always has the same expected output (e.g.~tables, graphs, reports)
 \end{enumerate}
 
+If you are just joining this project, please see the
+\protect\hyperlink{quickstart}{quickstart} section.
+
 \section{Introduction}\label{introduction}
 
 \subsection{Executive summary}\label{executive-summary}
@@ -259,7 +262,7 @@ Subscriptions}\label{physical-hardware-and-subscriptions}
   \item
     Production linux computer \texttt{smhb}
   \item
-    Testing linux computer \texttt{linux}
+    Integration testing linux computer \texttt{linux}
   \item
     Development linux computers (1 per person)
   \end{enumerate}
@@ -468,23 +471,23 @@ Note: This script is generally only run by \texttt{Jenkins} on
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/add\_autofs.sh}\label{dashboards_folderdashboards_controlinfrastructuredashboards_radd_autofs.sh}
 
-See \protect\hypertarget{autofs}{}{autofs}.
+See \protect\hyperlink{autofs}{autofs}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/add\_cron.sh}\label{dashboards_folderdashboards_controlinfrastructuredashboards_radd_cron.sh}
 
-See \protect\hypertarget{cron}{}{cron}.
+See \protect\hyperlink{cron}{cron}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/auto.mounts}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rauto.mounts}
 
-See \protect\hypertarget{autofs}{}{autofs}.
+See \protect\hyperlink{autofs}{autofs}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/crontab}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rcrontab}
 
-See \protect\hypertarget{cron}{}{cron}.
+See \protect\hyperlink{cron}{cron}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/Dockerfile}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rdockerfile}
 
-See \protect\hypertarget{analysisdocker}{}{here}.
+See \protect\hyperlink{analysisdocker}{here}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/emails\_sykdomspuls\_alert\_test.xlsx}\label{dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert_test.xlsx}
 
@@ -500,7 +503,7 @@ A list of email addresses used in
 
 A list of email addresses used in many projects.
 
-\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/httr-oauth\_2017\_09\_17}\label{httroauth}
+\hypertarget{httroauth}{\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/httr-oauth\_2017\_09\_17}\label{httroauth}}
 
 The authorization file for the
 \href{mailto:dashboardsfhi@gmail.com}{\nolinkurl{dashboardsfhi@gmail.com}}.
@@ -508,7 +511,7 @@ This probably needs to be refreshed every year??
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/mail.json}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rmail.json}
 
-Related to \protect\hypertarget{httroauth}{}{httr-oauth}.
+Related to \protect\hyperlink{httroauth}{httr-oauth}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/repo-key}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rrepo-key}
 
@@ -527,18 +530,21 @@ Docker-compose file used for testing the
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-dev.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-dev.yml}
 
-Docker-compose file used for development.
+Docker-compose file used for development. See
+\protect\hyperlink{dockercompose}{here}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-prod.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-prod.yml}
 
-Docker-compose file used for the production computer.
+Docker-compose file used for the production computer. See
+\protect\hyperlink{dockercompose}{here}.
 
 \subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-test.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-test.yml}
 
 Docker-compose file used for integration testing of \texttt{Jenkins} on
-\texttt{linux}.
+\texttt{linux}. See \protect\hyperlink{dockercompose}{here}.
 
-\subsection{Analysis Docker Image}\label{analysisdocker}
+\hypertarget{analysisdocker}{\subsection{Analysis Docker
+Image}\label{analysisdocker}}
 
 \subsubsection{Images}\label{images}
 
@@ -609,7 +615,7 @@ structure:
 Note that we have a soft link between \texttt{/r} and
 \texttt{/usr/local/lib/R/site-library/}.
 
-\subsubsection{cron}\label{cron}
+\hypertarget{cron}{\subsubsection{cron}\label{cron}}
 
 We use \href{https://en.wikipedia.org/wiki/Cron}{cron} to schedule the
 analyses. The schedule is specified in
@@ -621,7 +627,7 @@ The cronjobs are only activated when the environmental variable
 
 In principle, cronjobs should only be activated on \texttt{smhb}.
 
-\subsubsection{autofs}\label{autofs}
+\hypertarget{autofs}{\subsubsection{autofs}\label{autofs}}
 
 We use \href{https://help.ubuntu.com/community/Autofs}{autofs} to
 connect to the F network. The network locations, username, and password
@@ -641,12 +647,13 @@ We use nginx as a reverse proxy to make rstudio server available to the
 developers.
 
 The relevant Dockerfile is
-{[}here{]}(\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile}{raw996/dashboards\_r}
+\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile}{here}
 and is pushed to
 \href{https://hub.docker.com/r/raw996/dashboards_nginx/}{raw996/dashboards\_nginx:production}
 after integration testing is passed.
 
-\subsection{Docker Compose}\label{docker-compose}
+\hypertarget{dockercompose}{\subsection{Docker
+Compose}\label{dockercompose}}
 
 \href{https://docs.docker.com/compose/}{Docker compose} is used to
 integrate these Docker images into the local filesystem. We have
@@ -667,6 +674,99 @@ multiple docker-compose files for different reasons:
   \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-dev.yml}{development}
   on a dev computer
 \end{itemize}
+
+\subsection{Production Computer -
+smhb}\label{production-computer---smhb}
+
+\subsubsection{crontab}\label{crontab}
+
+\begin{verbatim}
+# m h  dom mon dow   command
+5 1 * * * /home/raw996/git/dashboards_control/bin/prod_update.sh
+@reboot /home/raw996/git/dashboards_control/bin/prod_update.sh
+\end{verbatim}
+
+\subsubsection{File Structure}\label{file-structure-1}
+
+\begin{verbatim}
+/home/raw996/git/dashboards_control/
+\end{verbatim}
+
+\subsubsection{Explanation}\label{explanation}
+
+\texttt{smhb} is designed to be extremely simple. It has two jobs:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Updating
+  \href{https://hub.docker.com/r/raw996/dashboards_r/}{raw996/dashboards\_r:production},
+  \href{https://hub.docker.com/r/raw996/dashboards_shiny/}{raw996/dashboards\_shiny:production},
+  and
+  \href{https://hub.docker.com/r/raw996/dashboards_nginx/}{raw996/dashboards\_nginx:production}
+\item
+  Making sure that
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml}{docker-compose-prod.yml}
+  is running
+\end{enumerate}
+
+We purposefully minimize all integration with the base machine, because
+this enables us to be deploy-environment independent and to move our
+deployment anywhere with minimal hassle.
+
+\subsection{Integration Testing Computer -
+linux}\label{integration-testing-computer---linux}
+
+\subsubsection{File Structure}\label{file-structure-2}
+
+\begin{verbatim}
+/home/raw996/
+  |-- docker-compose-jenkins/
+    |-- docker-compose.yml
+  |-- data/
+    |-- data_app/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_clean/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_raw/
+      |-- normomo/
+        |-- FHIDOD2_20170425.txt
+      |-- sykdomspuls/
+        |-- partially_formatted_2017_08_01.txt
+    |-- data_results/
+      |-- normomo/
+      |-- sykdomspuls/
+  |-- jenkins/
+\end{verbatim}
+
+\subsubsection{Explanation}\label{explanation-1}
+
+\texttt{linux} has three jobs:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Building
+  {[}raw996/dhadley{]}(\url{https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile}
+\item
+  Integration testing for the automated analyses
+\item
+  Pushing
+  \href{https://hub.docker.com/r/raw996/dashboards_r/}{raw996/dashboards\_r:production},
+  \href{https://hub.docker.com/r/raw996/dashboards_shiny/}{raw996/dashboards\_shiny:production},
+  and
+  \href{https://hub.docker.com/r/raw996/dashboards_nginx/}{raw996/dashboards\_nginx:production}
+  to Docker hub after successful integration testing
+\end{enumerate}
+
+\subsection{Unit Testing - travis-ci}\label{unit-testing---travis-ci}
+
+\href{http://travis-ci.org/folkehelseinstituttet}{Travis-ci} is used for
+unit testing.
 
 \section{R packages}\label{r-packages}
 
@@ -908,7 +1008,7 @@ Jenkins build pipeline.
 
 \section{Contributing/Quickstart}\label{contributingquickstart}
 
-\subsection{Quickstart}\label{quickstart}
+\hypertarget{quickstart}{\subsection{Quickstart}\label{quickstart}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -948,17 +1048,17 @@ git remote add upstream https://github.com/raubreywhite/dashboards_control.git
   \begin{itemize}
   \tightlist
   \item
-    \url{https://folkehelseinstituttet.github.io/dashboards/}
+    \url{https://github.com/folkehelseinstituttet/dashboards/}
   \item
-    \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/}
   \item
-    \url{https://folkehelseinstituttet.github.io/dashboards_normomo/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_normomo/}
   \item
-    \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/}
   \item
-    \url{https://folkehelseinstituttet.github.io/dashboards_noispiah/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_noispiah/}
   \item
-    \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/}
   \end{itemize}
 \item
   For each repo, add the folkehelseinstitutet repository as your
@@ -1052,7 +1152,8 @@ dev_up.sh
   Login using \texttt{username=rstudio} and \texttt{password=rstudio1}
 \item
   Using the project menu, open the project corresponding to the
-  automated analysis you are interested in
+  automated analysis you are interested in. This should be located at
+  \texttt{/dashboards/}.
 \end{enumerate}
 
 \subsection{Development guidelines}\label{development-guidelines}
