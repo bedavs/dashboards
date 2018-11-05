@@ -29,6 +29,10 @@
 - Git
 - Docker Engine - Community (https://www.docker.com/products/docker-engine)
 
+## Configuration, Scripts, etc.
+
+Most of the bash scripts, Docker files, passwords, etc. are all hosted at the private Github repository [raubreywhite/dashboards_control](https://github.com/raubreywhite/dashboards_control).
+
 ## Analysis Docker Image
 
 ### Images

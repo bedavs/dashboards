@@ -1,4 +1,79 @@
-# Contributing
+# Contributing/Quickstart
+
+## Quickstart
+
+1. Create a project folder for your code (let us say `~/git/dashboards`). This folder will be accessible from inside your Docker container as `/dashboards/`
+2. Create a project folder for your data (let us say `~/data/`).
+3. Fork the following repos, and clone them to your computer inside `~/git/dashboards`:
+    - https://github.com/raubreywhite/dashboards_control/ (private)
+4. For each repo, add the raubreywhite repository as your upstream:
+
+```
+git remote add upstream https://github.com/raubreywhite/dashboards_control.git
+```
+
+5. Fork the following repos, and clone them to your computer inside `~/git/dashboards`:
+    - https://folkehelseinstituttet.github.io/dashboards/
+    - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/
+    - https://folkehelseinstituttet.github.io/dashboards_normomo/
+    - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/
+    - https://folkehelseinstituttet.github.io/dashboards_noispiah/
+    - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/
+6. For each repo, add the folkehelseinstitutet repository as your upstream:
+
+```
+git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
+```
+
+7. In your `~/.profile` add the following two lines:
+
+```
+export DASHBOARDS_DATA=~/git/dashboards/
+export DASHBOARDS_FOLDER=~/git/dashboards/
+export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/
+```
+
+8. Build your Dockerfiles:
+
+```
+docker_build.sh
+```
+
+9. A number of folders will have been automatically created (see below). Please put in your development datafiles into the appropriate `data_raw/` folder:
+
+```
+- $DASHBOARDS_DATA/
+  |-- data_app/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- data_clean/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- data_raw/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+  |-- results/
+    |-- sykdomspuls/
+    |-- normomo/
+    |-- sykdomspuls_log/
+    |-- sykdomspuls_pdf/
+```
+
+10. Run your docker-compose:
+
+```
+dev_up.sh
+```
+
+11. Open a browser and go to http://localhost:8788/
+12. Login using `username=rstudio` and `password=rstudio1`
+13. Using the project menu, open the project corresponding to the automated analysis you are interested in
 
 ## Development guidelines
 
