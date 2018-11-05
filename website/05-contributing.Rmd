@@ -1,6 +1,6 @@
 # Contributing/Quickstart
 
-## Quickstart
+## Quickstart {#quickstart}
 
 1. Create a project folder for your code (let us say `~/git/dashboards`). This folder will be accessible from inside your Docker container as `/dashboards/`
 2. Create a project folder for your data (let us say `~/data/`).
@@ -12,7 +12,7 @@
 git remote add upstream https://github.com/raubreywhite/dashboards_control.git
 ```
 
-5. Fork the following repos, and clone them to your computer inside `~/git/dashboards`:
+5. Fork the following repos, and then clone the forks to your computer inside `~/git/dashboards`:
     - https://folkehelseinstituttet.github.io/dashboards/
     - https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/
     - https://folkehelseinstituttet.github.io/dashboards_normomo/
@@ -25,10 +25,10 @@ git remote add upstream https://github.com/raubreywhite/dashboards_control.git
 git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
 ```
 
-7. In your `~/.profile` add the following two lines:
+7. In your `~/.profile` add the following three lines:
 
 ```
-export DASHBOARDS_DATA=~/git/dashboards/
+export DASHBOARDS_DATA=~/data/
 export DASHBOARDS_FOLDER=~/git/dashboards/
 export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/
 ```
