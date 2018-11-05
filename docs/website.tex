@@ -307,7 +307,238 @@ Most of the bash scripts, Docker files, passwords, etc. are all hosted
 at the private Github repository
 \href{https://github.com/raubreywhite/dashboards_control}{raubreywhite/dashboards\_control}.
 
-\subsection{Analysis Docker Image}\label{analysis-docker-image}
+\begin{verbatim}
+- $DASHBOARDS_FOLDER/dashboards_control/
+  |-- bin/
+    |-- dev_down.sh
+    |-- dev_up.sh
+    |-- docker_build.sh
+    |-- docker_login.sh
+    |-- docker_push_test_to_prod.sh
+    |-- prod_down.sh
+    |-- prod_up.sh
+    |-- prod_update.sh
+    |-- public.sh
+    |-- test_noispiah.sh
+    |-- test_normomo.sh
+    |-- test_sykdomspuls_log.sh
+    |-- test_sykdomspuls_pdf.sh
+    |-- test_sykdomspuls.sh
+  |-- infrastructure/
+    |-- dashboards_nginx/
+    |-- dashboards_r/
+      |-- add_autofs.sh
+      |-- add_cron.sh
+      |-- auto.mounts
+      |-- crontab
+      |-- Dockerfile
+      |-- emails_sykdomspuls_alert_test.xlsx
+      |-- emails_sykdomspuls_alert.xlsx
+      |-- emails.xlsx
+      |-- httr-oauth_2017_09_17
+      |-- mail.json
+      |-- repo-key
+      |-- secret.sh
+    |-- dashboards_shiny/
+    |-- docker-compose-api.yml
+    |-- docker-compose-dev.yml
+    |-- docker-compose-prod.yml
+    |-- docker-compose-test.yml
+\end{verbatim}
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/dev\_down.sh}\label{dashboards_folderdashboards_controlbindev_down.sh}
+
+Dev script to shut down docker-compose
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/dev\_up.sh}\label{dashboards_folderdashboards_controlbindev_up.sh}
+
+Dev script to start docker-compose
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/docker\_build.sh}\label{dashboards_folderdashboards_controlbindocker_build.sh}
+
+Builds all relevant Docker containers
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/docker\_login.sh}\label{dashboards_folderdashboards_controlbindocker_login.sh}
+
+Logs in to docker-hub
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/docker\_push\_test\_to\_prod.sh}\label{dashboards_folderdashboards_controlbindocker_push_test_to_prod.sh}
+
+Retags `test' Docker containers to `production' and pushs them to
+docker-hub
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/prod\_down.sh}\label{dashboards_folderdashboards_controlbinprod_down.sh}
+
+Only to be used on the production computer \texttt{smhb}. This bash
+script stops the docker-compose.
+
+Note: This script is not used.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/prod\_up.sh}\label{dashboards_folderdashboards_controlbinprod_up.sh}
+
+Only to be used on the production computer \texttt{smhb}. This bash
+script starts up the docker-compose.
+
+Note: This script is not used.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/prod\_update.sh}\label{dashboards_folderdashboards_controlbinprod_update.sh}
+
+Only to be used on the production computer \texttt{smhb}. This bash
+script:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Removes unused Docker container/images (important so we don't run out
+  of space)
+\item
+  Runs some scripts required for network access
+\item
+  Pulls the latest version of
+  \href{https://github.com/raubreywhite/dashboards_control}{raubreywhite/dashboards\_control}
+\item
+  Stops the
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml}{docker-compose-prod.yml}
+\item
+  Pulls the latest production images for:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:production}
+  \item
+    \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile}{raw996/dashboards\_nginx:production}
+  \item
+    \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_shiny/Dockerfile}{raw996/dashboards\_shiny:production}
+  \end{itemize}
+\item
+  Starts the
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml}{docker-compose-prod.yml}
+\end{enumerate}
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/public.sh}\label{dashboards_folderdashboards_controlbinpublic.sh}
+
+Lists a bunch of environmental variables
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_noispiah.sh}\label{dashboards_folderdashboards_controlbintest_noispiah.sh}
+
+Runs \texttt{/r/noispiah/src/RunTest.R} inside
+\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:test}
+
+Note: This script is generally only run by \texttt{Jenkins} on
+\texttt{linux} as the integration testing for
+\href{https://folkehelseinstituttet.github.io/dashboards_noispiah/}{noispiah}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_normomo.sh}\label{dashboards_folderdashboards_controlbintest_normomo.sh}
+
+Runs \texttt{/r/normomo/src/RunTest.R} inside
+\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:test}
+
+Note: This script is generally only run by \texttt{Jenkins} on
+\texttt{linux} as the integration testing for
+\href{https://folkehelseinstituttet.github.io/dashboards_normomo/}{normomo}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_sykdomspuls\_log.sh}\label{dashboards_folderdashboards_controlbintest_sykdomspuls_log.sh}
+
+Runs \texttt{/r/sykdomspulslog/src/RunTest.R} inside
+\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:test}
+
+Note: This script is generally only run by \texttt{Jenkins} on
+\texttt{linux} as the integration testing for
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}{sykdomspuls\_log}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_sykdomspuls\_pdf.sh}\label{dashboards_folderdashboards_controlbintest_sykdomspuls_pdf.sh}
+
+Runs \texttt{/r/sykdomspulspdf/src/RunTest.R} inside
+\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:test}
+
+Note: This script is generally only run by \texttt{Jenkins} on
+\texttt{linux} as the integration testing for
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/}{sykdomspuls\_pdf}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_sykdomspuls.sh}\label{dashboards_folderdashboards_controlbintest_sykdomspuls.sh}
+
+Runs \texttt{/r/sykdomspuls/src/RunTest.R} inside
+\href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:test}
+
+Note: This script is generally only run by \texttt{Jenkins} on
+\texttt{linux} as the integration testing for
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/add\_autofs.sh}\label{dashboards_folderdashboards_controlinfrastructuredashboards_radd_autofs.sh}
+
+See \protect\hypertarget{autofs}{}{autofs}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/add\_cron.sh}\label{dashboards_folderdashboards_controlinfrastructuredashboards_radd_cron.sh}
+
+See \protect\hypertarget{cron}{}{cron}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/auto.mounts}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rauto.mounts}
+
+See \protect\hypertarget{autofs}{}{autofs}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/crontab}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rcrontab}
+
+See \protect\hypertarget{cron}{}{cron}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/Dockerfile}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rdockerfile}
+
+See \protect\hypertarget{analysisdocker}{}{here}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/emails\_sykdomspuls\_alert\_test.xlsx}\label{dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert_test.xlsx}
+
+A list of email addresses used in
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/emails\_sykdomspuls\_alert.xlsx}\label{dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert.xlsx}
+
+A list of email addresses used in
+\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/emails.xlsx}\label{dashboards_folderdashboards_controlinfrastructuredashboards_remails.xlsx}
+
+A list of email addresses used in many projects.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/httr-oauth\_2017\_09\_17}\label{httroauth}
+
+The authorization file for the
+\href{mailto:dashboardsfhi@gmail.com}{\nolinkurl{dashboardsfhi@gmail.com}}.
+This probably needs to be refreshed every year??
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/mail.json}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rmail.json}
+
+Related to \protect\hypertarget{httroauth}{}{httr-oauth}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/repo-key}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rrepo-key}
+
+The repo-key for downloading the private
+\href{https://github.com/raubreywhite/dashboards_control}{raubreywhite/dashboards\_control}
+repository.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/dashboards\_r/secret.sh}\label{dashboards_folderdashboards_controlinfrastructuredashboards_rsecret.sh}
+
+Passwords.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-api.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-api.yml}
+
+Docker-compose file used for testing the
+\href{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/blob/master/inst/src/RunAPI.R}{API}.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-dev.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-dev.yml}
+
+Docker-compose file used for development.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-prod.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-prod.yml}
+
+Docker-compose file used for the production computer.
+
+\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/infrastructure/docker-compose-test.yml}\label{dashboards_folderdashboards_controlinfrastructuredocker-compose-test.yml}
+
+Docker-compose file used for integration testing of \texttt{Jenkins} on
+\texttt{linux}.
+
+\subsection{Analysis Docker Image}\label{analysisdocker}
 
 \subsubsection{Images}\label{images}
 
@@ -711,8 +942,8 @@ git remote add upstream https://github.com/raubreywhite/dashboards_control.git
 \setcounter{enumi}{4}
 \tightlist
 \item
-  Fork the following repos, and clone them to your computer inside
-  \texttt{\textasciitilde{}/git/dashboards}:
+  Fork the following repos, and then clone the forks to your computer
+  inside \texttt{\textasciitilde{}/git/dashboards}:
 
   \begin{itemize}
   \tightlist
@@ -743,12 +974,12 @@ git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSI
 \setcounter{enumi}{6}
 \tightlist
 \item
-  In your \texttt{\textasciitilde{}/.profile} add the following two
+  In your \texttt{\textasciitilde{}/.profile} add the following three
   lines:
 \end{enumerate}
 
 \begin{verbatim}
-export DASHBOARDS_DATA=~/git/dashboards/
+export DASHBOARDS_DATA=~/data/
 export DASHBOARDS_FOLDER=~/git/dashboards/
 export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/
 \end{verbatim}
