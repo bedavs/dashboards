@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="introduction.html">
+<link rel="next" href="travis.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -174,29 +174,247 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Dashboards project</h1>
-<p class="author"><em>Richard White</em></p>
-<p class="date"><em>2018-11-09</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The dashboards project is a project at FHI concerned with running automated analyses on data. An automated analysis is any analysis that:</p>
+<div id="umbrella" class="section level1">
+<h1><span class="header-section-number">2</span> Umbrella Infrastructure</h1>
+<div id="physical-hardware-and-subscriptions" class="section level2">
+<h2><span class="header-section-number">2.1</span> Physical Hardware and Subscriptions</h2>
+<ul>
+<li>One Github organization (<a href="http://github.com/folkehelseinstituttet/" class="uri">http://github.com/folkehelseinstituttet/</a>)</li>
+<li>One Github team (<a href="https://github.com/orgs/folkehelseinstituttet/teams/dashboards" class="uri">https://github.com/orgs/folkehelseinstituttet/teams/dashboards</a>)</li>
+<li>One <a href="https://github.com/eddelbuettel/drat">drat</a> repository (<a href="https://folkehelseinstituttet.github.io/drat/" class="uri">https://folkehelseinstituttet.github.io/drat/</a>)</li>
+<li>One travis-ci.org account (<a href="http://travis-ci.org/folkehelseinstituttet" class="uri">http://travis-ci.org/folkehelseinstituttet</a>)</li>
+<li>One travis-ci.com account (<a href="http://travis-ci.com/folkehelseinstituttet" class="uri">http://travis-ci.com/folkehelseinstituttet</a>)</li>
+<li>One Docker hub account (<a href="http://hub.docker.com/u/raw996/" class="uri">http://hub.docker.com/u/raw996/</a>)</li>
+<li>At least three computers:
 <ol style="list-style-type: decimal">
-<li>Will be repeated multiple times in the future</li>
-<li>Always has an input dataset with consistent file structure</li>
-<li>Always has the same expected output (e.g. tables, graphs, reports)</li>
+<li>Production linux computer <code>smhb</code></li>
+<li>Integration testing linux computer <code>linux</code></li>
+<li>Development linux computers (1 per person)</li>
+</ol></li>
+</ul>
+<div id="requirements---smhb" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Requirements - smhb</h3>
+<ul>
+<li>Git</li>
+<li>Docker Engine - Community (<a href="https://www.docker.com/products/docker-engine" class="uri">https://www.docker.com/products/docker-engine</a>)</li>
+</ul>
+</div>
+<div id="requirements---linux" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Requirements - linux</h3>
+<ul>
+<li>Git</li>
+<li>Docker Engine - Community (<a href="https://www.docker.com/products/docker-engine" class="uri">https://www.docker.com/products/docker-engine</a>)</li>
+<li>Jenkins installed via a Docker container (<a href="http://jenkins.io" class="uri">http://jenkins.io</a>)</li>
+</ul>
+</div>
+<div id="requirements---dev" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Requirements - dev</h3>
+<ul>
+<li>Git</li>
+<li>Docker Engine - Community (<a href="https://www.docker.com/products/docker-engine" class="uri">https://www.docker.com/products/docker-engine</a>)</li>
+</ul>
+</div>
+</div>
+<div id="configuration-scripts-etc." class="section level2">
+<h2><span class="header-section-number">2.2</span> Configuration, Scripts, etc.</h2>
+<p>Most of the bash scripts, Docker files, passwords, etc. are all hosted at the private Github repository <a href="https://github.com/raubreywhite/dashboards_control">raubreywhite/dashboards_control</a>.</p>
+<pre><code>- $DASHBOARDS_FOLDER/dashboards_control/
+  |-- bin/
+    |-- dev_down.sh
+    |-- dev_up.sh
+    |-- docker_build.sh
+    |-- docker_login.sh
+    |-- docker_push_test_to_prod.sh
+    |-- prod_down.sh
+    |-- prod_up.sh
+    |-- prod_update.sh
+    |-- public.sh
+    |-- test_noispiah.sh
+    |-- test_normomo.sh
+    |-- test_sykdomspuls_log.sh
+    |-- test_sykdomspuls_pdf.sh
+    |-- test_sykdomspuls.sh
+  |-- infrastructure/
+    |-- dashboards_nginx/
+    |-- dashboards_r/
+      |-- add_autofs.sh
+      |-- add_cron.sh
+      |-- auto.mounts
+      |-- crontab
+      |-- Dockerfile
+      |-- emails_sykdomspuls_alert_test.xlsx
+      |-- emails_sykdomspuls_alert.xlsx
+      |-- emails.xlsx
+      |-- httr-oauth_2017_09_17
+      |-- mail.json
+      |-- repo-key
+      |-- secret.sh
+    |-- dashboards_shiny/
+    |-- docker-compose-api.yml
+    |-- docker-compose-dev.yml
+    |-- docker-compose-prod.yml
+    |-- docker-compose-test.yml</code></pre>
+<div id="dashboards_folderdashboards_controlbindev_down.sh" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> $DASHBOARDS_FOLDER/dashboards_control/bin/dev_down.sh</h3>
+<p>Dev script to shut down docker-compose</p>
+</div>
+<div id="dashboards_folderdashboards_controlbindev_up.sh" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> $DASHBOARDS_FOLDER/dashboards_control/bin/dev_up.sh</h3>
+<p>Dev script to start docker-compose</p>
+</div>
+<div id="dashboards_folderdashboards_controlbindocker_build.sh" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_build.sh</h3>
+<p>Builds all relevant Docker containers</p>
+</div>
+<div id="dashboards_folderdashboards_controlbindocker_login.sh" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_login.sh</h3>
+<p>Logs in to docker-hub</p>
+</div>
+<div id="dashboards_folderdashboards_controlbindocker_push_test_to_prod.sh" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_push_test_to_prod.sh</h3>
+<p>Retags ‘test’ Docker containers to ‘production’ and pushs them to docker-hub</p>
+</div>
+<div id="dashboards_folderdashboards_controlbinprod_down.sh" class="section level3">
+<h3><span class="header-section-number">2.2.6</span> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_down.sh</h3>
+<p>Only to be used on the production computer <code>smhb</code>. This bash script stops the docker-compose.</p>
+<p>Note: This script is not used.</p>
+</div>
+<div id="dashboards_folderdashboards_controlbinprod_up.sh" class="section level3">
+<h3><span class="header-section-number">2.2.7</span> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_up.sh</h3>
+<p>Only to be used on the production computer <code>smhb</code>. This bash script starts up the docker-compose.</p>
+<p>Note: This script is not used.</p>
+</div>
+<div id="dashboards_folderdashboards_controlbinprod_update.sh" class="section level3">
+<h3><span class="header-section-number">2.2.8</span> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_update.sh</h3>
+<p>Only to be used on the production computer <code>smhb</code>. This bash script:</p>
+<ol style="list-style-type: decimal">
+<li>Removes unused Docker container/images (important so we don’t run out of space)</li>
+<li>Runs some scripts required for network access</li>
+<li>Pulls the latest version of <a href="https://github.com/raubreywhite/dashboards_control">raubreywhite/dashboards_control</a></li>
+<li>Stops the <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml">docker-compose-prod.yml</a></li>
+<li>Pulls the latest production images for:
+<ul>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r:production</a></li>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile">raw996/dashboards_nginx:production</a></li>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_shiny/Dockerfile">raw996/dashboards_shiny:production</a></li>
+</ul></li>
+<li>Starts the <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml">docker-compose-prod.yml</a></li>
 </ol>
-<p>If you are just joining this project, please see the <a href="contributingquickstart.html#quickstart">quickstart</a> section.</p>
-
+</div>
+<div id="dashboards_folderdashboards_controlbinpublic.sh" class="section level3">
+<h3><span class="header-section-number">2.2.9</span> $DASHBOARDS_FOLDER/dashboards_control/bin/public.sh</h3>
+<p>Lists a bunch of environmental variables</p>
+</div>
+<div id="test_noispiah" class="section level3">
+<h3><span class="header-section-number">2.2.10</span> $DASHBOARDS_FOLDER/dashboards_control/bin/test_noispiah.sh</h3>
+<p>Runs <code>/r/noispiah/src/RunTest.R</code> inside <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r:test</a></p>
+<p>Note: This script is generally only run by <code>Jenkins</code> on <code>linux</code> as the integration testing for <a href="https://folkehelseinstituttet.github.io/dashboards_noispiah/">noispiah</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlbintest_normomo.sh" class="section level3">
+<h3><span class="header-section-number">2.2.11</span> $DASHBOARDS_FOLDER/dashboards_control/bin/test_normomo.sh</h3>
+<p>Runs <code>/r/normomo/src/RunTest.R</code> inside <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r:test</a></p>
+<p>Note: This script is generally only run by <code>Jenkins</code> on <code>linux</code> as the integration testing for <a href="https://folkehelseinstituttet.github.io/dashboards_normomo/">normomo</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlbintest_sykdomspuls_log.sh" class="section level3">
+<h3><span class="header-section-number">2.2.12</span> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls_log.sh</h3>
+<p>Runs <code>/r/sykdomspulslog/src/RunTest.R</code> inside <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r:test</a></p>
+<p>Note: This script is generally only run by <code>Jenkins</code> on <code>linux</code> as the integration testing for <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/">sykdomspuls_log</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlbintest_sykdomspuls_pdf.sh" class="section level3">
+<h3><span class="header-section-number">2.2.13</span> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls_pdf.sh</h3>
+<p>Runs <code>/r/sykdomspulspdf/src/RunTest.R</code> inside <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r:test</a></p>
+<p>Note: This script is generally only run by <code>Jenkins</code> on <code>linux</code> as the integration testing for <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/">sykdomspuls_pdf</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlbintest_sykdomspuls.sh" class="section level3">
+<h3><span class="header-section-number">2.2.14</span> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls.sh</h3>
+<p>Runs <code>/r/sykdomspuls/src/RunTest.R</code> inside <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r:test</a></p>
+<p>Note: This script is generally only run by <code>Jenkins</code> on <code>linux</code> as the integration testing for <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_radd_autofs.sh" class="section level3">
+<h3><span class="header-section-number">2.2.15</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_autofs.sh</h3>
+<p>See <a href="travis.html#autofs">autofs</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_radd_cron.sh" class="section level3">
+<h3><span class="header-section-number">2.2.16</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_cron.sh</h3>
+<p>See <a href="travis.html#cron">cron</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_rauto.mounts" class="section level3">
+<h3><span class="header-section-number">2.2.17</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/auto.mounts</h3>
+<p>See <a href="travis.html#autofs">autofs</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_rcrontab" class="section level3">
+<h3><span class="header-section-number">2.2.18</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/crontab</h3>
+<p>See <a href="travis.html#cron">cron</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_rdockerfile" class="section level3">
+<h3><span class="header-section-number">2.2.19</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/Dockerfile</h3>
+<p>See <a href="umbrella.html#analysisdocker">here</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert_test.xlsx" class="section level3">
+<h3><span class="header-section-number">2.2.20</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert_test.xlsx</h3>
+<p>A list of email addresses used in <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert.xlsx" class="section level3">
+<h3><span class="header-section-number">2.2.21</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert.xlsx</h3>
+<p>A list of email addresses used in <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_remails.xlsx" class="section level3">
+<h3><span class="header-section-number">2.2.22</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails.xlsx</h3>
+<p>A list of email addresses used in many projects.</p>
+</div>
+<div id="httroauth" class="section level3">
+<h3><span class="header-section-number">2.2.23</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/httr-oauth_2017_09_17</h3>
+<p>The authorization file for the <a href="mailto:dashboardsfhi@gmail.com">dashboardsfhi@gmail.com</a>. This probably needs to be refreshed every year??</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_rmail.json" class="section level3">
+<h3><span class="header-section-number">2.2.24</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/mail.json</h3>
+<p>Related to <a href="umbrella.html#httroauth">httr-oauth</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_rrepo-key" class="section level3">
+<h3><span class="header-section-number">2.2.25</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/repo-key</h3>
+<p>The repo-key for downloading the private <a href="https://github.com/raubreywhite/dashboards_control">raubreywhite/dashboards_control</a> repository.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredashboards_rsecret.sh" class="section level3">
+<h3><span class="header-section-number">2.2.26</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/secret.sh</h3>
+<p>Passwords.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-api.yml" class="section level3">
+<h3><span class="header-section-number">2.2.27</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-api.yml</h3>
+<p>Docker-compose file used for testing the <a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/blob/master/inst/src/RunAPI.R">API</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-dev.yml" class="section level3">
+<h3><span class="header-section-number">2.2.28</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-dev.yml</h3>
+<p>Docker-compose file used for development. See <a href="travis.html#dockercompose">here</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-prod.yml" class="section level3">
+<h3><span class="header-section-number">2.2.29</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-prod.yml</h3>
+<p>Docker-compose file used for the production computer. See <a href="travis.html#dockercompose">here</a>.</p>
+</div>
+<div id="dashboards_folderdashboards_controlinfrastructuredocker-compose-test.yml" class="section level3">
+<h3><span class="header-section-number">2.2.30</span> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-test.yml</h3>
+<p>Docker-compose file used for integration testing of <code>Jenkins</code> on <code>linux</code>. See <a href="travis.html#dockercompose">here</a>.</p>
+</div>
+</div>
+<div id="analysisdocker" class="section level2">
+<h2><span class="header-section-number">2.3</span> Analysis Docker Image</h2>
+<div id="images" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Images</h3>
+<p>Our analysis Docker images are based off the <a href="https://rocker-project.org">rocker</a> images. More specifically, the <a href="https://hub.docker.com/r/rocker/verse/">rocker/verse:3.5.0</a> image.</p>
+<p>This Docker image is then expanded upon by a separate Dockerfile <a href="https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile">raw996/dhadley</a>. This Docker image is automatically rebuilt by <code>Jenkins</code> on <code>linux</code> whenever the repository is updated. The resultant Docker image is pushed to <a href="https://hub.docker.com/r/raw996/dhadley/">raw996/dhadley:3.5.0</a>. This image is a general-purpose analysis image, with no sensitive information in it.</p>
+<p>This Docker image is then expanded upon by a separate Dockerfile <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile">raw996/dashboards_r</a>. This Docker image is automatically rebuilt by <code>Jenkins</code> on <code>linux</code> whenever the repository is updated. The resultant Docker image is locally tagged as <code>raw996/dashboards_r:test</code> and then a number of integration tests are performed on it. If the integration tests are passed, then the Docker image is retagged and pushed to <a href="https://hub.docker.com/r/raw996/dashboards_r/">raw996/dashboards_r:production</a>. This image is private as it contains passwords and email addresses.</p>
+</div>
+<div id="automated-analysis-r-packages" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Automated Analysis R Packages</h3>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="travis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

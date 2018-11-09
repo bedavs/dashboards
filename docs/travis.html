@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="umbrella.html">
+<link rel="next" href="r-packages.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -174,29 +174,149 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Dashboards project</h1>
-<p class="author"><em>Richard White</em></p>
-<p class="date"><em>2018-11-09</em></p>
+<div id="travis" class="section level1">
+<h1><span class="header-section-number">3</span> travis</h1>
+<div id="internalfilestructure" class="section level3">
+<h3><span class="header-section-number">3.0.1</span> File Structure</h3>
+<p>Inside <code>raw996/dashboards_r</code> we have the following file structure:</p>
+<pre><code>/data_raw/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/data_clean/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/data_app/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/results/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+/usr/local/lib/R/site-library/  &lt;soft linked to /r&gt;
+  |-- &lt;OTHER R PACKAGES INSTALLED HERE&gt;/
+  |-- fhi/
+  |-- normomo/
+  |-- noispiah/
+  |-- sykdomspuls/
+  |-- sykdomspuls_pdf/
+  |-- sykdomspuls_log/
+  |-- &lt;OTHER R PACKAGES INSTALLED HERE&gt;/</code></pre>
+<p>Note that we have a soft link between <code>/r</code> and <code>/usr/local/lib/R/site-library/</code>.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The dashboards project is a project at FHI concerned with running automated analyses on data. An automated analysis is any analysis that:</p>
+<div id="cron" class="section level3">
+<h3><span class="header-section-number">3.0.2</span> cron</h3>
+<p>We use <a href="https://en.wikipedia.org/wiki/Cron">cron</a> to schedule the analyses. The schedule is specified in <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab">crontab</a>.</p>
+<p>The cronjobs are only activated when the environmental variable <code>ADD=cron</code> is defined. Cronjobs are then activated through <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/add_cron.sh">add_cron.sh</a>.</p>
+<p>In principle, cronjobs should only be activated on <code>smhb</code>.</p>
+</div>
+<div id="autofs" class="section level3">
+<h3><span class="header-section-number">3.0.3</span> autofs</h3>
+<p>We use <a href="https://help.ubuntu.com/community/Autofs">autofs</a> to connect to the F network. The network locations, username, and password are specified in <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/auto.mounts">auto.mounts</a>.</p>
+<p>Autofs is only activated when the environmental variable <code>ADD_AUTOFS=yes</code> is defined. Autofs is then activated through <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/add_autofs.sh">add_autofs.sh</a>.</p>
+<p>In principle, autofs should only be activated on <code>smhb</code>.</p>
+</div>
+<div id="reverse-proxy-docker-image" class="section level2">
+<h2><span class="header-section-number">3.1</span> Reverse Proxy Docker Image</h2>
+<p>We use nginx as a reverse proxy to make rstudio server available to the developers.</p>
+<p>The relevant Dockerfile is <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_nginx/Dockerfile">here</a> and is pushed to <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a> after integration testing is passed.</p>
+</div>
+<div id="dockercompose" class="section level2">
+<h2><span class="header-section-number">3.2</span> Docker Compose</h2>
+<p><a href="https://docs.docker.com/compose/">Docker compose</a> is used to integrate these Docker images into the local filesystem. We have multiple docker-compose files for different reasons:</p>
+<ul>
+<li>For <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml">production</a> on <code>smhb</code></li>
+<li>For <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-test.yml">testing</a> on <code>linux</code></li>
+<li>For <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-dev.yml">development</a> on a dev computer</li>
+</ul>
+</div>
+<div id="production-computer---smhb" class="section level2">
+<h2><span class="header-section-number">3.3</span> Production Computer - smhb</h2>
+<div id="crontab" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> crontab</h3>
+<pre><code># m h  dom mon dow   command
+5 1 * * * /home/raw996/git/dashboards_control/bin/prod_update.sh
+@reboot /home/raw996/git/dashboards_control/bin/prod_update.sh</code></pre>
+</div>
+<div id="file-structure" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> File Structure</h3>
+<pre><code>/home/raw996/git/dashboards_control/</code></pre>
+</div>
+<div id="explanation" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Explanation</h3>
+<p><code>smhb</code> is designed to be extremely simple. It has two jobs:</p>
 <ol style="list-style-type: decimal">
-<li>Will be repeated multiple times in the future</li>
-<li>Always has an input dataset with consistent file structure</li>
-<li>Always has the same expected output (e.g. tables, graphs, reports)</li>
+<li>Updating <a href="https://hub.docker.com/r/raw996/dashboards_r/">raw996/dashboards_r:production</a>, <a href="https://hub.docker.com/r/raw996/dashboards_shiny/">raw996/dashboards_shiny:production</a>, and <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a></li>
+<li>Making sure that <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/docker-compose-prod.yml">docker-compose-prod.yml</a> is running</li>
 </ol>
-<p>If you are just joining this project, please see the <a href="contributingquickstart.html#quickstart">quickstart</a> section.</p>
+<p>We purposefully minimize all integration with the base machine, because this enables us to be deploy-environment independent and to move our deployment anywhere with minimal hassle.</p>
+</div>
+</div>
+<div id="integrationtesting" class="section level2">
+<h2><span class="header-section-number">3.4</span> Integration Testing Computer - linux</h2>
+<div id="file-structure-1" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> File Structure</h3>
+<pre><code>/home/raw996/
+  |-- docker-compose-jenkins/
+    |-- docker-compose.yml
+  |-- data/
+    |-- data_app/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_clean/
+      |-- normomo/
+      |-- sykdomspuls/
+    |-- data_raw/
+      |-- normomo/
+        |-- FHIDOD2_20170425.txt
+      |-- sykdomspuls/
+        |-- partially_formatted_2017_08_01.txt
+    |-- data_results/
+      |-- normomo/
+      |-- sykdomspuls/
+  |-- jenkins/</code></pre>
+</div>
+<div id="explanation-1" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Explanation</h3>
+<p><code>linux</code> has three jobs:</p>
+<ol style="list-style-type: decimal">
+<li>Building [raw996/dhadley](<a href="https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile" class="uri">https://github.com/raubreywhite/docker/blob/master/dhadley/Dockerfile</a></li>
+<li>Integration testing for the automated analyses</li>
+<li>Pushing <a href="https://hub.docker.com/r/raw996/dashboards_r/">raw996/dashboards_r:production</a>, <a href="https://hub.docker.com/r/raw996/dashboards_shiny/">raw996/dashboards_shiny:production</a>, and <a href="https://hub.docker.com/r/raw996/dashboards_nginx/">raw996/dashboards_nginx:production</a> to Docker hub after successful integration testing</li>
+</ol>
+<p>Integration testing happens by Jenkins running:</p>
+<ul>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_noispiah.sh">test_noispiah.sh</a></li>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_normomo.sh">test_normomo.sh</a></li>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspuls.sh">test_sykdomspuls.sh</a></li>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspulslog.sh">test_sykdomspulslog.sh</a></li>
+<li><a href="https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspulspdf.sh">test_sykdomspulspdf.sh</a></li>
+</ul>
+</div>
+</div>
+<div id="travis" class="section level2">
+<h2><span class="header-section-number">3.5</span> Unit Testing - travis-ci</h2>
+<p><a href="http://travis-ci.org/folkehelseinstituttet">Travis-ci</a> is used for <a href="http://r-pkgs.had.co.nz/check.html#travis">unit testing of packages</a>. If the R package passes all tests, then we use <a href="https://github.com/eddelbuettel/drat">drat</a> to deploy a built version of the package to Folkehelseinstituttet’s R repository: <a href="https://folkehelseinstituttet.github.io/drat/" class="uri">https://folkehelseinstituttet.github.io/drat/</a>.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="umbrella.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

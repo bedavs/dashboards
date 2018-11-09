@@ -89,7 +89,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-05}
+    \date{2018-11-09}
 
 \usepackage{booktabs}
 
@@ -229,7 +229,8 @@ packages}\label{automated-analyses-r-packages}
 
 \url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}
 
-\section{Umbrella Infrastructure}\label{umbrella-infrastructure}
+\hypertarget{umbrella}{\section{Umbrella
+Infrastructure}\label{umbrella}}
 
 \subsection{Physical Hardware and
 Subscriptions}\label{physical-hardware-and-subscriptions}
@@ -424,7 +425,7 @@ script:
 
 Lists a bunch of environmental variables
 
-\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_noispiah.sh}\label{dashboards_folderdashboards_controlbintest_noispiah.sh}
+\hypertarget{test_noispiah}{\subsubsection{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_noispiah.sh}\label{test_noispiah}}
 
 Runs \texttt{/r/noispiah/src/RunTest.R} inside
 \href{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}{raw996/dashboards\_r:test}
@@ -571,7 +572,13 @@ tests are passed, then the Docker image is retagged and pushed to
 \href{https://hub.docker.com/r/raw996/dashboards_r/}{raw996/dashboards\_r:production}.
 This image is private as it contains passwords and email addresses.
 
-\subsubsection{File Structure}\label{file-structure}
+\subsubsection{Automated Analysis R
+Packages}\label{automated-analysis-r-packages}
+
+\section{travis}\label{travis}
+
+\hypertarget{internalfilestructure}{\subsubsection{File
+Structure}\label{internalfilestructure}}
 
 Inside \texttt{raw996/dashboards\_r} we have the following file
 structure:
@@ -686,7 +693,7 @@ smhb}\label{production-computer---smhb}
 @reboot /home/raw996/git/dashboards_control/bin/prod_update.sh
 \end{verbatim}
 
-\subsubsection{File Structure}\label{file-structure-1}
+\subsubsection{File Structure}\label{file-structure}
 
 \begin{verbatim}
 /home/raw996/git/dashboards_control/
@@ -715,10 +722,10 @@ We purposefully minimize all integration with the base machine, because
 this enables us to be deploy-environment independent and to move our
 deployment anywhere with minimal hassle.
 
-\subsection{Integration Testing Computer -
-linux}\label{integration-testing-computer---linux}
+\hypertarget{integrationtesting}{\subsection{Integration Testing
+Computer - linux}\label{integrationtesting}}
 
-\subsubsection{File Structure}\label{file-structure-2}
+\subsubsection{File Structure}\label{file-structure-1}
 
 \begin{verbatim}
 /home/raw996/
@@ -763,10 +770,30 @@ linux}\label{integration-testing-computer---linux}
   to Docker hub after successful integration testing
 \end{enumerate}
 
-\subsection{Unit Testing - travis-ci}\label{unit-testing---travis-ci}
+Integration testing happens by Jenkins running:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_noispiah.sh}{test\_noispiah.sh}
+\item
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_normomo.sh}{test\_normomo.sh}
+\item
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspuls.sh}{test\_sykdomspuls.sh}
+\item
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspulslog.sh}{test\_sykdomspulslog.sh}
+\item
+  \href{https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspulspdf.sh}{test\_sykdomspulspdf.sh}
+\end{itemize}
+
+\subsection{Unit Testing - travis-ci}\label{travis}
 
 \href{http://travis-ci.org/folkehelseinstituttet}{Travis-ci} is used for
-unit testing.
+\href{http://r-pkgs.had.co.nz/check.html\#travis}{unit testing of
+packages}. If the R package passes all tests, then we use
+\href{https://github.com/eddelbuettel/drat}{drat} to deploy a built
+version of the package to Folkehelseinstituttet's R repository:
+\url{https://folkehelseinstituttet.github.io/drat/}.
 
 \section{R packages}\label{r-packages}
 
@@ -841,48 +868,18 @@ version of the package to Folkehelseinstituttet's R repository:
 \subsubsection{Integration with the local file
 system}\label{integration-with-the-local-file-system}
 
-\section{Integrating the R package into the physical
-system}\label{integrating-the-r-package-into-the-physical-system}
+We assume that the local file system follows
+\protect\hyperlink{internalfilestructure}{this file structure}, and this
+is provided via Docker-compose from the
+\protect\hyperlink{umbrella}{umbrella infrastructure}.
 
-\subsection{Summary}\label{summary}
+Referencing the \texttt{data\_raw}, \texttt{data\_clean},
+\texttt{data\_app}, and \texttt{results} folders are done through the
+the
+\href{https://folkehelseinstituttet.github.io/fhi/articles/dashboardbasics.html}{fhi}
+package.
 
-An R package is not enough to run an analysis -- something needs to
-physically call the functions inside the R package. That is, the R
-package needs to be integrated into the physical system.
-
-Everything related to integrating the R package into the physical system
-lives in the
-\href{https://github.com/folkehelseinstituttet/dashboards/}{dashboards}
-repository.
-
-Inside the
-\href{https://github.com/folkehelseinstituttet/dashboards/}{dashboards}
-repository we have:
-
-\begin{verbatim}
-- dev/
-  |-- src/
-    |-- sykdomspuls/
-       |-- 0_run.sh
-       |-- RunProcess.R
-       |-- RunTest.R
-    |-- normomo/
-       |-- 0_run.sh
-       |-- RunProcess.R
-       |-- RunTest.R
-    |-- sykdomspuls_log/
-       |-- 0_run.sh
-       |-- RunProcess.R
-       |-- RunTest.R
-    |-- sykdomspuls_pdf/
-       |-- 0_run.sh
-       |-- RunProcess.R
-       |-- RunTest.R
-\end{verbatim}
-
-\subsection{RunProcess.R}\label{runprocess.r}
-
-\subsubsection{Aim}\label{aim}
+\hypertarget{RunProcess}{\subsubsection{inst/src/RunProcess.R}\label{RunProcess}}
 
 An automated analysis needs to:
 
@@ -912,99 +909,39 @@ Depending on the automated analysis \texttt{RunProcess.R} can be run
 every two minutes (constantly checking for new data), or once a week
 (when we know that data will only be available on a certain day/time).
 
-\subsubsection{Bounded context}\label{bounded-context}
+\subsubsection{inst/src/RunTest.R}\label{instsrcruntest.r}
+
+This file is the brains of the integrated testing. This file will be run
+by the
+\protect\hyperlink{test_noispiah}{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_*.sh}
+files.
+
+\hypertarget{Runsh}{\subsubsection{inst/bin/0\_run.sh}\label{Runsh}}
+
+This file is used to:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Only one instance of \texttt{RunProcess.R} can be run at a time.
+  Do any pre-analysis steps (e.g.~download new data from an SFTP server)
 \item
-  Data only exists on physical folders on the system.
-\item
-  The following folder structure exists on the system (here the name of
-  the automated analysis is \texttt{ANALYSIS}):
+  Run \protect\hyperlink{RunProcess}{inst/src/RunProcess.R}
 \end{enumerate}
 
 \begin{verbatim}
-/data_raw/
-  |-- ANALYSIS/
-/data_clean/
-  |-- ANALYSIS/
-/data_app/
-  |-- ANALYSIS/
-/results/
-  |-- ANALYSIS/
-/src/
-  |-- ANALYSIS/
-     |-- 0_run.sh
-     |-- RunProcess.R
-     |-- RunTest.R
+/usr/local/bin/Rscript /r/ANALYSIS/src/RunProcess.R
 \end{verbatim}
-
-Point \#1 is important because if \texttt{RunProcess.R} is run every 2
-minutes (constantly checking for new data) but the analyses take 3 hours
-to run, then we need to ensure that only one instance of
-\texttt{RunProcess.R} can be run at a time.
-
-Point \#2 is important because sometimes:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
 \tightlist
 \item
-  Data files need to be downloaded from external SFTP servers
-  (\href{https://folkehelseinstituttet.github.io/dashboards_normomo/}{normomo},
-  \href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/}{sykdomspulslog}).
-\item
-  Results files need to be uploaded to external SFTP servers
-  (\href{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}{sykdomspuls}).
+  Do any post-analysis steps (e.g.~upload results to an SFTP server)
 \end{enumerate}
 
-If we include code to download/upload the files from SFTP servers inside
-\texttt{RunProcess.R} then it makes it very difficult to test
-\texttt{RunProcess.R} (because we will then need to simulate SFTP
-servers inside our testing infrastructure). If we know that
-\texttt{RunProcess.R} only accesses files that are available on physical
-folders in the system, then our testing infrastructure is a lot easier
-to create and maintain.
-
-\subsection{0\_run.sh}\label{run.sh}
-
-\subsubsection{Aim}\label{aim-1}
-
-The aim of \texttt{0\_run.sh} is to ensure that:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Points 1 and 2 of the bounded context of \texttt{RunProcess.R} happen
-\item
-  Run \texttt{RunProcess.R}
-\end{enumerate}
-
-With regards to the bounded context, we ensure that only one instance of
-\texttt{RunProcess.R} is run at a time through the use of
-\texttt{flock}.
-
-(If neccessary) with regards to the bounded context, we use
-\texttt{sshpass}, \texttt{sftp}, and \texttt{ncftpput} to
-download/upload files from SFTP servers.
-
-We then run \texttt{RunProcess.R} with a standard call:
-
-\begin{verbatim}
-/usr/local/bin/Rscript /src/ANALYSIS/RunProcess.R
-\end{verbatim}
-
-\subsection{RunTest.R}\label{runtest.r}
-
-\subsubsection{Aim}\label{aim-2}
-
-The aim of \texttt{RunTest.R} is to perform integration testing on the
-automated analysis. This integration testing is performed as part of the
-Jenkins build pipeline.
+This file will be run by \protect\hyperlink{cron}{cron}.
 
 \section{Contributing/Quickstart}\label{contributingquickstart}
 
@@ -1021,7 +958,7 @@ Jenkins build pipeline.
   Create a project folder for your data (let us say
   \texttt{\textasciitilde{}/data/}).
 \item
-  Fork the following repos, and clone them to your computer inside
+  Clone the following repos inside
   \texttt{\textasciitilde{}/git/dashboards}:
 
   \begin{itemize}
@@ -1029,18 +966,6 @@ Jenkins build pipeline.
   \item
     \url{https://github.com/raubreywhite/dashboards_control/} (private)
   \end{itemize}
-\item
-  For each repo, add the raubreywhite repository as your upstream:
-\end{enumerate}
-
-\begin{verbatim}
-git remote add upstream https://github.com/raubreywhite/dashboards_control.git
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{4}
-\tightlist
 \item
   Fork the following repos, and then clone the forks to your computer
   inside \texttt{\textasciitilde{}/git/dashboards}:
@@ -1071,7 +996,7 @@ git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSI
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{6}
+\setcounter{enumi}{5}
 \tightlist
 \item
   In your \texttt{\textasciitilde{}/.profile} add the following three
@@ -1086,7 +1011,7 @@ export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{7}
+\setcounter{enumi}{6}
 \tightlist
 \item
   Build your Dockerfiles:
@@ -1098,7 +1023,7 @@ docker_build.sh
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{8}
+\setcounter{enumi}{7}
 \tightlist
 \item
   A number of folders will have been automatically created (see below).
@@ -1130,13 +1055,7 @@ docker_build.sh
     |-- sykdomspuls_pdf/
 \end{verbatim}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{9}
-\tightlist
-\item
-  Run your docker-compose:
-\end{enumerate}
+9 Run your docker-compose:
 
 \begin{verbatim}
 dev_up.sh
@@ -1144,7 +1063,7 @@ dev_up.sh
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{10}
+\setcounter{enumi}{9}
 \tightlist
 \item
   Open a browser and go to \url{http://localhost:8788/}
@@ -1156,6 +1075,85 @@ dev_up.sh
   \texttt{/dashboards/}.
 \end{enumerate}
 
+\subsection{New Automated Analysis}\label{newautomatedanalysis}
+
+This will walk you through the creation of a new automated analysis
+called ``yyyy''.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a new repository on
+  \href{https://github.com/folkehelseinstituttet}{folkehelseinstituttet}
+  with the name \texttt{dashboards\_yyyy}.
+\item
+  Fork this repository to your Github account
+\item
+  Clone the forked repository to
+  \texttt{\textasciitilde{}/git/dashboards/dashboards\_xxxx}
+\item
+  Download
+  \href{https://github.com/folkehelseinstituttet/dashboards_xxxx}{dashboards\_template}
+  and copy all of its contents into
+  \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy}
+\item
+  Edit the following files:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy/DESCRIPTION}
+    (\texttt{Package:\ xxxx} -\textgreater{} \texttt{Package:\ yyyy})
+  \item
+    \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy/tests/testthat.R}
+    (\texttt{library(xxxx)}-\textgreater{}\texttt{library(yyyy)})
+  \item
+    \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy/.travis.yml}
+    (\texttt{xxxx}-\textgreater{}\texttt{yyyy})
+  \item
+    \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy/inst/bin/0\_run.sh}
+    (\texttt{xxxx}-\textgreater{}\texttt{yyyy})
+  \item
+    \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy/inst/src/RunProcess.sh}
+    (\texttt{xxxx}-\textgreater{}\texttt{yyyy})
+  \item
+    \texttt{\textasciitilde{}/git/dashboards/dashboards\_yyyy/inst/src/RunTest.sh}
+    (\texttt{xxxx}-\textgreater{}\texttt{yyyy})
+  \end{itemize}
+\item
+  Ask Richard to log into travis-ci.com and add the \texttt{GITHUB\_PAT}
+  environmental variable to activate continuous integration for
+  \texttt{yyyy}
+\item
+  Submit pull requests and ensure that:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Everything works
+  \item
+    The package is successfully build and included in
+    \url{https://github.com/folkehelseinstituttet/drat/tree/gh-pages/src/contrib}
+  \end{itemize}
+\item
+  Add your package under the secton ``\#\# DRAT PACKAGES FROM FHI'' at
+  \url{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}
+\item
+  Create the 4 folders \texttt{data\_raw}, \texttt{data\_clean},
+  \texttt{results}, \texttt{data\_app} at
+  \url{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile}
+\item
+  Add your package's \protect\hyperlink{Runsh}{0\_run.sh} to
+  \url{https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab}
+\item
+  Add your package's
+  \protect\hyperlink{integrationtesting}{test\_yyyy.sh} to
+  \texttt{Jenkins} on \texttt{Linux}
+\item
+  Hope it works!
+\end{enumerate}
+
 \subsection{Development guidelines}\label{development-guidelines}
 
 We try to follow the
@@ -1164,16 +1162,6 @@ development.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\item
-  Fork {[}this repo{]}{[}repo{]} and clone it to your computer. To learn
-  more about this process, see
-  \href{https://guides.github.com/activities/forking/}{this guide}.
-\item
-  Add the Folkehelseinstituttet repository as your upstream:
-
-\begin{verbatim}
-git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
-\end{verbatim}
 \item
   If you have forked and cloned the project before and it has been a
   while since you worked on it, merge changes from the original repo to
@@ -1222,7 +1210,7 @@ git merge upstream/master
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{8}
+\setcounter{enumi}{6}
 \tightlist
 \item
   Please make sure that the unit tests \texttt{PASS} before merging in!!

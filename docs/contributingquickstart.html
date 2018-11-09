@@ -25,14 +25,14 @@
 <meta name="author" content="Richard White">
 
 
-<meta name="date" content="2018-11-05">
+<meta name="date" content="2018-11-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="integrating-the-r-package-into-the-physical-system.html">
+<link rel="prev" href="r-packages.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -77,88 +77,82 @@
 <li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#automated-analyses-r-packages"><i class="fa fa-check"></i><b>1.4.2</b> Automated analyses R packages</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html"><i class="fa fa-check"></i><b>2</b> Umbrella Infrastructure</a><ul>
-<li class="chapter" data-level="2.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#physical-hardware-and-subscriptions"><i class="fa fa-check"></i><b>2.1</b> Physical Hardware and Subscriptions</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#requirements---smhb"><i class="fa fa-check"></i><b>2.1.1</b> Requirements - smhb</a></li>
-<li class="chapter" data-level="2.1.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#requirements---linux"><i class="fa fa-check"></i><b>2.1.2</b> Requirements - linux</a></li>
-<li class="chapter" data-level="2.1.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#requirements---dev"><i class="fa fa-check"></i><b>2.1.3</b> Requirements - dev</a></li>
+<li class="chapter" data-level="2" data-path="umbrella.html"><a href="umbrella.html"><i class="fa fa-check"></i><b>2</b> Umbrella Infrastructure</a><ul>
+<li class="chapter" data-level="2.1" data-path="umbrella.html"><a href="umbrella.html#physical-hardware-and-subscriptions"><i class="fa fa-check"></i><b>2.1</b> Physical Hardware and Subscriptions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="umbrella.html"><a href="umbrella.html#requirements---smhb"><i class="fa fa-check"></i><b>2.1.1</b> Requirements - smhb</a></li>
+<li class="chapter" data-level="2.1.2" data-path="umbrella.html"><a href="umbrella.html#requirements---linux"><i class="fa fa-check"></i><b>2.1.2</b> Requirements - linux</a></li>
+<li class="chapter" data-level="2.1.3" data-path="umbrella.html"><a href="umbrella.html#requirements---dev"><i class="fa fa-check"></i><b>2.1.3</b> Requirements - dev</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#configuration-scripts-etc."><i class="fa fa-check"></i><b>2.2</b> Configuration, Scripts, etc.</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbindev_down.sh"><i class="fa fa-check"></i><b>2.2.1</b> $DASHBOARDS_FOLDER/dashboards_control/bin/dev_down.sh</a></li>
-<li class="chapter" data-level="2.2.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbindev_up.sh"><i class="fa fa-check"></i><b>2.2.2</b> $DASHBOARDS_FOLDER/dashboards_control/bin/dev_up.sh</a></li>
-<li class="chapter" data-level="2.2.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbindocker_build.sh"><i class="fa fa-check"></i><b>2.2.3</b> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_build.sh</a></li>
-<li class="chapter" data-level="2.2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbindocker_login.sh"><i class="fa fa-check"></i><b>2.2.4</b> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_login.sh</a></li>
-<li class="chapter" data-level="2.2.5" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbindocker_push_test_to_prod.sh"><i class="fa fa-check"></i><b>2.2.5</b> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_push_test_to_prod.sh</a></li>
-<li class="chapter" data-level="2.2.6" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbinprod_down.sh"><i class="fa fa-check"></i><b>2.2.6</b> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_down.sh</a></li>
-<li class="chapter" data-level="2.2.7" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbinprod_up.sh"><i class="fa fa-check"></i><b>2.2.7</b> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_up.sh</a></li>
-<li class="chapter" data-level="2.2.8" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbinprod_update.sh"><i class="fa fa-check"></i><b>2.2.8</b> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_update.sh</a></li>
-<li class="chapter" data-level="2.2.9" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbinpublic.sh"><i class="fa fa-check"></i><b>2.2.9</b> $DASHBOARDS_FOLDER/dashboards_control/bin/public.sh</a></li>
-<li class="chapter" data-level="2.2.10" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbintest_noispiah.sh"><i class="fa fa-check"></i><b>2.2.10</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_noispiah.sh</a></li>
-<li class="chapter" data-level="2.2.11" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbintest_normomo.sh"><i class="fa fa-check"></i><b>2.2.11</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_normomo.sh</a></li>
-<li class="chapter" data-level="2.2.12" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbintest_sykdomspuls_log.sh"><i class="fa fa-check"></i><b>2.2.12</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls_log.sh</a></li>
-<li class="chapter" data-level="2.2.13" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbintest_sykdomspuls_pdf.sh"><i class="fa fa-check"></i><b>2.2.13</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls_pdf.sh</a></li>
-<li class="chapter" data-level="2.2.14" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlbintest_sykdomspuls.sh"><i class="fa fa-check"></i><b>2.2.14</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls.sh</a></li>
-<li class="chapter" data-level="2.2.15" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_radd_autofs.sh"><i class="fa fa-check"></i><b>2.2.15</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_autofs.sh</a></li>
-<li class="chapter" data-level="2.2.16" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_radd_cron.sh"><i class="fa fa-check"></i><b>2.2.16</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_cron.sh</a></li>
-<li class="chapter" data-level="2.2.17" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_rauto.mounts"><i class="fa fa-check"></i><b>2.2.17</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/auto.mounts</a></li>
-<li class="chapter" data-level="2.2.18" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_rcrontab"><i class="fa fa-check"></i><b>2.2.18</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/crontab</a></li>
-<li class="chapter" data-level="2.2.19" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_rdockerfile"><i class="fa fa-check"></i><b>2.2.19</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/Dockerfile</a></li>
-<li class="chapter" data-level="2.2.20" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert_test.xlsx"><i class="fa fa-check"></i><b>2.2.20</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert_test.xlsx</a></li>
-<li class="chapter" data-level="2.2.21" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert.xlsx"><i class="fa fa-check"></i><b>2.2.21</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert.xlsx</a></li>
-<li class="chapter" data-level="2.2.22" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_remails.xlsx"><i class="fa fa-check"></i><b>2.2.22</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails.xlsx</a></li>
-<li class="chapter" data-level="2.2.23" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#httroauth"><i class="fa fa-check"></i><b>2.2.23</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/httr-oauth_2017_09_17</a></li>
-<li class="chapter" data-level="2.2.24" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_rmail.json"><i class="fa fa-check"></i><b>2.2.24</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/mail.json</a></li>
-<li class="chapter" data-level="2.2.25" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_rrepo-key"><i class="fa fa-check"></i><b>2.2.25</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/repo-key</a></li>
-<li class="chapter" data-level="2.2.26" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredashboards_rsecret.sh"><i class="fa fa-check"></i><b>2.2.26</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/secret.sh</a></li>
-<li class="chapter" data-level="2.2.27" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-api.yml"><i class="fa fa-check"></i><b>2.2.27</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-api.yml</a></li>
-<li class="chapter" data-level="2.2.28" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-dev.yml"><i class="fa fa-check"></i><b>2.2.28</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-dev.yml</a></li>
-<li class="chapter" data-level="2.2.29" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-prod.yml"><i class="fa fa-check"></i><b>2.2.29</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-prod.yml</a></li>
-<li class="chapter" data-level="2.2.30" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-test.yml"><i class="fa fa-check"></i><b>2.2.30</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-test.yml</a></li>
+<li class="chapter" data-level="2.2" data-path="umbrella.html"><a href="umbrella.html#configuration-scripts-etc."><i class="fa fa-check"></i><b>2.2</b> Configuration, Scripts, etc.</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbindev_down.sh"><i class="fa fa-check"></i><b>2.2.1</b> $DASHBOARDS_FOLDER/dashboards_control/bin/dev_down.sh</a></li>
+<li class="chapter" data-level="2.2.2" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbindev_up.sh"><i class="fa fa-check"></i><b>2.2.2</b> $DASHBOARDS_FOLDER/dashboards_control/bin/dev_up.sh</a></li>
+<li class="chapter" data-level="2.2.3" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbindocker_build.sh"><i class="fa fa-check"></i><b>2.2.3</b> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_build.sh</a></li>
+<li class="chapter" data-level="2.2.4" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbindocker_login.sh"><i class="fa fa-check"></i><b>2.2.4</b> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_login.sh</a></li>
+<li class="chapter" data-level="2.2.5" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbindocker_push_test_to_prod.sh"><i class="fa fa-check"></i><b>2.2.5</b> $DASHBOARDS_FOLDER/dashboards_control/bin/docker_push_test_to_prod.sh</a></li>
+<li class="chapter" data-level="2.2.6" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbinprod_down.sh"><i class="fa fa-check"></i><b>2.2.6</b> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_down.sh</a></li>
+<li class="chapter" data-level="2.2.7" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbinprod_up.sh"><i class="fa fa-check"></i><b>2.2.7</b> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_up.sh</a></li>
+<li class="chapter" data-level="2.2.8" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbinprod_update.sh"><i class="fa fa-check"></i><b>2.2.8</b> $DASHBOARDS_FOLDER/dashboards_control/bin/prod_update.sh</a></li>
+<li class="chapter" data-level="2.2.9" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbinpublic.sh"><i class="fa fa-check"></i><b>2.2.9</b> $DASHBOARDS_FOLDER/dashboards_control/bin/public.sh</a></li>
+<li class="chapter" data-level="2.2.10" data-path="umbrella.html"><a href="umbrella.html#test_noispiah"><i class="fa fa-check"></i><b>2.2.10</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_noispiah.sh</a></li>
+<li class="chapter" data-level="2.2.11" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbintest_normomo.sh"><i class="fa fa-check"></i><b>2.2.11</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_normomo.sh</a></li>
+<li class="chapter" data-level="2.2.12" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbintest_sykdomspuls_log.sh"><i class="fa fa-check"></i><b>2.2.12</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls_log.sh</a></li>
+<li class="chapter" data-level="2.2.13" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbintest_sykdomspuls_pdf.sh"><i class="fa fa-check"></i><b>2.2.13</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls_pdf.sh</a></li>
+<li class="chapter" data-level="2.2.14" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlbintest_sykdomspuls.sh"><i class="fa fa-check"></i><b>2.2.14</b> $DASHBOARDS_FOLDER/dashboards_control/bin/test_sykdomspuls.sh</a></li>
+<li class="chapter" data-level="2.2.15" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_radd_autofs.sh"><i class="fa fa-check"></i><b>2.2.15</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_autofs.sh</a></li>
+<li class="chapter" data-level="2.2.16" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_radd_cron.sh"><i class="fa fa-check"></i><b>2.2.16</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/add_cron.sh</a></li>
+<li class="chapter" data-level="2.2.17" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_rauto.mounts"><i class="fa fa-check"></i><b>2.2.17</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/auto.mounts</a></li>
+<li class="chapter" data-level="2.2.18" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_rcrontab"><i class="fa fa-check"></i><b>2.2.18</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/crontab</a></li>
+<li class="chapter" data-level="2.2.19" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_rdockerfile"><i class="fa fa-check"></i><b>2.2.19</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/Dockerfile</a></li>
+<li class="chapter" data-level="2.2.20" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert_test.xlsx"><i class="fa fa-check"></i><b>2.2.20</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert_test.xlsx</a></li>
+<li class="chapter" data-level="2.2.21" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_remails_sykdomspuls_alert.xlsx"><i class="fa fa-check"></i><b>2.2.21</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails_sykdomspuls_alert.xlsx</a></li>
+<li class="chapter" data-level="2.2.22" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_remails.xlsx"><i class="fa fa-check"></i><b>2.2.22</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/emails.xlsx</a></li>
+<li class="chapter" data-level="2.2.23" data-path="umbrella.html"><a href="umbrella.html#httroauth"><i class="fa fa-check"></i><b>2.2.23</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/httr-oauth_2017_09_17</a></li>
+<li class="chapter" data-level="2.2.24" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_rmail.json"><i class="fa fa-check"></i><b>2.2.24</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/mail.json</a></li>
+<li class="chapter" data-level="2.2.25" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_rrepo-key"><i class="fa fa-check"></i><b>2.2.25</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/repo-key</a></li>
+<li class="chapter" data-level="2.2.26" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredashboards_rsecret.sh"><i class="fa fa-check"></i><b>2.2.26</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/dashboards_r/secret.sh</a></li>
+<li class="chapter" data-level="2.2.27" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-api.yml"><i class="fa fa-check"></i><b>2.2.27</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-api.yml</a></li>
+<li class="chapter" data-level="2.2.28" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-dev.yml"><i class="fa fa-check"></i><b>2.2.28</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-dev.yml</a></li>
+<li class="chapter" data-level="2.2.29" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-prod.yml"><i class="fa fa-check"></i><b>2.2.29</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-prod.yml</a></li>
+<li class="chapter" data-level="2.2.30" data-path="umbrella.html"><a href="umbrella.html#dashboards_folderdashboards_controlinfrastructuredocker-compose-test.yml"><i class="fa fa-check"></i><b>2.2.30</b> $DASHBOARDS_FOLDER/dashboards_control/infrastructure/docker-compose-test.yml</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#analysisdocker"><i class="fa fa-check"></i><b>2.3</b> Analysis Docker Image</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#images"><i class="fa fa-check"></i><b>2.3.1</b> Images</a></li>
-<li class="chapter" data-level="2.3.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure"><i class="fa fa-check"></i><b>2.3.2</b> File Structure</a></li>
-<li class="chapter" data-level="2.3.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#cron"><i class="fa fa-check"></i><b>2.3.3</b> cron</a></li>
-<li class="chapter" data-level="2.3.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#autofs"><i class="fa fa-check"></i><b>2.3.4</b> autofs</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#reverse-proxy-docker-image"><i class="fa fa-check"></i><b>2.4</b> Reverse Proxy Docker Image</a></li>
-<li class="chapter" data-level="2.5" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#dockercompose"><i class="fa fa-check"></i><b>2.5</b> Docker Compose</a></li>
-<li class="chapter" data-level="2.6" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#production-computer---smhb"><i class="fa fa-check"></i><b>2.6</b> Production Computer - smhb</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#crontab"><i class="fa fa-check"></i><b>2.6.1</b> crontab</a></li>
-<li class="chapter" data-level="2.6.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure-1"><i class="fa fa-check"></i><b>2.6.2</b> File Structure</a></li>
-<li class="chapter" data-level="2.6.3" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#explanation"><i class="fa fa-check"></i><b>2.6.3</b> Explanation</a></li>
-</ul></li>
-<li class="chapter" data-level="2.7" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#integration-testing-computer---linux"><i class="fa fa-check"></i><b>2.7</b> Integration Testing Computer - linux</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#file-structure-2"><i class="fa fa-check"></i><b>2.7.1</b> File Structure</a></li>
-<li class="chapter" data-level="2.7.2" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#explanation-1"><i class="fa fa-check"></i><b>2.7.2</b> Explanation</a></li>
-</ul></li>
-<li class="chapter" data-level="2.8" data-path="umbrella-infrastructure.html"><a href="umbrella-infrastructure.html#unit-testing---travis-ci"><i class="fa fa-check"></i><b>2.8</b> Unit Testing - travis-ci</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>3</b> R packages</a><ul>
-<li class="chapter" data-level="3.1" data-path="r-packages.html"><a href="r-packages.html#generic"><i class="fa fa-check"></i><b>3.1</b> Generic</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="r-packages.html"><a href="r-packages.html#overview"><i class="fa fa-check"></i><b>3.1.1</b> Overview</a></li>
-<li class="chapter" data-level="3.1.2" data-path="r-packages.html"><a href="r-packages.html#requirements"><i class="fa fa-check"></i><b>3.1.2</b> Requirements</a></li>
-<li class="chapter" data-level="3.1.3" data-path="r-packages.html"><a href="r-packages.html#deployment-via-travis-ci-and-drat"><i class="fa fa-check"></i><b>3.1.3</b> Deployment via travis-ci and drat</a></li>
-<li class="chapter" data-level="3.1.4" data-path="r-packages.html"><a href="r-packages.html#integration-with-the-local-file-system"><i class="fa fa-check"></i><b>3.1.4</b> Integration with the local file system</a></li>
+<li class="chapter" data-level="2.3" data-path="umbrella.html"><a href="umbrella.html#analysisdocker"><i class="fa fa-check"></i><b>2.3</b> Analysis Docker Image</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="umbrella.html"><a href="umbrella.html#images"><i class="fa fa-check"></i><b>2.3.1</b> Images</a></li>
+<li class="chapter" data-level="2.3.2" data-path="umbrella.html"><a href="umbrella.html#automated-analysis-r-packages"><i class="fa fa-check"></i><b>2.3.2</b> Automated Analysis R Packages</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html"><i class="fa fa-check"></i><b>4</b> Integrating the R package into the physical system</a><ul>
-<li class="chapter" data-level="4.1" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#summary"><i class="fa fa-check"></i><b>4.1</b> Summary</a></li>
-<li class="chapter" data-level="4.2" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#runprocess.r"><i class="fa fa-check"></i><b>4.2</b> RunProcess.R</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#aim"><i class="fa fa-check"></i><b>4.2.1</b> Aim</a></li>
-<li class="chapter" data-level="4.2.2" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#bounded-context"><i class="fa fa-check"></i><b>4.2.2</b> Bounded context</a></li>
+<li class="chapter" data-level="3" data-path="travis.html"><a href="travis.html"><i class="fa fa-check"></i><b>3</b> travis</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="travis.html"><a href="travis.html#internalfilestructure"><i class="fa fa-check"></i><b>3.0.1</b> File Structure</a></li>
+<li class="chapter" data-level="3.0.2" data-path="travis.html"><a href="travis.html#cron"><i class="fa fa-check"></i><b>3.0.2</b> cron</a></li>
+<li class="chapter" data-level="3.0.3" data-path="travis.html"><a href="travis.html#autofs"><i class="fa fa-check"></i><b>3.0.3</b> autofs</a></li>
+<li class="chapter" data-level="3.1" data-path="travis.html"><a href="travis.html#reverse-proxy-docker-image"><i class="fa fa-check"></i><b>3.1</b> Reverse Proxy Docker Image</a></li>
+<li class="chapter" data-level="3.2" data-path="travis.html"><a href="travis.html#dockercompose"><i class="fa fa-check"></i><b>3.2</b> Docker Compose</a></li>
+<li class="chapter" data-level="3.3" data-path="travis.html"><a href="travis.html#production-computer---smhb"><i class="fa fa-check"></i><b>3.3</b> Production Computer - smhb</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="travis.html"><a href="travis.html#crontab"><i class="fa fa-check"></i><b>3.3.1</b> crontab</a></li>
+<li class="chapter" data-level="3.3.2" data-path="travis.html"><a href="travis.html#file-structure"><i class="fa fa-check"></i><b>3.3.2</b> File Structure</a></li>
+<li class="chapter" data-level="3.3.3" data-path="travis.html"><a href="travis.html#explanation"><i class="fa fa-check"></i><b>3.3.3</b> Explanation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#run.sh"><i class="fa fa-check"></i><b>4.3</b> 0_run.sh</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#aim-1"><i class="fa fa-check"></i><b>4.3.1</b> Aim</a></li>
+<li class="chapter" data-level="3.4" data-path="travis.html"><a href="travis.html#integrationtesting"><i class="fa fa-check"></i><b>3.4</b> Integration Testing Computer - linux</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="travis.html"><a href="travis.html#file-structure-1"><i class="fa fa-check"></i><b>3.4.1</b> File Structure</a></li>
+<li class="chapter" data-level="3.4.2" data-path="travis.html"><a href="travis.html#explanation-1"><i class="fa fa-check"></i><b>3.4.2</b> Explanation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#runtest.r"><i class="fa fa-check"></i><b>4.4</b> RunTest.R</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="integrating-the-r-package-into-the-physical-system.html"><a href="integrating-the-r-package-into-the-physical-system.html#aim-2"><i class="fa fa-check"></i><b>4.4.1</b> Aim</a></li>
+<li class="chapter" data-level="3.5" data-path="travis.html"><a href="travis.html#travis"><i class="fa fa-check"></i><b>3.5</b> Unit Testing - travis-ci</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>4</b> R packages</a><ul>
+<li class="chapter" data-level="4.1" data-path="r-packages.html"><a href="r-packages.html#generic"><i class="fa fa-check"></i><b>4.1</b> Generic</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="r-packages.html"><a href="r-packages.html#overview"><i class="fa fa-check"></i><b>4.1.1</b> Overview</a></li>
+<li class="chapter" data-level="4.1.2" data-path="r-packages.html"><a href="r-packages.html#requirements"><i class="fa fa-check"></i><b>4.1.2</b> Requirements</a></li>
+<li class="chapter" data-level="4.1.3" data-path="r-packages.html"><a href="r-packages.html#deployment-via-travis-ci-and-drat"><i class="fa fa-check"></i><b>4.1.3</b> Deployment via travis-ci and drat</a></li>
+<li class="chapter" data-level="4.1.4" data-path="r-packages.html"><a href="r-packages.html#integration-with-the-local-file-system"><i class="fa fa-check"></i><b>4.1.4</b> Integration with the local file system</a></li>
+<li class="chapter" data-level="4.1.5" data-path="r-packages.html"><a href="r-packages.html#RunProcess"><i class="fa fa-check"></i><b>4.1.5</b> inst/src/RunProcess.R</a></li>
+<li class="chapter" data-level="4.1.6" data-path="r-packages.html"><a href="r-packages.html#instsrcruntest.r"><i class="fa fa-check"></i><b>4.1.6</b> inst/src/RunTest.R</a></li>
+<li class="chapter" data-level="4.1.7" data-path="r-packages.html"><a href="r-packages.html#Runsh"><i class="fa fa-check"></i><b>4.1.7</b> inst/bin/0_run.sh</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="contributingquickstart.html"><a href="contributingquickstart.html"><i class="fa fa-check"></i><b>5</b> Contributing/Quickstart</a><ul>
 <li class="chapter" data-level="5.1" data-path="contributingquickstart.html"><a href="contributingquickstart.html#quickstart"><i class="fa fa-check"></i><b>5.1</b> Quickstart</a></li>
-<li class="chapter" data-level="5.2" data-path="contributingquickstart.html"><a href="contributingquickstart.html#development-guidelines"><i class="fa fa-check"></i><b>5.2</b> Development guidelines</a></li>
-<li class="chapter" data-level="5.3" data-path="contributingquickstart.html"><a href="contributingquickstart.html#code-style"><i class="fa fa-check"></i><b>5.3</b> Code style</a></li>
+<li class="chapter" data-level="5.2" data-path="contributingquickstart.html"><a href="contributingquickstart.html#newautomatedanalysis"><i class="fa fa-check"></i><b>5.2</b> New Automated Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="contributingquickstart.html"><a href="contributingquickstart.html#development-guidelines"><i class="fa fa-check"></i><b>5.3</b> Development guidelines</a></li>
+<li class="chapter" data-level="5.4" data-path="contributingquickstart.html"><a href="contributingquickstart.html#code-style"><i class="fa fa-check"></i><b>5.4</b> Code style</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://www.fhi.no/" target="blank">www.fhi.no</a></li>
@@ -187,14 +181,10 @@
 <ol style="list-style-type: decimal">
 <li>Create a project folder for your code (let us say <code>~/git/dashboards</code>). This folder will be accessible from inside your Docker container as <code>/dashboards/</code></li>
 <li>Create a project folder for your data (let us say <code>~/data/</code>).</li>
-<li>Fork the following repos, and clone them to your computer inside <code>~/git/dashboards</code>:
+<li>Clone the following repos inside <code>~/git/dashboards</code>:
 <ul>
 <li><a href="https://github.com/raubreywhite/dashboards_control/" class="uri">https://github.com/raubreywhite/dashboards_control/</a> (private)</li>
 </ul></li>
-<li>For each repo, add the raubreywhite repository as your upstream:</li>
-</ol>
-<pre><code>git remote add upstream https://github.com/raubreywhite/dashboards_control.git</code></pre>
-<ol start="5" style="list-style-type: decimal">
 <li>Fork the following repos, and then clone the forks to your computer inside <code>~/git/dashboards</code>:
 <ul>
 <li><a href="https://github.com/folkehelseinstituttet/dashboards/" class="uri">https://github.com/folkehelseinstituttet/dashboards/</a></li>
@@ -207,17 +197,17 @@
 <li>For each repo, add the folkehelseinstitutet repository as your upstream:</li>
 </ol>
 <pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre>
-<ol start="7" style="list-style-type: decimal">
+<ol start="6" style="list-style-type: decimal">
 <li>In your <code>~/.profile</code> add the following three lines:</li>
 </ol>
 <pre><code>export DASHBOARDS_DATA=~/data/
 export DASHBOARDS_FOLDER=~/git/dashboards/
 export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/</code></pre>
-<ol start="8" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>Build your Dockerfiles:</li>
 </ol>
 <pre><code>docker_build.sh</code></pre>
-<ol start="9" style="list-style-type: decimal">
+<ol start="8" style="list-style-type: decimal">
 <li>A number of folders will have been automatically created (see below). Please put in your development datafiles into the appropriate <code>data_raw/</code> folder:</li>
 </ol>
 <pre><code>- $DASHBOARDS_DATA/
@@ -241,23 +231,48 @@ export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/</code></pre>
     |-- normomo/
     |-- sykdomspuls_log/
     |-- sykdomspuls_pdf/</code></pre>
-<ol start="10" style="list-style-type: decimal">
-<li>Run your docker-compose:</li>
-</ol>
+<p>9 Run your docker-compose:</p>
 <pre><code>dev_up.sh</code></pre>
-<ol start="11" style="list-style-type: decimal">
+<ol start="10" style="list-style-type: decimal">
 <li>Open a browser and go to <a href="http://localhost:8788/" class="uri">http://localhost:8788/</a></li>
 <li>Login using <code>username=rstudio</code> and <code>password=rstudio1</code></li>
 <li>Using the project menu, open the project corresponding to the automated analysis you are interested in. This should be located at <code>/dashboards/</code>.</li>
 </ol>
 </div>
+<div id="newautomatedanalysis" class="section level2">
+<h2><span class="header-section-number">5.2</span> New Automated Analysis</h2>
+<p>This will walk you through the creation of a new automated analysis called “yyyy”.</p>
+<ol style="list-style-type: decimal">
+<li>Create a new repository on <a href="https://github.com/folkehelseinstituttet">folkehelseinstituttet</a> with the name <code>dashboards_yyyy</code>.</li>
+<li>Fork this repository to your Github account</li>
+<li>Clone the forked repository to <code>~/git/dashboards/dashboards_xxxx</code></li>
+<li>Download <a href="https://github.com/folkehelseinstituttet/dashboards_xxxx">dashboards_template</a> and copy all of its contents into <code>~/git/dashboards/dashboards_yyyy</code></li>
+<li>Edit the following files:
+<ul>
+<li><code>~/git/dashboards/dashboards_yyyy/DESCRIPTION</code> (<code>Package: xxxx</code> -&gt; <code>Package: yyyy</code>)</li>
+<li><code>~/git/dashboards/dashboards_yyyy/tests/testthat.R</code> (<code>library(xxxx)</code>-&gt;<code>library(yyyy)</code>)</li>
+<li><code>~/git/dashboards/dashboards_yyyy/.travis.yml</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
+<li><code>~/git/dashboards/dashboards_yyyy/inst/bin/0_run.sh</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
+<li><code>~/git/dashboards/dashboards_yyyy/inst/src/RunProcess.sh</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
+<li><code>~/git/dashboards/dashboards_yyyy/inst/src/RunTest.sh</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
+</ul></li>
+<li>Ask Richard to log into travis-ci.com and add the <code>GITHUB_PAT</code> environmental variable to activate continuous integration for <code>yyyy</code></li>
+<li>Submit pull requests and ensure that:
+<ul>
+<li>Everything works</li>
+<li>The package is successfully build and included in <a href="https://github.com/folkehelseinstituttet/drat/tree/gh-pages/src/contrib" class="uri">https://github.com/folkehelseinstituttet/drat/tree/gh-pages/src/contrib</a></li>
+</ul></li>
+<li>Add your package under the secton “## DRAT PACKAGES FROM FHI” at <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile" class="uri">https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile</a></li>
+<li>Create the 4 folders <code>data_raw</code>, <code>data_clean</code>, <code>results</code>, <code>data_app</code> at <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile" class="uri">https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile</a></li>
+<li>Add your package’s <a href="r-packages.html#Runsh">0_run.sh</a> to <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab" class="uri">https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab</a></li>
+<li>Add your package’s <a href="travis.html#integrationtesting">test_yyyy.sh</a> to <code>Jenkins</code> on <code>Linux</code></li>
+<li>Hope it works!</li>
+</ol>
+</div>
 <div id="development-guidelines" class="section level2">
-<h2><span class="header-section-number">5.2</span> Development guidelines</h2>
+<h2><span class="header-section-number">5.3</span> Development guidelines</h2>
 <p>We try to follow the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> for development.</p>
 <ol style="list-style-type: decimal">
-<li>Fork [this repo][repo] and clone it to your computer. To learn more about this process, see <a href="https://guides.github.com/activities/forking/">this guide</a>.</li>
-<li><p>Add the Folkehelseinstituttet repository as your upstream:</p>
-<pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre></li>
 <li><p>If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:</p>
 <pre><code>git fetch upstream
 git merge upstream/master</code></pre></li>
@@ -277,13 +292,13 @@ git merge upstream/master</code></pre></li>
 <li><p>If you are reviewing the pull request, wait until the <a href="www.travis-ci.org">travis-ci</a> unit tests have finished</p></li>
 </ol>
 <p><img src="images/pull_request_before_checks.png" /><!-- --></p>
-<ol start="9" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>Please make sure that the unit tests <code>PASS</code> before merging in!!</li>
 </ol>
 <p><img src="images/pull_request_checks_failed.png" /><!-- --></p>
 </div>
 <div id="code-style" class="section level2">
-<h2><span class="header-section-number">5.3</span> Code style</h2>
+<h2><span class="header-section-number">5.4</span> Code style</h2>
 <ul>
 <li>Function names start with capital letters</li>
 <li>Variable names start with small letters</li>
@@ -310,7 +325,7 @@ git merge upstream/master</code></pre></li>
           </div>
         </div>
       </div>
-<a href="integrating-the-r-package-into-the-physical-system.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-packages.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
