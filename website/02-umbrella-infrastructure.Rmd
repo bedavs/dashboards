@@ -1,4 +1,4 @@
-# Umbrella Infrastructure
+# Umbrella Infrastructure {#umbrella}
 
 ## Physical Hardware and Subscriptions
 
@@ -122,7 +122,7 @@ Only to be used on the production computer `smhb`. This bash script:
 
 Lists a bunch of environmental variables
 
-### $DASHBOARDS_FOLDER/dashboards_control/bin/test_noispiah.sh
+### $DASHBOARDS_FOLDER/dashboards_control/bin/test_noispiah.sh {#test_noispiah}
 
 Runs `/r/noispiah/src/RunTest.R` inside [raw996/dashboards_r:test](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile)
 
@@ -226,7 +226,11 @@ This Docker image is then expanded upon by a separate Dockerfile [raw996/dhadley
 
 This Docker image is then expanded upon by a separate Dockerfile [raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile). This Docker image is automatically rebuilt by `Jenkins` on `linux` whenever the repository is updated. The resultant Docker image is locally tagged as `raw996/dashboards_r:test` and then a number of integration tests are performed on it. If the integration tests are passed, then the Docker image is retagged and pushed to [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/). This image is private as it contains passwords and email addresses.
 
-### File Structure
+### Automated Analysis R Packages
+
+#travis
+
+### File Structure {#internalfilestructure}
 
 Inside `raw996/dashboards_r` we have the following file structure:
 
@@ -323,7 +327,7 @@ The relevant Dockerfile is [here](https://github.com/raubreywhite/dashboards_con
 
 We purposefully minimize all integration with the base machine, because this enables us to be deploy-environment independent and to move our deployment anywhere with minimal hassle.
 
-## Integration Testing Computer - linux
+## Integration Testing Computer - linux {#integrationtesting}
 
 ### File Structure
 
@@ -357,6 +361,15 @@ We purposefully minimize all integration with the base machine, because this ena
 2. Integration testing for the automated analyses
 3. Pushing [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/), [raw996/dashboards_shiny:production](https://hub.docker.com/r/raw996/dashboards_shiny/), and [raw996/dashboards_nginx:production](https://hub.docker.com/r/raw996/dashboards_nginx/) to Docker hub after successful integration testing
 
-## Unit Testing - travis-ci
+Integration testing happens by Jenkins running:
 
-[Travis-ci](http://travis-ci.org/folkehelseinstituttet) is used for unit testing.
+- [test_noispiah.sh](https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_noispiah.sh)
+- [test_normomo.sh](https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_normomo.sh)
+- [test_sykdomspuls.sh](https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspuls.sh)
+- [test_sykdomspulslog.sh](https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspulslog.sh)
+- [test_sykdomspulspdf.sh](https://github.com/raubreywhite/dashboards_control/blob/master/bin/test_sykdomspulspdf.sh)
+
+## Unit Testing - travis-ci {#travis}
+
+[Travis-ci](http://travis-ci.org/folkehelseinstituttet) is used for  [unit testing of packages](http://r-pkgs.had.co.nz/check.html#travis). If the R package passes all tests, then we use [drat](https://github.com/eddelbuettel/drat) to deploy a built version of the package to Folkehelseinstituttet's R repository: https://folkehelseinstituttet.github.io/drat/.
+

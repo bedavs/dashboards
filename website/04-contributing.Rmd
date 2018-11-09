@@ -4,28 +4,22 @@
 
 1. Create a project folder for your code (let us say `~/git/dashboards`). This folder will be accessible from inside your Docker container as `/dashboards/`
 2. Create a project folder for your data (let us say `~/data/`).
-3. Fork the following repos, and clone them to your computer inside `~/git/dashboards`:
+3. Clone the following repos inside `~/git/dashboards`:
     - https://github.com/raubreywhite/dashboards_control/ (private)
-4. For each repo, add the raubreywhite repository as your upstream:
-
-```
-git remote add upstream https://github.com/raubreywhite/dashboards_control.git
-```
-
-5. Fork the following repos, and then clone the forks to your computer inside `~/git/dashboards`:
+4. Fork the following repos, and then clone the forks to your computer inside `~/git/dashboards`:
     - https://github.com/folkehelseinstituttet/dashboards/
     - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/
     - https://github.com/folkehelseinstituttet/dashboards_normomo/
     - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/
     - https://github.com/folkehelseinstituttet/dashboards_noispiah/
     - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/
-6. For each repo, add the folkehelseinstitutet repository as your upstream:
+5. For each repo, add the folkehelseinstitutet repository as your upstream:
 
 ```
 git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
 ```
 
-7. In your `~/.profile` add the following three lines:
+6. In your `~/.profile` add the following three lines:
 
 ```
 export DASHBOARDS_DATA=~/data/
@@ -33,13 +27,13 @@ export DASHBOARDS_FOLDER=~/git/dashboards/
 export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/
 ```
 
-8. Build your Dockerfiles:
+7. Build your Dockerfiles:
 
 ```
 docker_build.sh
 ```
 
-9. A number of folders will have been automatically created (see below). Please put in your development datafiles into the appropriate `data_raw/` folder:
+8. A number of folders will have been automatically created (see below). Please put in your development datafiles into the appropriate `data_raw/` folder:
 
 ```
 - $DASHBOARDS_DATA/
@@ -65,32 +59,53 @@ docker_build.sh
     |-- sykdomspuls_pdf/
 ```
 
-10. Run your docker-compose:
+9 Run your docker-compose:
 
 ```
 dev_up.sh
 ```
 
-11. Open a browser and go to http://localhost:8788/
-12. Login using `username=rstudio` and `password=rstudio1`
-13. Using the project menu, open the project corresponding to the automated analysis you are interested in. This should be located at `/dashboards/`.
+10. Open a browser and go to http://localhost:8788/
+11. Login using `username=rstudio` and `password=rstudio1`
+12. Using the project menu, open the project corresponding to the automated analysis you are interested in. This should be located at `/dashboards/`.
+
+## New Automated Analysis {#newautomatedanalysis}
+
+This will walk you through the creation of a new automated analysis called "yyyy".
+
+1. Create a new repository on [folkehelseinstituttet](https://github.com/folkehelseinstituttet) with the name `dashboards_yyyy`.
+2. Fork this repository to your Github account
+3. Clone the forked repository to `~/git/dashboards/dashboards_xxxx`
+4. Download [dashboards_template](https://github.com/folkehelseinstituttet/dashboards_xxxx) and copy all of its contents into `~/git/dashboards/dashboards_yyyy`
+5. Edit the following files:
+    - `~/git/dashboards/dashboards_yyyy/DESCRIPTION` (`Package: xxxx` -> `Package: yyyy`)
+    - `~/git/dashboards/dashboards_yyyy/tests/testthat.R` (`library(xxxx)`->`library(yyyy)`)
+    - `~/git/dashboards/dashboards_yyyy/.travis.yml` (`xxxx`->`yyyy`)
+    - `~/git/dashboards/dashboards_yyyy/inst/bin/0_run.sh` (`xxxx`->`yyyy`)
+    - `~/git/dashboards/dashboards_yyyy/inst/src/RunProcess.sh` (`xxxx`->`yyyy`)
+    - `~/git/dashboards/dashboards_yyyy/inst/src/RunTest.sh` (`xxxx`->`yyyy`)
+    
+6. Ask Richard to log into travis-ci.com and add the `GITHUB_PAT` environmental variable to activate continuous integration for `yyyy`
+7. Submit pull requests and ensure that:
+    - Everything works
+    - The package is successfully build and included in https://github.com/folkehelseinstituttet/drat/tree/gh-pages/src/contrib
+8. Add your package under the secton "## DRAT PACKAGES FROM FHI" at https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile
+9. Create the 4 folders `data_raw`, `data_clean`, `results`, `data_app` at https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile
+10. Add your package's [0_run.sh](#Runsh) to https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab
+11. Add your package's [test_yyyy.sh](#integrationtesting) to `Jenkins` on `Linux`
+12. Hope it works!
 
 ## Development guidelines
 
 We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/) for development.
 
-1. Fork [this repo][repo] and clone it to your computer. To learn more about this process, see [this guide](https://guides.github.com/activities/forking/).
-2. Add the Folkehelseinstituttet repository as your upstream:
-```
-git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git
-```
-3. If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:
+1. If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:
 ```
 git fetch upstream
 git merge upstream/master
 ```
-4. Open the RStudio project file (`.Rproj`).
-5. Make your changes:
+2. Open the RStudio project file (`.Rproj`).
+3. Make your changes:
     * Write your code.
     * Test your code (bonus points for adding unit tests).
     * Document your code (see function documentation above).
@@ -98,15 +113,15 @@ git merge upstream/master
     * Commit your changes locally
     * Merge changes from the original repo (again)
     * Do an `R CMD check` using `devtools::check()` and aim for 0 errors and warnings.
-6. Commit and push your changes.
-7. Submit a [pull request](https://guides.github.com/activities/forking/#making-a-pull-request).
-8. If you are reviewing the pull request, wait until the [travis-ci](www.travis-ci.org) unit tests have finished
+4. Commit and push your changes.
+5. Submit a [pull request](https://guides.github.com/activities/forking/#making-a-pull-request).
+6. If you are reviewing the pull request, wait until the [travis-ci](www.travis-ci.org) unit tests have finished
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 knitr::include_graphics("images/pull_request_before_checks.png")
 ```
 
-9. Please make sure that the unit tests `PASS` before merging in!!
+7. Please make sure that the unit tests `PASS` before merging in!!
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 knitr::include_graphics("images/pull_request_checks_failed.png")
