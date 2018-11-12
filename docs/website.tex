@@ -572,11 +572,6 @@ tests are passed, then the Docker image is retagged and pushed to
 \href{https://hub.docker.com/r/raw996/dashboards_r/}{raw996/dashboards\_r:production}.
 This image is private as it contains passwords and email addresses.
 
-\subsubsection{Automated Analysis R
-Packages}\label{automated-analysis-r-packages}
-
-\subsection{travis}\label{travis}
-
 \hypertarget{internalfilestructure}{\subsubsection{File
 Structure}\label{internalfilestructure}}
 
@@ -795,11 +790,9 @@ packages}. If the R package passes all tests, then we use
 version of the package to Folkehelseinstituttet's R repository:
 \url{https://folkehelseinstituttet.github.io/drat/}.
 
-\section{R packages}\label{r-packages}
+\section{R packages}\label{rpackages}
 
-\subsection{Generic}\label{generic}
-
-\subsubsection{Overview}\label{overview}
+\subsection{Overview}\label{overview}
 
 Each automated analysis has its own R package:
 
@@ -832,7 +825,7 @@ analysis. Typical examples are:
   Report generation
 \end{itemize}
 
-\subsubsection{Requirements}\label{requirements}
+\subsection{Requirements}\label{requirements}
 
 The R packages should be developed using unit testing as implemented in
 the \href{http://r-pkgs.had.co.nz/tests.html}{testthat} package.
@@ -855,7 +848,7 @@ where the names of the data.table are checked against reference values
 to ensure that the structure of the results are not accidentally
 changed.
 
-\subsubsection{Deployment via travis-ci and
+\subsection{Deployment via travis-ci and
 drat}\label{deployment-via-travis-ci-and-drat}
 
 Unit testing is then automatically run using
@@ -865,7 +858,7 @@ package passes all tests, then we use
 version of the package to Folkehelseinstituttet's R repository:
 \url{https://folkehelseinstituttet.github.io/drat/}.
 
-\subsubsection{Integration with the local file
+\subsection{Integration with the local file
 system}\label{integration-with-the-local-file-system}
 
 We assume that the local file system follows
@@ -879,7 +872,7 @@ the
 \href{https://folkehelseinstituttet.github.io/fhi/articles/dashboardbasics.html}{fhi}
 package.
 
-\hypertarget{RunProcess}{\subsubsection{inst/src/RunProcess.R}\label{RunProcess}}
+\hypertarget{RunProcess}{\subsection{inst/src/RunProcess.R}\label{RunProcess}}
 
 An automated analysis needs to:
 
@@ -909,14 +902,14 @@ Depending on the automated analysis \texttt{RunProcess.R} can be run
 every two minutes (constantly checking for new data), or once a week
 (when we know that data will only be available on a certain day/time).
 
-\subsubsection{inst/src/RunTest.R}\label{instsrcruntest.r}
+\subsection{inst/src/RunTest.R}\label{instsrcruntest.r}
 
 This file is the brains of the integrated testing. This file will be run
 by the
 \protect\hyperlink{test_noispiah}{\$DASHBOARDS\_FOLDER/dashboards\_control/bin/test\_*.sh}
 files.
 
-\hypertarget{Runsh}{\subsubsection{inst/bin/0\_run.sh}\label{Runsh}}
+\hypertarget{Runsh}{\subsection{inst/bin/0\_run.sh}\label{Runsh}}
 
 This file is used to:
 
@@ -979,11 +972,11 @@ This file will be run by \protect\hyperlink{cron}{cron}.
   \item
     \url{https://github.com/folkehelseinstituttet/dashboards_normomo/}
   \item
-    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspulspdf/}
   \item
     \url{https://github.com/folkehelseinstituttet/dashboards_noispiah/}
   \item
-    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/}
+    \url{https://github.com/folkehelseinstituttet/dashboards_sykdomspulslog/}
   \end{itemize}
 \item
   For each repo, add the folkehelseinstitutet repository as your

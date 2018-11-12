@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="rpackages.html">
-
+<link rel="prev" href="umbrella.html">
+<link rel="next" href="contributingquickstart.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -169,149 +169,72 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="contributingquickstart" class="section level1">
-<h1><span class="header-section-number">4</span> Contributing/Quickstart</h1>
-<div id="quickstart" class="section level2">
-<h2><span class="header-section-number">4.1</span> Quickstart</h2>
-<ol style="list-style-type: decimal">
-<li>Create a project folder for your code (let us say <code>~/git/dashboards</code>). This folder will be accessible from inside your Docker container as <code>/dashboards/</code></li>
-<li>Create a project folder for your data (let us say <code>~/data/</code>).</li>
-<li>Clone the following repos inside <code>~/git/dashboards</code>:
+<div id="rpackages" class="section level1">
+<h1><span class="header-section-number">3</span> R packages</h1>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">3.1</span> Overview</h2>
+<p>Each automated analysis has its own R package:</p>
 <ul>
-<li><a href="https://github.com/raubreywhite/dashboards_control/" class="uri">https://github.com/raubreywhite/dashboards_control/</a> (private)</li>
-</ul></li>
-<li>Fork the following repos, and then clone the forks to your computer inside <code>~/git/dashboards</code>:
-<ul>
-<li><a href="https://github.com/folkehelseinstituttet/dashboards/" class="uri">https://github.com/folkehelseinstituttet/dashboards/</a></li>
-<li><a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/" class="uri">https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/</a></li>
-<li><a href="https://github.com/folkehelseinstituttet/dashboards_normomo/" class="uri">https://github.com/folkehelseinstituttet/dashboards_normomo/</a></li>
-<li><a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspulspdf/" class="uri">https://github.com/folkehelseinstituttet/dashboards_sykdomspulspdf/</a></li>
-<li><a href="https://github.com/folkehelseinstituttet/dashboards_noispiah/" class="uri">https://github.com/folkehelseinstituttet/dashboards_noispiah/</a></li>
-<li><a href="https://github.com/folkehelseinstituttet/dashboards_sykdomspulslog/" class="uri">https://github.com/folkehelseinstituttet/dashboards_sykdomspulslog/</a></li>
-</ul></li>
-<li>For each repo, add the folkehelseinstitutet repository as your upstream:</li>
-</ol>
-<pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>In your <code>~/.profile</code> add the following three lines:</li>
-</ol>
-<pre><code>export DASHBOARDS_DATA=~/data/
-export DASHBOARDS_FOLDER=~/git/dashboards/
-export PATH=$PATH:$DASHBOARDS_FOLDER/dashboards_control/bin/</code></pre>
-<ol start="7" style="list-style-type: decimal">
-<li>Build your Dockerfiles:</li>
-</ol>
-<pre><code>docker_build.sh</code></pre>
-<ol start="8" style="list-style-type: decimal">
-<li>A number of folders will have been automatically created (see below). Please put in your development datafiles into the appropriate <code>data_raw/</code> folder:</li>
-</ol>
-<pre><code>- $DASHBOARDS_DATA/
-  |-- data_app/
-    |-- sykdomspuls/
-    |-- normomo/
-    |-- sykdomspuls_log/
-    |-- sykdomspuls_pdf/
-  |-- data_clean/
-    |-- sykdomspuls/
-    |-- normomo/
-    |-- sykdomspuls_log/
-    |-- sykdomspuls_pdf/
-  |-- data_raw/
-    |-- sykdomspuls/
-    |-- normomo/
-    |-- sykdomspuls_log/
-    |-- sykdomspuls_pdf/
-  |-- results/
-    |-- sykdomspuls/
-    |-- normomo/
-    |-- sykdomspuls_log/
-    |-- sykdomspuls_pdf/</code></pre>
-<p>9 Run your docker-compose:</p>
-<pre><code>dev_up.sh</code></pre>
-<ol start="10" style="list-style-type: decimal">
-<li>Open a browser and go to <a href="http://localhost:8788/" class="uri">http://localhost:8788/</a></li>
-<li>Login using <code>username=rstudio</code> and <code>password=rstudio1</code></li>
-<li>Using the project menu, open the project corresponding to the automated analysis you are interested in. This should be located at <code>/dashboards/</code>.</li>
-</ol>
-</div>
-<div id="newautomatedanalysis" class="section level2">
-<h2><span class="header-section-number">4.2</span> New Automated Analysis</h2>
-<p>This will walk you through the creation of a new automated analysis called “yyyy”.</p>
-<ol style="list-style-type: decimal">
-<li>Create a new repository on <a href="https://github.com/folkehelseinstituttet">folkehelseinstituttet</a> with the name <code>dashboards_yyyy</code>.</li>
-<li>Fork this repository to your Github account</li>
-<li>Clone the forked repository to <code>~/git/dashboards/dashboards_xxxx</code></li>
-<li>Download <a href="https://github.com/folkehelseinstituttet/dashboards_xxxx">dashboards_template</a> and copy all of its contents into <code>~/git/dashboards/dashboards_yyyy</code></li>
-<li>Edit the following files:
-<ul>
-<li><code>~/git/dashboards/dashboards_yyyy/DESCRIPTION</code> (<code>Package: xxxx</code> -&gt; <code>Package: yyyy</code>)</li>
-<li><code>~/git/dashboards/dashboards_yyyy/tests/testthat.R</code> (<code>library(xxxx)</code>-&gt;<code>library(yyyy)</code>)</li>
-<li><code>~/git/dashboards/dashboards_yyyy/.travis.yml</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
-<li><code>~/git/dashboards/dashboards_yyyy/inst/bin/0_run.sh</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
-<li><code>~/git/dashboards/dashboards_yyyy/inst/src/RunProcess.sh</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
-<li><code>~/git/dashboards/dashboards_yyyy/inst/src/RunTest.sh</code> (<code>xxxx</code>-&gt;<code>yyyy</code>)</li>
-</ul></li>
-<li>Ask Richard to log into travis-ci.com and add the <code>GITHUB_PAT</code> environmental variable to activate continuous integration for <code>yyyy</code></li>
-<li>Submit pull requests and ensure that:
-<ul>
-<li>Everything works</li>
-<li>The package is successfully build and included in <a href="https://github.com/folkehelseinstituttet/drat/tree/gh-pages/src/contrib" class="uri">https://github.com/folkehelseinstituttet/drat/tree/gh-pages/src/contrib</a></li>
-</ul></li>
-<li>Add your package under the secton “## DRAT PACKAGES FROM FHI” at <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile" class="uri">https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile</a></li>
-<li>Create the 4 folders <code>data_raw</code>, <code>data_clean</code>, <code>results</code>, <code>data_app</code> at <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile" class="uri">https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile</a></li>
-<li>Add your package’s <a href="rpackages.html#Runsh">0_run.sh</a> to <a href="https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab" class="uri">https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/crontab</a></li>
-<li>Add your package’s <a href="umbrella.html#integrationtesting">test_yyyy.sh</a> to <code>Jenkins</code> on <code>Linux</code></li>
-<li>Hope it works!</li>
-</ol>
-</div>
-<div id="development-guidelines" class="section level2">
-<h2><span class="header-section-number">4.3</span> Development guidelines</h2>
-<p>We try to follow the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> for development.</p>
-<ol style="list-style-type: decimal">
-<li><p>If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:</p>
-<pre><code>git fetch upstream
-git merge upstream/master</code></pre></li>
-<li>Open the RStudio project file (<code>.Rproj</code>).</li>
-<li>Make your changes:
-<ul>
-<li>Write your code.</li>
-<li>Test your code (bonus points for adding unit tests).</li>
-<li>Document your code (see function documentation above).</li>
-<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
-<li>Commit your changes locally</li>
-<li>Merge changes from the original repo (again)</li>
-<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
-</ul></li>
-<li>Commit and push your changes.</li>
-<li>Submit a <a href="https://guides.github.com/activities/forking/#making-a-pull-request">pull request</a>.</li>
-<li><p>If you are reviewing the pull request, wait until the <a href="www.travis-ci.org">travis-ci</a> unit tests have finished</p></li>
-</ol>
-<p><img src="images/pull_request_before_checks.png" /><!-- --></p>
-<ol start="7" style="list-style-type: decimal">
-<li>Please make sure that the unit tests <code>PASS</code> before merging in!!</li>
-</ol>
-<p><img src="images/pull_request_checks_failed.png" /><!-- --></p>
-</div>
-<div id="code-style" class="section level2">
-<h2><span class="header-section-number">4.4</span> Code style</h2>
-<ul>
-<li>Function names start with capital letters</li>
-<li>Variable names start with small letters</li>
-<li>Environments should be in ALL CAPS</li>
-<li>Reference <a href="http://adv-r.had.co.nz/Style.html">Hadley’s style code</a></li>
-<li>&lt;- is preferred over = for assignment</li>
-<li>Indentation is with two spaces, not two or a tab. There should be no tabs in code files.</li>
-<li>if () {} else {} constructions should always use full curly braces even when usage seems unnecessary from a clarity perspective.</li>
-<li>TODO statements should be opened as GitHub issues with links to specific code files and code lines, rather than written inline.</li>
-<li><p>Follow Hadley’s suggestion for aligning long functions with many arguments:</p>
-<pre><code> long_function_name &lt;- function(a = &quot;a long argument&quot;, 
-                            b = &quot;another argument&quot;,
-                            c = &quot;another long argument&quot;) {
-   # As usual code is indented by two spaces.
- }</code></pre></li>
-<li>Never use print() to send text to the console. Instead use message(), warning(), and error() as appropriate.</li>
-<li><p>Use environment variables, not options(), to store global arguments that are used by many or all functions.</p></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_normomo/">normomo</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_noispiah/">noispiah</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_pdf/">sykdomspulspdf</a></li>
+<li><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls_log/">sykdomspulslog</a></li>
 </ul>
+<p>Each R package contains all of the code necessary for that automated analysis. Typical examples are:</p>
+<ul>
+<li>Data cleaning</li>
+<li>Signal analysis</li>
+<li>Graph generation</li>
+<li>Report generation</li>
+</ul>
+</div>
+<div id="requirements" class="section level2">
+<h2><span class="header-section-number">3.2</span> Requirements</h2>
+<p>The R packages should be developed using unit testing as implemented in the <a href="http://r-pkgs.had.co.nz/tests.html">testthat</a> package.</p>
+<p>Furthermore, the R package should operate (and be able to be tested) independently from the real datasets on the system. This is because the real datasets cannot be shared publically or uploaded to github. To circumvent this issue, each package will need to develop functions that can generate fake data. <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/GenFakeDataRaw.html">GenFakeDataRaw</a> is one example from <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>.</p>
+<p>We also require that unit tests are created to test the formatting/structure of results. <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/ValidateAnalysisResults.html">ValidateAnalysisResults</a> is one example from <a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/">sykdomspuls</a>, where the names of the data.table are checked against reference values to ensure that the structure of the results are not accidentally changed.</p>
+</div>
+<div id="deployment-via-travis-ci-and-drat" class="section level2">
+<h2><span class="header-section-number">3.3</span> Deployment via travis-ci and drat</h2>
+<p>Unit testing is then automatically run using <a href="http://r-pkgs.had.co.nz/check.html#travis">travis-ci</a>. If the R package passes all tests, then we use <a href="https://github.com/eddelbuettel/drat">drat</a> to deploy a built version of the package to Folkehelseinstituttet’s R repository: <a href="https://folkehelseinstituttet.github.io/drat/" class="uri">https://folkehelseinstituttet.github.io/drat/</a>.</p>
+</div>
+<div id="integration-with-the-local-file-system" class="section level2">
+<h2><span class="header-section-number">3.4</span> Integration with the local file system</h2>
+<p>We assume that the local file system follows <a href="umbrella.html#internalfilestructure">this file structure</a>, and this is provided via Docker-compose from the <a href="umbrella.html#umbrella">umbrella infrastructure</a>.</p>
+<p>Referencing the <code>data_raw</code>, <code>data_clean</code>, <code>data_app</code>, and <code>results</code> folders are done through the the <a href="https://folkehelseinstituttet.github.io/fhi/articles/dashboardbasics.html">fhi</a> package.</p>
+</div>
+<div id="RunProcess" class="section level2">
+<h2><span class="header-section-number">3.5</span> inst/src/RunProcess.R</h2>
+<p>An automated analysis needs to:</p>
+<ol style="list-style-type: decimal">
+<li>Know the location of the data/results folders.</li>
+<li>Check for new data in these folders. If no new data - then quit.</li>
+<li>Load in the data.</li>
+<li>Load in the analysis functions.</li>
+<li>Run the analyses.</li>
+<li>Save the results.</li>
+</ol>
+<p><code>RunProcess.R</code> is responsible for these tasks.</p>
+<p>We can think of it as an extremely short and extremely high-level script that implements the analysis scripts.</p>
+<p>Depending on the automated analysis <code>RunProcess.R</code> can be run every two minutes (constantly checking for new data), or once a week (when we know that data will only be available on a certain day/time).</p>
+</div>
+<div id="instsrcruntest.r" class="section level2">
+<h2><span class="header-section-number">3.6</span> inst/src/RunTest.R</h2>
+<p>This file is the brains of the integrated testing. This file will be run by the <a href="umbrella.html#test_noispiah">$DASHBOARDS_FOLDER/dashboards_control/bin/test_*.sh</a> files.</p>
+</div>
+<div id="Runsh" class="section level2">
+<h2><span class="header-section-number">3.7</span> inst/bin/0_run.sh</h2>
+<p>This file is used to:</p>
+<ol style="list-style-type: decimal">
+<li>Do any pre-analysis steps (e.g. download new data from an SFTP server)</li>
+<li>Run <a href="rpackages.html#RunProcess">inst/src/RunProcess.R</a></li>
+</ol>
+<pre><code>/usr/local/bin/Rscript /r/ANALYSIS/src/RunProcess.R</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Do any post-analysis steps (e.g. upload results to an SFTP server)</li>
+</ol>
+<p>This file will be run by <a href="umbrella.html#cron">cron</a>.</p>
 
 </div>
 </div>
@@ -320,8 +243,8 @@ git merge upstream/master</code></pre></li>
           </div>
         </div>
       </div>
-<a href="rpackages.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="umbrella.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="contributingquickstart.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
