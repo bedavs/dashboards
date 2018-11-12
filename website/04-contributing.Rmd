@@ -10,9 +10,9 @@
     - https://github.com/folkehelseinstituttet/dashboards/
     - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls/
     - https://github.com/folkehelseinstituttet/dashboards_normomo/
-    - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_pdf/
+    - https://github.com/folkehelseinstituttet/dashboards_sykdomspulspdf/
     - https://github.com/folkehelseinstituttet/dashboards_noispiah/
-    - https://github.com/folkehelseinstituttet/dashboards_sykdomspuls_log/
+    - https://github.com/folkehelseinstituttet/dashboards_sykdomspulslog/
 5. For each repo, add the folkehelseinstitutet repository as your upstream:
 
 ```
