@@ -226,10 +226,6 @@ This Docker image is then expanded upon by a separate Dockerfile [raw996/dhadley
 
 This Docker image is then expanded upon by a separate Dockerfile [raw996/dashboards_r](https://github.com/raubreywhite/dashboards_control/blob/master/infrastructure/dashboards_r/Dockerfile). This Docker image is automatically rebuilt by `Jenkins` on `linux` whenever the repository is updated. The resultant Docker image is locally tagged as `raw996/dashboards_r:test` and then a number of integration tests are performed on it. If the integration tests are passed, then the Docker image is retagged and pushed to [raw996/dashboards_r:production](https://hub.docker.com/r/raw996/dashboards_r/). This image is private as it contains passwords and email addresses.
 
-### Automated Analysis R Packages
-
-##travis
-
 ### File Structure {#internalfilestructure}
 
 Inside `raw996/dashboards_r` we have the following file structure:

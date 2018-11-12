@@ -1,8 +1,6 @@
-# R packages
+# R packages {#rpackages}
 
-## Generic
-
-### Overview
+## Overview
 
 Each automated analysis has its own R package:
 
@@ -19,7 +17,7 @@ Each R package contains all of the code necessary for that automated analysis. T
 - Graph generation
 - Report generation
 
-### Requirements
+## Requirements
 
 The R packages should be developed using unit testing as implemented in the [testthat](http://r-pkgs.had.co.nz/tests.html) package.
 
@@ -27,17 +25,17 @@ Furthermore, the R package should operate (and be able to be tested) independent
 
 We also require that unit tests are created to test the formatting/structure of results. [ValidateAnalysisResults](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/reference/ValidateAnalysisResults.html) is one example from [sykdomspuls](https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/), where the names of the data.table are checked against reference values to ensure that the structure of the results are not accidentally changed.
 
-### Deployment via travis-ci and drat
+## Deployment via travis-ci and drat
 
 Unit testing is then automatically run using [travis-ci](http://r-pkgs.had.co.nz/check.html#travis). If the R package passes all tests, then we use [drat](https://github.com/eddelbuettel/drat) to deploy a built version of the package to Folkehelseinstituttet's R repository: https://folkehelseinstituttet.github.io/drat/.
 
-### Integration with the local file system
+## Integration with the local file system
 
 We assume that the local file system follows [this file structure](#internalfilestructure), and this is provided via Docker-compose from the [umbrella infrastructure](#umbrella).
 
 Referencing the `data_raw`, `data_clean`, `data_app`, and `results` folders are done through the the [fhi](https://folkehelseinstituttet.github.io/fhi/articles/dashboardbasics.html) package.
 
-### inst/src/RunProcess.R {#RunProcess}
+## inst/src/RunProcess.R {#RunProcess}
 
 An automated analysis needs to:
 
@@ -54,11 +52,11 @@ We can think of it as an extremely short and extremely high-level script that im
 
 Depending on the automated analysis `RunProcess.R` can be run every two minutes (constantly checking for new data), or once a week (when we know that data will only be available on a certain day/time).
 
-### inst/src/RunTest.R
+## inst/src/RunTest.R
 
 This file is the brains of the integrated testing. This file will be run by the [$DASHBOARDS_FOLDER/dashboards_control/bin/test_*.sh](#test_noispiah) files.
 
-### inst/bin/0_run.sh {#Runsh}
+## inst/bin/0_run.sh {#Runsh}
 
 This file is used to:
 
