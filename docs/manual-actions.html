@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="umbrella-infrastructure.html">
-<link rel="next" href="manual-actions.html">
+<link rel="prev" href="contributing.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -127,60 +127,43 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="contributing" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Contributing</h1>
-<div id="development-guidelines" class="section level2">
-<h2><span class="header-section-number">5.1</span> Development guidelines</h2>
-<p>We try to follow the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> for development.</p>
+<div id="manual-actions" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Manual Actions</h1>
+<div id="sykdomspulsen" class="section level2">
+<h2><span class="header-section-number">6.1</span> Sykdomspulsen</h2>
+<div id="sykdomspulsen-weekly-update" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Sykdomspulsen Weekly update</h3>
+<p>The weekly update needs to be done every Tuesday morning. New data has arrived from Helsedirektoratet to FHI during Monday evening and night, and the further statistical analysis and updating of the interactive webpage for Sykdomspulsen is done on Tuesday. For more information about Sykdomspulsen setup:</p>
+<p><a href="https://folkehelseinstituttet.github.io/dashboards/" class="uri">https://folkehelseinstituttet.github.io/dashboards/</a></p>
+<p><a href="https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/" class="uri">https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/</a></p>
 <ol style="list-style-type: decimal">
-<li>Fork [this repo][repo] and clone it to your computer. To learn more about this process, see <a href="https://guides.github.com/activities/forking/">this guide</a>.</li>
-<li><p>Add the Folkehelseinstituttet repository as your upstream:</p>
-<pre><code>git remote add upstream https://github.com/folkehelseinstituttet/ORIGINAL_REPOSITORY.git</code></pre></li>
-<li><p>If you have forked and cloned the project before and it has been a while since you worked on it, merge changes from the original repo to your clone by using:</p>
-<pre><code>git fetch upstream
-git merge upstream/master</code></pre></li>
-<li>Open the RStudio project file (<code>.Rproj</code>).</li>
-<li>Make your changes:
-<ul>
-<li>Write your code.</li>
-<li>Test your code (bonus points for adding unit tests).</li>
-<li>Document your code (see function documentation above).</li>
-<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
-<li>Commit your changes locally</li>
-<li>Merge changes from the original repo (again)</li>
-<li>Do an <code>R CMD check</code> using <code>devtools::check()</code> and aim for 0 errors and warnings.</li>
-</ul></li>
-<li>Commit and push your changes.</li>
-<li>Submit a <a href="https://guides.github.com/activities/forking/#making-a-pull-request">pull request</a>.</li>
-<li><p>If you are reviewing the pull request, wait until the <a href="www.travis-ci.org">travis-ci</a> unit tests have finished</p></li>
+<li>Log in to «Sikker sone»</li>
+<li>Click on «Sikkersone statistikk»</li>
+<li>Open R or R studio by clicking on the four squares in the bottom left corner, then on the arrow pointing downwards approximately in the same area and search for R in the upper right corner</li>
+<li>When R is open, click on “file” in the upper left corner, and then “open script”</li>
+<li>Open G:/Helseregistre/MSIS/Sykdomspulsen/Gry/FormattingWithinSikkersone/<br />
+SykdomspulsenWeeklyReport</li>
+<li>Slide the R-code so that it is beside the R console (so that you can see the whole R console)</li>
+<li>Put the marker within the R-code and click Ctrl+A, then click Ctrl+R</li>
+<li>After a few minutes, you will see a progress bar on the R-console, which shows how much of the code is finished. When the bar shows 100%, the whole code has run, and the results are finished (this takes about 1 hour, you can do other things while waiting for this)</li>
+<li>When the progress bar shows 100% you should look at the data that is shown in the console and see if the dates are from this week. If not you should contact the IT department by Cathrine Slorbak (<a href="mailto:Cathrine.Slorbak@fhi.no">Cathrine.Slorbak@fhi.no</a>) and Gry Grøneng (<a href="mailto:GryMarysol.Groneng@fhi.no">GryMarysol.Groneng@fhi.no</a>). There is probably something wrong with receiving the data from the Health directorate, hence the IT department needs to solve it. Do not continue until the problem is solved.</li>
+<li>If the dates look ok, you can close R (by clicking on x in the upper right corner).</li>
+<li>Go to “Windows explorer” by clicking on the four squares in the lower left corner (still in “sikker sone”), and go to: G:/Helseregistre/MSIS/Sykdomspulsen/Gry/<br />
+FormattingWithinSikkersone, and find a text file which is called “partially_formatted_<br />
+todays date.txt” (todays date is displayed 2017_06_13). You should look if the file is larger than last weeks file, it should be larger since we take out all the data every week, and more days have been added since last week. If the file is smaller than last week, contact the IT department by Cathrine Slorbak (<a href="mailto:Cathrine.Slorbak@fhi.no">Cathrine.Slorbak@fhi.no</a>) and Gry Grøneng (<a href="mailto:GryMarysol.Groneng@fhi.no">GryMarysol.Groneng@fhi.no</a>). Do not continue until the problem is solved.</li>
+<li>Copy and paste the file into the folder “Filer til ordinær sone (J:)”</li>
+<li>Log out of “sikker sone” and open the windows explorer in the ordinary zone and go to “Filer overført fra sikker sone (K:)” and find the file.</li>
+<li>Copy and paste the file into:</li>
 </ol>
-<p><img src="images/pull_request_before_checks.png" width="1372" /></p>
-<ol start="9" style="list-style-type: decimal">
-<li>Please make sure that the unit tests <code>PASS</code> before merging in!!</li>
-</ol>
-<p><img src="images/pull_request_checks_failed.png" width="1372" /></p>
-</div>
-<div id="code-style" class="section level2">
-<h2><span class="header-section-number">5.2</span> Code style</h2>
 <ul>
-<li>Function names start with capital letters</li>
-<li>Variable names start with small letters</li>
-<li>Environments should be in ALL CAPS</li>
-<li>Reference <a href="http://adv-r.had.co.nz/Style.html">Hadley’s style code</a></li>
-<li>&lt;- is preferred over = for assignment</li>
-<li>Indentation is with two spaces, not two or a tab. There should be no tabs in code files.</li>
-<li>if () {} else {} constructions should always use full curly braces even when usage seems unnecessary from a clarity perspective.</li>
-<li>TODO statements should be opened as GitHub issues with links to specific code files and code lines, rather than written inline.</li>
-<li><p>Follow Hadley’s suggestion for aligning long functions with many arguments:</p>
-<pre><code> long_function_name &lt;- function(a = &quot;a long argument&quot;, 
-                            b = &quot;another argument&quot;,
-                            c = &quot;another long argument&quot;) {
-   # As usual code is indented by two spaces.
- }</code></pre></li>
-<li>Never use print() to send text to the console. Instead use message(), warning(), and error() as appropriate.</li>
-<li><p>Use environment variables, not options(), to store global arguments that are used by many or all functions.</p></li>
+<li>F:/Prosjekter/sMSIS/WeeklyUpdates_Sykdomspulsen AND</li>
+<li>F:/Prosjekter/Dashboards/data_raw/sykdomspuls</li>
 </ul>
+<ol start="15" style="list-style-type: decimal">
+<li>You have now done the weekly update of Sykdomspulsen!</li>
+</ol>
 
+</div>
 </div>
 </div>
             </section>
@@ -188,8 +171,8 @@ git merge upstream/master</code></pre></li>
           </div>
         </div>
       </div>
-<a href="umbrella-infrastructure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="manual-actions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="contributing.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

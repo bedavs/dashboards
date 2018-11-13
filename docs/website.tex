@@ -90,7 +90,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-26}
+    \date{2018-11-13}
 
 \usepackage{booktabs}
 
@@ -654,6 +654,106 @@ git merge upstream/master
   Use environment variables, not options(), to store global arguments
   that are used by many or all functions.
 \end{itemize}
+
+\section{Manual Actions}\label{manual-actions}
+
+\subsection{Sykdomspulsen}\label{sykdomspulsen}
+
+\subsubsection{Sykdomspulsen Weekly
+update}\label{sykdomspulsen-weekly-update}
+
+The weekly update needs to be done every Tuesday morning. New data has
+arrived from Helsedirektoratet to FHI during Monday evening and night,
+and the further statistical analysis and updating of the interactive
+webpage for Sykdomspulsen is done on Tuesday. For more information about
+Sykdomspulsen setup:
+
+\url{https://folkehelseinstituttet.github.io/dashboards/}
+
+\url{https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Log in to «Sikker sone»
+\item
+  Click on «Sikkersone statistikk»
+\item
+  Open R or R studio by clicking on the four squares in the bottom left
+  corner, then on the arrow pointing downwards approximately in the same
+  area and search for R in the upper right corner
+\item
+  When R is open, click on ``file'' in the upper left corner, and then
+  ``open script''
+\item
+  Open
+  G:/Helseregistre/MSIS/Sykdomspulsen/Gry/FormattingWithinSikkersone/\\
+  SykdomspulsenWeeklyReport
+\item
+  Slide the R-code so that it is beside the R console (so that you can
+  see the whole R console)
+\item
+  Put the marker within the R-code and click Ctrl+A, then click Ctrl+R
+\item
+  After a few minutes, you will see a progress bar on the R-console,
+  which shows how much of the code is finished. When the bar shows
+  100\%, the whole code has run, and the results are finished (this
+  takes about 1 hour, you can do other things while waiting for this)
+\item
+  When the progress bar shows 100\% you should look at the data that is
+  shown in the console and see if the dates are from this week. If not
+  you should contact the IT department by Cathrine Slorbak
+  (\href{mailto:Cathrine.Slorbak@fhi.no}{\nolinkurl{Cathrine.Slorbak@fhi.no}})
+  and Gry Grøneng
+  (\href{mailto:GryMarysol.Groneng@fhi.no}{\nolinkurl{GryMarysol.Groneng@fhi.no}}).
+  There is probably something wrong with receiving the data from the
+  Health directorate, hence the IT department needs to solve it. Do not
+  continue until the problem is solved.
+\item
+  If the dates look ok, you can close R (by clicking on x in the upper
+  right corner).
+\item
+  Go to ``Windows explorer'' by clicking on the four squares in the
+  lower left corner (still in ``sikker sone''), and go to:
+  G:/Helseregistre/MSIS/Sykdomspulsen/Gry/\\
+  FormattingWithinSikkersone, and find a text file which is called
+  ``partially\_formatted\_\\
+  todays date.txt'' (todays date is displayed 2017\_06\_13). You should
+  look if the file is larger than last weeks file, it should be larger
+  since we take out all the data every week, and more days have been
+  added since last week. If the file is smaller than last week, contact
+  the IT department by Cathrine Slorbak
+  (\href{mailto:Cathrine.Slorbak@fhi.no}{\nolinkurl{Cathrine.Slorbak@fhi.no}})
+  and Gry Grøneng
+  (\href{mailto:GryMarysol.Groneng@fhi.no}{\nolinkurl{GryMarysol.Groneng@fhi.no}}).
+  Do not continue until the problem is solved.
+\item
+  Copy and paste the file into the folder ``Filer til ordinær sone
+  (J:)''
+\item
+  Log out of ``sikker sone'' and open the windows explorer in the
+  ordinary zone and go to ``Filer overført fra sikker sone (K:)'' and
+  find the file.
+\item
+  Copy and paste the file into:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  F:/Prosjekter/sMSIS/WeeklyUpdates\_Sykdomspulsen AND
+\item
+  F:/Prosjekter/Dashboards/data\_raw/sykdomspuls
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  You have now done the weekly update of Sykdomspulsen!
+\end{enumerate}
 
 \bibliography{book.bib}
 

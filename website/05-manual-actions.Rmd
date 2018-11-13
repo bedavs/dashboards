@@ -1,0 +1,35 @@
+# Manual Actions
+
+## Sykdomspulsen
+
+### Sykdomspulsen Weekly update
+
+The weekly update needs to be done every Tuesday morning. 
+New data has arrived from Helsedirektoratet to FHI during Monday evening and night, and the further statistical analysis and updating of the interactive webpage for Sykdomspulsen is done on Tuesday. 
+For more information about Sykdomspulsen setup:
+
+https://folkehelseinstituttet.github.io/dashboards/
+
+https://folkehelseinstituttet.github.io/dashboards_sykdomspuls/
+
+
+1. Log in to «Sikker sone»
+2. Click on «Sikkersone statistikk»
+3. Open R or R studio by clicking on the four squares in the bottom left corner, then on the arrow pointing downwards approximately in the same area and search for R in the upper right corner
+4. When R is open, click on “file” in the upper left corner, and then “open script”
+5. Open G:/Helseregistre/MSIS/Sykdomspulsen/Gry/FormattingWithinSikkersone/  
+SykdomspulsenWeeklyReport
+6. Slide the R-code so that it is beside the R console (so that you can see the whole R console)
+7. Put the marker within the R-code and click Ctrl+A, then click Ctrl+R
+8. After a few minutes, you will see a progress bar on the R-console, which shows how much of the code is finished. When the bar shows 100%, the whole code has run, and the results are finished (this takes about 1 hour, you can do other things while waiting for this)
+9. When the progress bar shows 100% you should look at the data that is shown in the console and see if the dates are from this week. If not you should contact the IT department by Cathrine Slorbak (Cathrine.Slorbak@fhi.no) and Gry Grøneng (GryMarysol.Groneng@fhi.no). There is probably something wrong with receiving the data from the Health directorate, hence the IT department needs to solve it. Do not continue until the problem is solved.
+10. If the dates look ok, you can close R (by clicking on x in the upper right corner). 
+11. Go to “Windows explorer” by clicking on the four squares in the lower left corner (still in “sikker sone”), and go to: G:/Helseregistre/MSIS/Sykdomspulsen/Gry/  
+FormattingWithinSikkersone, and find a text file which is called “partially_formatted_  
+todays date.txt” (todays date is displayed 2017_06_13). You should look if the file is larger than last weeks file, it should be larger since we take out all the data every week, and more days have been added since last week. If the file is smaller than last week, contact the IT department by Cathrine Slorbak (Cathrine.Slorbak@fhi.no) and Gry Grøneng (GryMarysol.Groneng@fhi.no). Do not continue until the problem is solved.
+12. Copy and paste the file into the folder “Filer til ordinær sone (J:)”
+13. Log out of “sikker sone” and open the windows explorer in the ordinary zone and go to “Filer overført fra sikker sone (K:)” and find the file.
+14. Copy and paste the file into:
+  + F:/Prosjekter/sMSIS/WeeklyUpdates_Sykdomspulsen AND
+  + F:/Prosjekter/Dashboards/data_raw/sykdomspuls
+15. You have now done the weekly update of Sykdomspulsen!
