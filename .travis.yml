@@ -1,0 +1,12 @@
+language: r
+pandoc_version: 1.19.2.1
+
+before_script:
+- chmod +x ./website/_build.sh
+- chmod +x ./website/_deploy.sh
+script:
+- "./website/_build.sh"
+- "./website/_deploy.sh"
+env:
+  global:
+    secure: GH0TW4ZSeH27Nzz52IIuVACV89fwEU3ll8vS+hd3kAhHEMRK+6/25be8YhXS8gGCipmNOppLWMVV55iF4wrsLdhcpzDD43kodq6Zs476iJofTB8c86ym4iv7dlglxvidyZu9IK0wyTYoJ8fW7KzocAungJJL2JvmMl3aV/lVFCVIn2dPPO80gwcLM/XSFe7WA0oGREMeF4eELc8qBu+nRpVZo05SP/o1kKMR8dR7N5fW9icowKMS7oodZBEDQYXZXMWMvnO6QewApBitkUQXI2Wuv6k929Z9G0piZfMo2nQJZKcN+h646veYLbSrL4WdIE2hvi/FxRNaXZl9nxFo6DTlQu8/X91n3+jezLQTNUm8Dx1wxmXM0ePzGfQ4LdyDaaF/h08gPmQzKxrP2VL39KVKtQLUUnlhXc43Swtj3pNYnDiNwzRl4cbLQM5oEVj2RqiqFRh6CQE4vTijyOZl5TmbsJdLL4ZLg1bXx+oauxJCwdX+4aN7gJ5ajDbU6dOyTD3goE3h26cx8OnEH46BpcBw+lpRLaOrZ8UkpWbNxG/KrAoKTaSZ39aReFUl6OB+iHoAc6byG5db3KJ68rhNMmM71KkyPGgsQWdXdqK8Drjl5NkPICO6EOGP12yz50ZwfF31GUw6be0D9TXkGTRT8cl7luohB5h3Pg9bb557OcQ=
